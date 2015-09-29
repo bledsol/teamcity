@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f7c80841-c5d8-49a8-80a2-af130157b9b8" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Update Check</name>
+  <description>Update world dry-run with new use flags</description>
+  <settings>
+    <options>
+      <option name="allowExternalStatus" value="true" />
+      <option name="artifactRules" value="./emerge.log&#xA;./sync.log&#xA;./glsa.log" />
+      <option name="checkoutMode" value="MANUAL" />
+      <option name="maximumNumberOfBuilds" value="1" />
+    </options>
+    <parameters>
+      <param name="env.Gentoo.GLSA.Updated" value="" />
+      <param name="env.Gentoo.Portage.Updated" value="" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_1" name="eix-sync" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[PORTAGE_LAST_UP="$(date -d"$(cat /usr/portage/metadata/timestamp.chk)" +%s)"
+GLSA_LAST_UP="$(date -d"$(cat /usr/portage/metadata/glsa/timestamp.chk)" +%s)"
+
+sudo eix-sync|tee sync.log
+if (( ${PORTAGE_LAST_UP} < $(date -d"$(cat /usr/portage/metadata/timestamp.chk)" +%s) ))
+then
+  echo "New Sources"
+  echo "##teamcity[setParameter name='env.Gentoo.Portage.Updated' value='1']"
+else
+  echo "Not New"
+  echo "##teamcity[setParameter name='env.Gentoo.Portage.Updated' value='0']"
+fi
+
+if (( ${GLSA_LAST_UP} < $(date -d"$(cat /usr/portage/metadata/glsa/timestamp.chk)" +%s) ))
+then
+  echo "GLSA Update"
+  echo "##teamcity[setParameter name='env.Gentoo.GLSA.Updated' value='1']"
+else
+  echo "No GLSA Updates"
+  echo "##teamcity[setParameter name='env.Gentoo.GLSA.Updated' value='0']"
+fi]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_2" name="emerge dry run" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[NEW_SRC=%env.Gentoo.Portage.Updated%
+
+if (( NEW_SRC == 1 ))
+then 
+  echo "New sources variable: ${NEW_SRC}"
+  emerge --update --newuse --deep --with-bdeps=y -pv  @world | tee emerge.log
+else
+  echo "No new sources Variable: ${NEW_SRC}"
+fi]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_6" name="GLSA Check" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[GLSA_UPDATES=%env.Gentoo.GLSA.Updated%
+
+if (( GLSA_UPDATES == 1 ))
+then 
+  echo "New GLSAs variable: ${GLSA_UPDATES}"
+  glsa-check -t all 2>&1 | tee ./glsa.log
+  grep "This system is not affected by any of the listed GLSAs" ./glsa.log && exit 0
+  exit 1
+else
+  echo "No new GLSAs Variable: ${GLSA_UPDATES}"
+fi]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings />
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_1" type="schedulingTrigger">
+        <parameters>
+          <param name="cronExpression_dm" value="*" />
+          <param name="cronExpression_dw" value="?" />
+          <param name="cronExpression_hour" value="*" />
+          <param name="cronExpression_min" value="0" />
+          <param name="cronExpression_month" value="*" />
+          <param name="cronExpression_sec" value="0" />
+          <param name="cronExpression_year" value="*" />
+          <param name="dayOfWeek" value="Sunday" />
+          <param name="hour" value="10" />
+          <param name="minute" value="0" />
+          <param name="revisionRule" value="lastFinished" />
+          <param name="schedulingPolicy" value="daily" />
+          <param name="timezone" value="SERVER" />
+          <param name="triggerBuildOnAllCompatibleAgents" value="true" />
+        </parameters>
+      </build-trigger>
+      <build-trigger id="TRIGGER_2" type="schedulingTrigger">
+        <parameters>
+          <param name="cronExpression_dm" value="*" />
+          <param name="cronExpression_dw" value="?" />
+          <param name="cronExpression_hour" value="*" />
+          <param name="cronExpression_min" value="0" />
+          <param name="cronExpression_month" value="*" />
+          <param name="cronExpression_sec" value="0" />
+          <param name="cronExpression_year" value="*" />
+          <param name="dayOfWeek" value="Sunday" />
+          <param name="hour" value="14" />
+          <param name="minute" value="0" />
+          <param name="revisionRule" value="lastFinished" />
+          <param name="schedulingPolicy" value="daily" />
+          <param name="timezone" value="SERVER" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
+      <extension id="BUILD_EXT_1" type="BuildFailureOnMetric">
+        <parameters>
+          <param name="anchorBuild" value="lastSuccessful" />
+          <param name="metricKey" value="BuildDurationNetTime" />
+          <param name="metricThreshold" value="1" />
+          <param name="metricUnits" value="metricUnitsDefault" />
+          <param name="moreOrLess" value="less" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+

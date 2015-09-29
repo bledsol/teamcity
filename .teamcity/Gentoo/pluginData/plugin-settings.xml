@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <JetBrains.SharedResources>
+    <resource>
+      <name>emerge</name>
+      <values type="quota">
+        <quota>1</quota>
+      </values>
+    </resource>
+  </JetBrains.SharedResources>
+</settings>
+

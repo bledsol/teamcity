@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c90a802c-bfe9-4c77-8a10-52b949986081" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Update World</name>
+  <description>Update World with new use and depclean</description>
+  <settings>
+    <parameters />
+    <build-runners>
+      <runner id="RUNNER_4" name="emerge world" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/bin/emerge --update --newuse --deep --with-bdeps=y @world" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_5" name="emerge depclean" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/bin/emerge --depclean" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <build-extensions>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+

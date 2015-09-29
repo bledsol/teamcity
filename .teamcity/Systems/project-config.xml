@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3031385a-d6f9-49e3-925d-0408775ce8d2" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Systems</name>
+  <description>Collection of systems tasks</description>
+  <parameters />
+  <cleanup />
+</project>
+
