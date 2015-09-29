@@ -56,7 +56,7 @@ sudo make modules_install]]></param>
       <runner id="RUNNER_9" name="Install kernel initramfs" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[cd /usr/src/linux
-sudo /usr/bin/genkernel --lvm --install initramfs]]></param>
+sudo /usr/bin/genkernel --lvm --mdadm --install initramfs]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
