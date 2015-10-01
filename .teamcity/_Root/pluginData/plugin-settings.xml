@@ -4,6 +4,6 @@
     <build-report-tab title="Code Coverage" startPage="coverage.zip!index.html" />
     <build-report-tab title="JavaDoc" startPage="javadoc.zip!index.html" />
   </report-tabs>
-  <versionedSettings rootId="Teamcity" enabled="true" showChanges="true" buildSettings="PREFER_VCS" />
+  <versionedSettings rootId="Teamcity" enabled="true" showChanges="true" buildSettings="PREFER_CURRENT" />
 </settings>
 
