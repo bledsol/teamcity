@@ -15,6 +15,13 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_20" name="DBENCH tests" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="dbench -D /tmp 5" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="ansible">
