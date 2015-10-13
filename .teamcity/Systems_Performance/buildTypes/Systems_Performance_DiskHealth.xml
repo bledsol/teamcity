@@ -10,7 +10,7 @@
     <build-runners>
       <runner id="RUNNER_19" name="SMART Health Check" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="/usr/sbin/smartctl -a /dev/sda &gt; smartctl_out.txt" />
+          <param name="script.content" value="sudo /usr/sbin/smartctl -a /dev/sda &gt; smartctl_out.txt" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
