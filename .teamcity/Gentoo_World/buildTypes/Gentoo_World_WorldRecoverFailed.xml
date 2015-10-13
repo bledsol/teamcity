@@ -4,7 +4,15 @@
   <description>Try to recover from a failed build</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_18" name="resume emerge and skip first" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/bin/emerge --resume --skipfirst" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings />
     <requirements />
     <build-triggers />
