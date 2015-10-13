@@ -4,7 +4,7 @@
   <description>Disk Health &amp; Performance</description>
   <settings>
     <options>
-      <option name="artifactRules" value="./smartctl_out.txt" />
+      <option name="artifactRules" value="./smartctl_out.txt&#xA;./dbench_out.txt" />
     </options>
     <parameters />
     <build-runners>
