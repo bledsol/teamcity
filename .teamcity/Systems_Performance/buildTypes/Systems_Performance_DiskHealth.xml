@@ -17,7 +17,7 @@
       </runner>
       <runner id="RUNNER_20" name="DBENCH tests" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="dbench -D /tmp 5" />
+          <param name="script.content" value="dbench -c /usr/share/dbench/client.txt -D /tmp 5 &gt; dbench_out.txt" />
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
