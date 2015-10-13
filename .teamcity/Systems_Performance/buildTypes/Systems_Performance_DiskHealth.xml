@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f20e0589-b92b-46c7-b4d7-a3a538282d16" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
   <name>Disk Health</name>
-  <description>Route Health</description>
+  <description>Disk Health &amp; Performance</description>
   <settings>
     <options>
       <option name="artifactRules" value="./smartctl_out.txt" />
