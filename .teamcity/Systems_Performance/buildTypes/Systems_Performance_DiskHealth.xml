@@ -4,7 +4,7 @@
   <description>Route Health</description>
   <settings>
     <options>
-      <option name="artifactRules" value="./mtr_out.txt" />
+      <option name="artifactRules" value="./smartctl_out.txt" />
     </options>
     <parameters />
     <build-runners>
