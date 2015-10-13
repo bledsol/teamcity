@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" parent-id="Systems" uuid="3fad7a78-b332-4629-837b-c46572e583f7" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Health</name>
+  <name>Performance</name>
   <parameters />
   <cleanup />
 </project>
