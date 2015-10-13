@@ -6,6 +6,9 @@
     <options>
       <option name="artifactRules" value="./smartctl_out.txt&#xA;./dbench_out.txt" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_20" />
+    </disabled-settings>
     <parameters />
     <build-runners>
       <runner id="RUNNER_19" name="SMART Health Check" type="simpleRunner">
