@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" parent-id="Systems" uuid="c8fe6910-0b7c-4de2-93c3-817695b7594f" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Orchestration</name>
+  <parameters />
+  <cleanup />
+</project>
+
