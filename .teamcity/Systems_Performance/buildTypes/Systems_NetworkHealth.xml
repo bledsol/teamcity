@@ -31,7 +31,7 @@
       </runner>
       <runner id="RUNNER_23" name="Interface Stats - Post" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="ifstat &gt;&gt; ifstat_out.txt" />
+          <param name="script.content" value="/sbin/ifstat &gt;&gt; ifstat_out.txt" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
