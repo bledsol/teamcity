@@ -10,7 +10,7 @@
     <build-runners>
       <runner id="RUNNER_22" name="Interface Stats" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="ifstat &gt; ifstat_out.txt" />
+          <param name="script.content" value="/sbin/ifstat &gt; ifstat_out.txt" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
