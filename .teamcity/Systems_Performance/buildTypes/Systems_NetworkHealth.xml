@@ -8,6 +8,13 @@
     </options>
     <parameters />
     <build-runners>
+      <runner id="RUNNER_22" name="Interface Stats" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="ifstat &gt; ifstat_out.txt" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_17" name="MTR Report" type="simpleRunner">
         <parameters>
           <param name="script.content" value="/usr/sbin/mtr -c 10 -r google.com &gt; mtr_out.txt" />
@@ -18,13 +25,6 @@
       <runner id="RUNNER_21" name="TCP Traceroute" type="simpleRunner">
         <parameters>
           <param name="script.content" value="/usr/sbin/tcptraceroute -q 10 google.com 80 &gt; tcptr_out.txt" />
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_22" name="Interface Stats" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="ifstat &gt; ifstat_out.txt" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
