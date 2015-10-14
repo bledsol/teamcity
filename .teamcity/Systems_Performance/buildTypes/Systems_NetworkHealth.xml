@@ -8,7 +8,7 @@
     </options>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_17" name="ansible the things" type="simpleRunner">
+      <runner id="RUNNER_17" name="MTR Report" type="simpleRunner">
         <parameters>
           <param name="script.content" value="/usr/sbin/mtr -c 10 -r google.com &gt; mtr_out.txt" />
           <param name="teamcity.step.mode" value="default" />
