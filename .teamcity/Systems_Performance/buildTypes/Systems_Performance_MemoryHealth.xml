@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="893a87b2-5ca4-43a6-80ca-9b38e5a2e8ff" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Memory Health</name>
+  <description>Disk Health &amp; Performance</description>
+  <settings>
+    <options>
+      <option name="artifactRules" value="./smartctl_out.txt&#xA;./dbench_out.txt" />
+    </options>
+    <parameters />
+    <build-runners>
+      <runner id="RUNNER_24" name="SMART Health Check" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/sbin/smartctl -a /dev/sda &gt; smartctl_out.txt" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_25" name="DBENCH tests" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="dbench -c /usr/share/dbench/client.txt -D /tmp 5 &gt; dbench_out.txt" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="ansible">
+        <checkout-rule rule="+:.=&gt;ansible" />
+      </vcs-entry-ref>
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_5" type="schedulingTrigger">
+        <parameters>
+          <param name="cronExpression_dm" value="*" />
+          <param name="cronExpression_dw" value="1" />
+          <param name="cronExpression_hour" value="9" />
+          <param name="cronExpression_min" value="0" />
+          <param name="cronExpression_month" value="*" />
+          <param name="cronExpression_sec" value="0" />
+          <param name="cronExpression_year" value="*" />
+          <param name="dayOfWeek" value="Sunday" />
+          <param name="hour" value="12" />
+          <param name="minute" value="0" />
+          <param name="promoteWatchedBuild" value="true" />
+          <param name="revisionRule" value="lastFinished" />
+          <param name="revisionRuleBuildBranch" value="&lt;default&gt;" />
+          <param name="schedulingPolicy" value="cron" />
+          <param name="timezone" value="SERVER" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+
