@@ -8,9 +8,9 @@
     </options>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_24" name="SMART Health Check" type="simpleRunner">
+      <runner id="RUNNER_24" name="memtester" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/sbin/smartctl -a /dev/sda &gt; smartctl_out.txt" />
+          <param name="script.content" value="/usr/sbin/memtester $(grep MemFree /proc/meminfo|awk '{ print $2 }')K 3 &gt; memtester_out.txt" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
