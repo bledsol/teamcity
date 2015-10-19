@@ -7,7 +7,6 @@
       <option name="allowExternalStatus" value="true" />
     </options>
     <disabled-settings>
-      <setting-ref ref="RUNNER_7" />
       <setting-ref ref="RUNNER_8" />
     </disabled-settings>
     <parameters>
