@@ -48,8 +48,6 @@ sudo make -j${THREAD_COUNT}]]></param>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
 
 cd /usr/src/linux
-echo "Mount boot"
-sudo /bin/mount /boot
 
 if (( ${CLEAN_BUILD} == 1 )) 
 then
