@@ -94,7 +94,7 @@ fi]]></param>
       <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
           <param name="quietPeriodMode" value="DO_NOT_USE" />
-          <param name="triggerRules" value="+:kernel-config*" />
+          <param name="triggerRules" value="+:root=Gentoo_Sysconfig: kernels/kernel-config-x86_64-*" />
         </parameters>
       </build-trigger>
     </build-triggers>
