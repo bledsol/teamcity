@@ -89,7 +89,9 @@ fi]]></param>
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Gentoo_Sysconfig" />
+      <vcs-entry-ref root-id="Gentoo_Sysconfig">
+        <checkout-rule rule="+:.=&gt;sysconfig" />
+      </vcs-entry-ref>
     </vcs-settings>
     <requirements />
     <build-triggers>
