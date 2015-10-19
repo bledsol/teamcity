@@ -18,6 +18,11 @@ THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 
 cd /usr/src/linux
 
+if [[ -f .config ]]
+then
+  cp .config config-running
+fi
+
 if (( ${CLEAN_BUILD} == 1 )) 
 then
   echo "Clean build, backup config"
