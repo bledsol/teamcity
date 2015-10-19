@@ -14,6 +14,7 @@
       <runner id="RUNNER_7" name="Make kernel" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
+CPU_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 
 cd /usr/src/linux
 
@@ -28,7 +29,7 @@ then
 fi
 
 echo "Build kernel image"
-sudo make]]></param>
+sudo make -j${CPU_COUNT}]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
