@@ -8,6 +8,7 @@
     </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_7" />
+      <setting-ref ref="RUNNER_8" />
     </disabled-settings>
     <parameters>
       <param name="env.Gentoo.Kernel.Src.Clean" value="0" spec="checkbox checkedValue='1' description='Clean Source Tree' uncheckedValue='0' label='Clean Build' display='normal'" />
