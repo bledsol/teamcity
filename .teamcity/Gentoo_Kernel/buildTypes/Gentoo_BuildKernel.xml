@@ -15,12 +15,16 @@
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
 THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
+KERNEL_CONFIG='kernel-config-x86_64-4.0.5-builder'
+
+cp sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux
 
 cd /usr/src/linux
 
 if [[ -f .config ]]
 then
-  cp .config config-running
+  cp .config kernel-config-running
+  cp ${KERNEL_CONFIG} .config
 fi
 
 if (( ${CLEAN_BUILD} == 1 )) 
