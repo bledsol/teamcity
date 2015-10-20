@@ -26,6 +26,19 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_26" name="Capture eselect news" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[if (( $(/usr/bin/eselect news count all) > 0 ))
+then
+  /usr/bin/eselect news read all > eselect-news-out.txt
+  (( $? == 0 )) && sudo /usr/bin/eselect purge
+else
+  echo "No news is good news? :|"
+fi]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />
