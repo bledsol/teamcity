@@ -3,6 +3,9 @@
   <name>Update World</name>
   <description>Update World with new use and depclean</description>
   <settings>
+    <options>
+      <option name="artifactRules" value="./eselect-news-out.txt" />
+    </options>
     <parameters />
     <build-runners>
       <runner id="RUNNER_4" name="emerge world" type="simpleRunner">
