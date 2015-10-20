@@ -12,6 +12,19 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_26" name="Capture eselect news" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[if (( $(/usr/bin/eselect news count all) > 0 ))
+then
+  /usr/bin/eselect news read all > eselect-news-out.txt
+  (( $? == 0 )) && sudo /usr/bin/eselect purge
+else
+  echo "No news is good news? :|"
+fi]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_5" name="emerge depclean" type="simpleRunner">
         <parameters>
           <param name="script.content" value="sudo /usr/bin/emerge --depclean" />
@@ -22,19 +35,6 @@
       <runner id="RUNNER_25" name="eclean unused binaries" type="simpleRunner">
         <parameters>
           <param name="script.content" value="sudo /usr/bin/eclean packages" />
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_26" name="Capture eselect news" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[if (( $(/usr/bin/eselect news count all) > 0 ))
-then
-  /usr/bin/eselect news read all > eselect-news-out.txt
-  (( $? == 0 )) && sudo /usr/bin/eselect purge
-else
-  echo "No news is good news? :|"
-fi]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
