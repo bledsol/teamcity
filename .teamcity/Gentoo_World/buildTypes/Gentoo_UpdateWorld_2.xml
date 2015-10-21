@@ -10,7 +10,7 @@
     <build-runners>
       <runner id="RUNNER_4" name="emerge world" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/bin/emerge --update --newuse --deep --with-bdeps=y @world" />
+          <param name="script.content" value="sudo /usr/bin/emerge --quiet-build --update --newuse --deep --with-bdeps=y @world" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
