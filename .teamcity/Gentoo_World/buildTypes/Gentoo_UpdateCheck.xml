@@ -48,7 +48,7 @@ fi]]></param>
 if (( NEW_SRC == 1 ))
 then 
   echo "New sources variable: ${NEW_SRC}"
-  emerge --update --newuse --deep --with-bdeps=y -pv  @world | tee emerge.log
+  emerge --update --newuse --deep --with-bdeps=y -pvt  @world | tee emerge.log
 else
   echo "No new sources Variable: ${NEW_SRC}"
 fi]]></param>
