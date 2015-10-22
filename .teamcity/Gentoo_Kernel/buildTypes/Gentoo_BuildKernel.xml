@@ -71,8 +71,7 @@ sudo /usr/bin/genkernel --install --no-ramdisk-modules initramfs]]></param>
       </runner>
       <runner id="RUNNER_10" name="Grub Config" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[sudo /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg
-sudo /bin/umount /boot]]></param>
+          <param name="script.content" value="sudo /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
