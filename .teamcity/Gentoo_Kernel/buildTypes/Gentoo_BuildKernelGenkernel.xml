@@ -19,20 +19,15 @@
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
 
-cd /usr/src/linux
-
 if (( ${CLEAN_BUILD} == 1 )) 
 then
-  echo "Clean build, backup config"
-  cp /usr/src/linux/.config /tmp/kernel_config_bk
-  echo "Clean source tree"
-  sudo make distclean
-  echo "Install kernel config"
-  sudo mv /tmp/kernel_config_bk /usr/src/linux/.config
-fi
-
-echo "Build kernel image"
-sudo make]]></param>
+  cd /usr/src/linux
+  sudo /usr/bin/genkernel --oldconfig all
+else
+  cd /usr/src/linux
+  sudo make defconfig
+  sudo /usr/bin/genkernel --no-clean --oldconfig all
+fi]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
