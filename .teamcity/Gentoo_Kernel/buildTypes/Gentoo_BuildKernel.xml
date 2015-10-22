@@ -22,6 +22,7 @@ THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 
 if [[ -f /usr/src/linux/.config ]]
 then
+  echo "Backing up kernel-config to /tmp"
   cp /usr/src/linux/.config /tmp/kernel-config-running-$(date +%s)
 fi
 
