@@ -15,7 +15,7 @@
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
 THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
-KERNEL_CONFIG='kernel-config-x86_64-4.0.5-builder'
+KERNEL_CONFIG='kernel-config-x86_64-4.0.5-gentoo-buildhost'
 
 cp sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux
 
