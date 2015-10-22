@@ -28,14 +28,6 @@ fi]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_15" name="Grub Config" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[sudo /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg
-sudo /bin/umount /boot]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_16" name="Rebuild userland modules" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[NEW_KERNEL=%env.Gentoo.Kernel.Updated%
