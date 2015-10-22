@@ -29,7 +29,9 @@ fi]]></param>
         </parameters>
       </runner>
     </build-runners>
-    <vcs-settings />
+    <vcs-settings>
+      <vcs-entry-ref root-id="Gentoo_Sysconfig" />
+    </vcs-settings>
     <requirements />
     <build-triggers />
     <build-extensions>
