@@ -33,7 +33,14 @@ fi]]></param>
       <vcs-entry-ref root-id="Gentoo_Sysconfig" />
     </vcs-settings>
     <requirements />
-    <build-triggers />
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="+:root=Gentoo_Sysconfig;comment=Genkernel Config:+:root=Gentoo_Sysconfig: genkernel.conf" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
     <build-extensions>
       <extension id="perfmon" type="perfmon">
         <parameters />
