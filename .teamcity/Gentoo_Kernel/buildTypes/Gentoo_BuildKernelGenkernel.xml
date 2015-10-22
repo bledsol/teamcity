@@ -18,11 +18,11 @@
 if (( ${CLEAN_BUILD} == 1 )) 
 then
   cd /usr/src/linux
-  sudo /usr/bin/genkernel --oldconfig all
+  sudo /usr/bin/genkernel --oldconfig --no-save-config all
 else
   cd /usr/src/linux
   sudo make defconfig
-  sudo /usr/bin/genkernel --no-clean --oldconfig all
+  sudo /usr/bin/genkernel --no-clean --oldconfig --kernel-config=.config --no-save-config  all
 fi]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
