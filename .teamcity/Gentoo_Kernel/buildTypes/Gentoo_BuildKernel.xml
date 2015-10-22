@@ -9,6 +9,7 @@
     <parameters>
       <param name="env.Gentoo.Kernel.Src.Clean" value="0" spec="checkbox checkedValue='1' description='Clean Source Tree' uncheckedValue='0' label='Clean Build' display='normal'" />
       <param name="env.Gentoo.Kernel.Updated" value="0" spec="checkbox checkedValue='1' description='Check this if new kernel is being installed' uncheckedValue='0' label='New kernel' display='normal'" />
+      <param name="system.kernel_config" value="kernel-config-x86_64-4.0.5-gentoo-buildhost" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_7" name="Make kernel" type="simpleRunner">
