@@ -16,26 +16,27 @@
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
 KERNEL_CONFIG=%system.kernel_config%
+WORK_DIR=$(pwd)
 
 THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 
-cd /usr/src/linux
-
-if [[ -f .config ]]
+if [[ -f /usr/src/linux/.config ]]
 then
-  cp .config /tmp/kernel-config-running-$(date +%s)
+  cp /usr/src/linux/.config /tmp/kernel-config-running-$(date +%s)
 fi
 
 if (( ${CLEAN_BUILD} == 1 )) 
 then
+  cd /usr/src/linux
   echo "Clean source tree"
   sudo make distclean
 fi
 
 echo "Install kernel config"
-sudo /bin/cp sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux/.config
+sudo /bin/cp ${WORK_DIR}/sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux/.config
 
 echo "Build kernel image"
+cd /usr/src/linux
 sudo make -j${THREAD_COUNT}]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
