@@ -33,7 +33,7 @@ then
 fi
 
 echo "Install kernel config"
-sudo cp sysconfig/kernels/${KERNEL_CONFIG} .config
+sudo /bin/cp sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux/.config
 
 echo "Build kernel image"
 sudo make -j${THREAD_COUNT}]]></param>
