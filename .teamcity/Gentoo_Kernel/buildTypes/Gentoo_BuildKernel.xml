@@ -15,28 +15,25 @@
       <runner id="RUNNER_7" name="Make kernel" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
-THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 KERNEL_CONFIG=%system.kernel_config%
 
-cp sysconfig/kernels/${KERNEL_CONFIG} /usr/src/linux
+THREAD_COUNT=$(( $( grep processor /proc/cpuinfo |wc -l ) +1 ))
 
 cd /usr/src/linux
 
 if [[ -f .config ]]
 then
-  cp .config kernel-config-running
-  cp ${KERNEL_CONFIG} .config
+  cp .config /tmp/kernel-config-running-$(date +%s)
 fi
 
 if (( ${CLEAN_BUILD} == 1 )) 
 then
-  echo "Clean build, backup config"
-  cp /usr/src/linux/.config /tmp/kernel_config_bk
   echo "Clean source tree"
   sudo make distclean
-  echo "Install kernel config"
-  sudo mv /tmp/kernel_config_bk /usr/src/linux/.config
 fi
+
+echo "Install kernel config"
+sudo cp sysconfig/kernels/${KERNEL_CONFIG} .config
 
 echo "Build kernel image"
 sudo make -j${THREAD_COUNT}]]></param>
