@@ -28,26 +28,6 @@ fi]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_12" name="Install modules" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[CLEAN_BUILD=%env.Gentoo.Kernel.Src.Clean%
-
-cd /usr/src/linux
-echo "Mount boot"
-sudo /bin/mount /boot
-
-if (( ${CLEAN_BUILD} == 1 )) 
-then
-  echo "Clean build, prepare modules"
-  sudo make modules_prepare
-fi
-
-echo "Make modules"
-sudo make modules_install]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_14" name="Install kernel initramfs" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[cd /usr/src/linux
