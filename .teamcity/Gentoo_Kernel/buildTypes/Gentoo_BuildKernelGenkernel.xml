@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ec46da33-51b6-443c-8e8b-fa31909c7657" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Build Kernel -- genkernel</name>
+  <name>Build Kernel -- Genkernel</name>
   <description>Build, install kernel, initramfs and update grub</description>
   <settings>
     <options>
