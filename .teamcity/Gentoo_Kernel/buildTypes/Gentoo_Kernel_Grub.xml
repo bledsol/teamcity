@@ -4,7 +4,15 @@
   <description>Grubery</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_14" name="Grub Mkconfig" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/sbin/grub2-mkconfig -o /boot/grub/grub.cfg" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_Sysconfig" />
     </vcs-settings>
