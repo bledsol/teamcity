@@ -21,7 +21,7 @@
       <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
           <param name="quietPeriodMode" value="DO_NOT_USE" />
-          <param name="triggerRules" value="+:root=Gentoo_Sysconfig: default/grub.conf" />
+          <param name="triggerRules" value="+:root=Gentoo_Sysconfig: default/grub" />
         </parameters>
       </build-trigger>
     </build-triggers>
