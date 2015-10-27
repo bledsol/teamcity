@@ -20,7 +20,7 @@
           <param name="script.content"><![CDATA[if (( $(/usr/bin/eselect news count all) > 0 ))
 then
   /usr/bin/eselect news read all > eselect-news-out.txt
-  (( $? == 0 )) && sudo /usr/bin/eselect purge
+  (( $? == 0 )) && sudo /usr/bin/eselect news purge
 else
   echo "No news is good news? :|"
 fi]]></param>
