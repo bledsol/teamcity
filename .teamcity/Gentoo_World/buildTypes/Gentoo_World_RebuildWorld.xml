@@ -3,7 +3,9 @@
   <name>Rebuild World</name>
   <description>Recompile the world</description>
   <settings>
-    <parameters />
+    <parameters>
+      <param name="sys.halt" value="" spec="checkbox checkedValue='1' description='Halt system after completeion (success or fail)' uncheckedValue='0' label='Halt system' display='normal'" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_27" name="" type="simpleRunner">
         <parameters>
