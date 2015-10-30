@@ -14,7 +14,7 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_15" name="" type="simpleRunner">
+      <runner id="RUNNER_15" name="halt" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[HALT="%sys.action.halt%"
 (( HALT == 1 )) && sudo /sbin/halt -p]]></param>
