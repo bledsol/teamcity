@@ -9,10 +9,7 @@
     <build-runners>
       <runner id="RUNNER_27" name="" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[HALT="%sys.action.halt%"
-sudo /usr/bin/emerge -e --quiet-build @world
-
-(( HALT == 1 )) && sudo /sbin/halt -p]]></param>
+          <param name="script.content" value="sudo /usr/bin/emerge -e --quiet-build @world" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
