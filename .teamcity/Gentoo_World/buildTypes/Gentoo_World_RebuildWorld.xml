@@ -7,7 +7,7 @@
       <param name="sys.action.halt" value="" spec="checkbox checkedValue='1' description='Halt system after completeion (success or fail)' uncheckedValue='0' label='Halt system' display='normal'" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_27" name="" type="simpleRunner">
+      <runner id="RUNNER_27" name="emerge everything" type="simpleRunner">
         <parameters>
           <param name="script.content" value="sudo /usr/bin/emerge -e --quiet-build @world" />
           <param name="teamcity.step.mode" value="default" />
