@@ -3,6 +3,9 @@
   <name>Power Save</name>
   <description>Shut 'r down</description>
   <settings>
+    <options>
+      <option name="checkoutMode" value="MANUAL" />
+    </options>
     <parameters />
     <build-runners>
       <runner id="RUNNER_16" name="halt" type="simpleRunner">
