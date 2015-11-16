@@ -4,6 +4,7 @@
   <description>Recompile the world</description>
   <settings>
     <parameters>
+      <param name="emerge.action.pretend" value="0" spec="checkbox description='Emerge Dry Run' label='Dry Run' uncheckedValue='0' display='normal' checkedValue='1'" />
       <param name="sys.action.halt" value="" spec="checkbox checkedValue='1' description='Halt system after completeion (success or fail)' uncheckedValue='0' label='Halt system' display='normal'" />
     </parameters>
     <build-runners>
