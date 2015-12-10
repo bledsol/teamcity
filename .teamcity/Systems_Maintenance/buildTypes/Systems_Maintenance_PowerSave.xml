@@ -10,7 +10,7 @@
     <build-runners>
       <runner id="RUNNER_16" name="halt" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[w|awk '{ print $7 }'|grep 'sshd:'
+          <param name="script.content"><![CDATA[netstat -ant|grep ESTABLISHED|awk '{ print $4 }'|grep ':22'
 (( $? == 0 )) && echo -e "SSH Users:\n $(w|grep sshd:)" && exit 1
 echo sudo /sbin/halt -p]]></param>
           <param name="teamcity.step.mode" value="default" />
