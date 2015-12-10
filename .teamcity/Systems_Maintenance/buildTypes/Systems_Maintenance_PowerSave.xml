@@ -12,7 +12,7 @@
         <parameters>
           <param name="script.content"><![CDATA[netstat -ant|grep ESTABLISHED|awk '{ print $4 }'|grep ':22' > /dev/null
 (( $? == 0 )) && echo -e "SSH Users:\n $(w)" && exit 1
-echo sudo /sbin/halt -p]]></param>
+sudo /sbin/halt -p]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
