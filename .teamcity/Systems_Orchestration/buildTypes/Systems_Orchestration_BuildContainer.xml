@@ -4,7 +4,15 @@
   <description>Build a lxc container</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_33" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="lxc-create -t %param.GUEST% -n %param.NAME% -f %param.CONFIG%" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings />
     <requirements />
     <build-triggers />
