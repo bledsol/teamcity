@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="param.CONFIG" value="/etc/lxc/guest.conf" spec="text regexp='/etc/lxc/guest.conf' description='path to config usually: /etc/lxc/guest.conf' label='Container config' validationMode='not_empty' display='hidden'" />
+      <param name="param.GUEST" value="debian" spec="text description='Architecture of the guest' label='Guest Architecture' validationMode='not_empty' display='prompt'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_33" name="" type="simpleRunner">
