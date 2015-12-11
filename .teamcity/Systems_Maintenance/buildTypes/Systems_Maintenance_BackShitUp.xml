@@ -4,6 +4,7 @@
   <description>Backup This Wretched Beastie</description>
   <settings>
     <parameters>
+      <param name="param.PASS" value="" />
       <param name="param.USER" value="" />
     </parameters>
     <build-runners>
