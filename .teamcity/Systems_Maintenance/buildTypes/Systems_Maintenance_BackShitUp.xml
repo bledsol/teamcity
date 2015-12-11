@@ -3,9 +3,7 @@
   <name>BackShitUp</name>
   <description>Backup This Wretched Beastie</description>
   <settings>
-    <parameters>
-      <param name="param.PASS" value="" />
-    </parameters>
+    <parameters />
     <build-runners>
       <runner id="RUNNER_15" name="" type="simpleRunner">
         <parameters>
