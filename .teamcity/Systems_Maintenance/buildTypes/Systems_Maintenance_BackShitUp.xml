@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="param.PASS" value="" />
+      <param name="param.USER" value="" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_15" name="" type="simpleRunner">
