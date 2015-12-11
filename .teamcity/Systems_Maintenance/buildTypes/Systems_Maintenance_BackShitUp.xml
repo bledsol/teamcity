@@ -10,7 +10,7 @@
     <build-runners>
       <runner id="RUNNER_15" name="" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="curl -s --basic --user %param.USER%:%param.PASS% -X POST &quot;http://localhost:8111/httpAuth/app/rest/server/backup?includeConfigs=true&amp;includeDatabase=true&amp;includeBuildLogs=true&amp;fileName=ScheduledBackup&quot;" />
+          <param name="script.content" value="curl -s --basic --user %param.USER%:%param.PASS% -X POST &quot;http://localhost:8111/httpAuth/app/rest/server/backup?includeConfigs=true&amp;includeDatabase=true&amp;includeBuildLogs=true&amp;fileName=Manual_Backup&quot;" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
