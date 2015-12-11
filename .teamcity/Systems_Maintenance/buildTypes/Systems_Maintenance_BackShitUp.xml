@@ -3,7 +3,9 @@
   <name>BackShitUp</name>
   <description>Backup This Wretched Beastie</description>
   <settings>
-    <parameters />
+    <parameters>
+      <param name="param.PASS" value="zxx775d03cbe80d301b" spec="password description='Password' label='Password' display='prompt'" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_15" name="" type="simpleRunner">
         <parameters>
