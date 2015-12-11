@@ -4,7 +4,7 @@
   <description>Backup This Wretched Beastie</description>
   <settings>
     <parameters>
-      <param name="param.PASS" value="" />
+      <param name="param.PASS" value="zxx775d03cbe80d301b" spec="password description='Credentials for login' label='Password' display='prompt'" />
       <param name="param.USER" value="" spec="text description='User to log in with' label='Username' validationMode='not_empty' display='prompt'" />
     </parameters>
     <build-runners>
