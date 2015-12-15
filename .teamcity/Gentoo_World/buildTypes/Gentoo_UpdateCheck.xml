@@ -81,6 +81,15 @@ sudo /usr/bin/eix-update]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_37" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[touch ./emerge.log
+touch ./sync.log
+touch ./glsa.log]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />
