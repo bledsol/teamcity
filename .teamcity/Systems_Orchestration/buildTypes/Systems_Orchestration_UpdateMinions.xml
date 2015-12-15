@@ -16,6 +16,17 @@ done]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_35" name="apt-get update (1)" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
+for host in ${MINIONS[@]}
+do
+  ssh ${host} "sudo apt-get update && sudo apt-get upgrade"
+done]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />
