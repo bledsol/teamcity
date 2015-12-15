@@ -16,7 +16,7 @@ done]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_36" name="Start container (1)" type="simpleRunner">
+      <runner id="RUNNER_36" name="Stop containers" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
 for host in ${MINIONS[@]}
