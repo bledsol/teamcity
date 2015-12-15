@@ -7,8 +7,11 @@
     <build-runners>
       <runner id="RUNNER_34" name="apt-get update" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[ssh 192.168.10.86 "apt-get update"
-ssh 192.168.10.86 "apt-get upgrade"]]></param>
+          <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
+for host in ${MINIONS[@]}
+do
+  ssh ${host} "sudo apt-get update && sudo apt-get upgrade"
+done]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
