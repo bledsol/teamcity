@@ -18,7 +18,9 @@ done]]></param>
       </runner>
       <runner id="RUNNER_35" name="Update debian containers" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
+          <param name="script.content"><![CDATA[sleep 5
+
+MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
 for host in ${MINIONS[@]}
 do
   ssh ${host} "sudo apt-get update && sudo apt-get upgrade"
