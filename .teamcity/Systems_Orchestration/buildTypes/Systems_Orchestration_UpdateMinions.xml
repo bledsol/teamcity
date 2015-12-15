@@ -21,7 +21,7 @@ done]]></param>
           <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
 for host in ${MINIONS[@]}
 do
-  /etc/init.d/lxc.${host} stop
+  sudo /etc/init.d/lxc.${host} stop
 done]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
