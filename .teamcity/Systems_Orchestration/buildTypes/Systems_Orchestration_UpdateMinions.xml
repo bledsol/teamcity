@@ -5,7 +5,7 @@
   <settings>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_34" name="apt-get update" type="simpleRunner">
+      <runner id="RUNNER_34" name="Start container" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
 for host in ${MINIONS[@]}
