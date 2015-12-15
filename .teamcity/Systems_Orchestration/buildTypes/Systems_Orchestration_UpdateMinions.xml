@@ -16,6 +16,17 @@ done]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_36" name="Start container (1)" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
+for host in ${MINIONS[@]}
+do
+  /etc/init.d/lxc.${host} start
+done]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_35" name="apt-get update" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[MINIONS=( $(grep '#minions' /etc/hosts|awk '{ print $2 }') )
