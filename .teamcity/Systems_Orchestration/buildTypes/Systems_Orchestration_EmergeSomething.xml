@@ -3,7 +3,9 @@
   <name>Emerge Something</name>
   <description>emerge a thing</description>
   <settings>
-    <parameters />
+    <parameters>
+      <param name="param.ebuild" value="" spec="text validationMode='any' display='prompt'" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_38" name="" type="simpleRunner">
         <parameters>
