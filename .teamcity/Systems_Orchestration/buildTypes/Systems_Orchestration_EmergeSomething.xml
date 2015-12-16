@@ -4,7 +4,25 @@
   <description>emerge a thing</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_38" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[emerge %%param.ebuild%%
+
+while (( $? == 0 )) 
+do 
+  sleep 1
+  clear
+  echo "${PRINT_STRING}"
+  EMERGE_STAT=$(genlop -c -q -i -t |egrep -v -e '!!!' -e 'see manpage')
+  [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
+  jobs | grep Running &> /dev/null
+done]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings />
     <requirements />
     <build-triggers />
