@@ -12,13 +12,11 @@
           <param name="script.content"><![CDATA[/usr/bin/sudo /usr/bin/emerge --quiet-build %param.ebuild% &> emerge.log &
 
 while (( $? == 0 )) 
-do 
-  sleep 1
-  clear
+do
   echo "${PRINT_STRING}"
   EMERGE_STAT=$(genlop -c -q -i -t |egrep -v -e '!!!' -e 'see manpage')
   [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
-  jobs | grep Running &> /dev/null
+  jobs | grep Running &> /dev/null && sleep 1 && echo
 done
 
 cat emerge.log]]></param>
