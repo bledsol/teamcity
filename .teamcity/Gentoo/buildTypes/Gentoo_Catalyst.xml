@@ -15,9 +15,9 @@ catalyst -f stage1.spec]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_40" name="" type="simpleRunner">
+      <runner id="RUNNER_40" name="Stage 2 deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[cd /var/data/catalyst/builds/default
+          <param name="script.content"><![CDATA[cd /var/data/catalyst/builds/%Release%
 catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
