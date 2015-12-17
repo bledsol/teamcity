@@ -69,7 +69,7 @@ cd /var/data/catalyst/builds/%param.release%
 
 [[ -f stage2.spec ]] || wget -O stage2.spec "https://gitweb.gentoo.org/proj/releng.git/plain/releases/weekly/specs/amd64/livecd-stage2.spec"
 
-echo sudo /usr/bin/catalyst -f stage2.spec]]></param>
+sudo /usr/bin/catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
