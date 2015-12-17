@@ -3,6 +3,9 @@
   <name>Catalyst Deployment</name>
   <description>Gentoo Catalyst Stage Burner</description>
   <settings>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_40" />
+    </disabled-settings>
     <parameters>
       <param name="Release" value="default" spec="text description='Release Name' label='Release' validationMode='any' display='prompt'" />
     </parameters>
