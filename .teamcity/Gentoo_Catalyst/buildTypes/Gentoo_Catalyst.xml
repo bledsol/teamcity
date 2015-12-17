@@ -44,7 +44,7 @@ fi
 (( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2
 (( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 
-catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"]]></param>
+sudo catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
