@@ -10,7 +10,6 @@
     </disabled-settings>
     <parameters>
       <param name="param.release" value="Default" spec="text description='Release' label='Release' validationMode='not_empty' display='prompt'" />
-      <param name="Release" value="default" spec="text description='Release Name' label='Release' validationMode='any' display='prompt'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
