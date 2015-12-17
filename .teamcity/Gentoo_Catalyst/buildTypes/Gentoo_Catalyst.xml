@@ -52,7 +52,7 @@ fi
 
 if [[ ! -L stage3-amd64-hardened-latest.tar.bz2 ]]
 then
-    ln -s tage3-amd64-hardened-20151210.tar.bz2 stage3-amd64-hardened-latest.tar.bz2 || exit 1
+    ln -s stage3-amd64-hardened-20151210.tar.bz2 stage3-amd64-hardened-latest.tar.bz2
 fi
 
 sudo /usr/bin/catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"
