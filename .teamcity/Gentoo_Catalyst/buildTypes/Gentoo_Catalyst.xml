@@ -16,10 +16,35 @@
         <parameters>
           <param name="script.content"><![CDATA[[[ -d /var/data/catalyst/builds/%Release% ]] || mkdir -p /var/data/catalyst/builds/%Release% 
 cd /var/data/catalyst/builds/%Release%
-lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2
-lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
+
+wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2.DIGESTS.asc
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig
+wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2.DIGESTS.asc
 wget https://gitweb.gentoo.org/proj/releng.git/tree/releases/weekly/specs/amd64/livecd-stage1.spec
-#sudo catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"]]></param>
+
+
+if [[ -f stage3-amd64-hardened-20151210.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-20151210.tar.bz2) stage3-amd64-hardened-20151210.tar.bz2.DIGESTS.asc &> /dev/null )
+then
+    echo "Not fetching, file exists and checksums match"
+else
+    echo "Clobbering stagnant stage"
+    rm stage3-amd64-hardened-20151210.tar.bz2
+    FETCH_STAGE=1
+fi
+
+if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum )
+then
+     echo "Not fetching, file exists and checksums match"
+else
+    FETCH_PORTAGE=1
+    echo "Clobbering stagnant snapshot"
+fi
+
+(( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2
+(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
+
+catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
