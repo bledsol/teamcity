@@ -7,9 +7,9 @@
       <param name="Release" value="default" spec="text description='Release Name' label='Release' validationMode='any' display='prompt'" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_39" name="" type="simpleRunner">
+      <runner id="RUNNER_39" name="Stage 1" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[cd /var/data/catalyst/builds/default
+          <param name="script.content"><![CDATA[cd /var/data/catalyst/builds/%Release%
 catalyst -f stage1.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
