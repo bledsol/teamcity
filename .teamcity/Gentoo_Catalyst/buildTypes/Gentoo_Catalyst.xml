@@ -27,7 +27,8 @@ wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig
 wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2.DIGESTS.asc
 
-[[ -f stage1.spec ]] || wget -O stage1.spec https://gitweb.gentoo.org/proj/releng.git/tree/releases/weekly/specs/amd64/livecd-stage1.spec
+[[ -f stage1.spec ]] || wget -O stage1.spec "https://gitweb.gentoo.org/proj/releng.git/plain/releases/weekly/specs/amd64/livecd-stage1.spec"
+
 
 
 if [[ -f stage3-amd64-hardened-20151210.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-20151210.tar.bz2) stage3-amd64-hardened-20151210.tar.bz2.DIGESTS.asc &> /dev/null )
