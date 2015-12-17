@@ -3,7 +3,9 @@
   <name>Catalyst</name>
   <description>Gentoo Catalyst Stage Burner</description>
   <settings>
-    <parameters />
+    <parameters>
+      <param name="Release" value="" spec="text description='Release Name' label='Release' validationMode='any' display='normal'" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_39" name="" type="simpleRunner">
         <parameters>
