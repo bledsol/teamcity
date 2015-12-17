@@ -10,7 +10,17 @@
     <build-runners>
       <runner id="RUNNER_27" name="emerge everything" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/bin/emerge -e --quiet-build @world" />
+          <param name="script.content"><![CDATA[sudo /usr/bin/emerge -e --quiet-build @world &> emerge.out &
+
+while (( $? == 0 )) 
+do
+  [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
+  EMERGE_STAT=$(genlop -c -q -i -t |egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
+  [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
+  jobs | grep Running &> /dev/null && sleep 1
+done
+
+cat emerge.out]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
