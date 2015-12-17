@@ -4,7 +4,6 @@
   <description>Gentoo Catalyst Stage Burner</description>
   <settings>
     <disabled-settings>
-      <setting-ref ref="RUNNER_40" />
       <setting-ref ref="RUNNER_41" />
       <setting-ref ref="RUNNER_42" />
     </disabled-settings>
@@ -69,14 +68,6 @@ cd /var/data/catalyst/builds/%param.release%
 [[ -f stage2.spec ]] || wget -O stage2.spec "https://gitweb.gentoo.org/proj/releng.git/plain/releases/weekly/specs/amd64/livecd-stage2.spec"
 
 echo sudo /usr/bin/catalyst -f stage2.spec]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_40" name="Stage 2 Deployment" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[cd /var/data/catalyst/builds/%Release%
-catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
