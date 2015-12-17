@@ -16,8 +16,8 @@
         <parameters>
           <param name="script.content"><![CDATA[[[ -d /var/data/catalyst/builds/%Release% ]] || mkdir -p /var/data/catalyst/builds/%Release% 
 cd /var/data/catalyst/builds/%Release%
-lftp --use-pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2
-lftp --use-pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
+lftp -e pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-20151210.tar.bz2
+lftp -e pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 wget https://gitweb.gentoo.org/proj/releng.git/tree/releases/weekly/specs/amd64/livecd-stage1.spec
 #sudo catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"]]></param>
           <param name="teamcity.step.mode" value="default" />
