@@ -13,10 +13,10 @@
 
 while (( $? == 0 )) 
 do
-  echo "${PRINT_STRING}"
+  [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
   EMERGE_STAT=$(genlop -c -q -i -t |egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
   [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
-  jobs | grep Running &> /dev/null && sleep 1 && echo
+  jobs | grep Running &> /dev/null && sleep 1
 done
 
 cat emerge.log]]></param>
