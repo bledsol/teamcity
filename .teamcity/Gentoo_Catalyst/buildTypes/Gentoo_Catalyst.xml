@@ -14,7 +14,7 @@
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[BUILD='20151217'
+          <param name="script.content"><![CDATA[BUILD='%param.buildid%'
 
 [[ -d /var/data/catalyst/builds/%Release% ]] || mkdir -p /var/data/catalyst/builds/%Release% 
 cd /var/data/catalyst/builds/%Release%
