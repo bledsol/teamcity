@@ -5,6 +5,7 @@
   <settings>
     <disabled-settings>
       <setting-ref ref="RUNNER_40" />
+      <setting-ref ref="RUNNER_41" />
     </disabled-settings>
     <parameters>
       <param name="Release" value="default" spec="text description='Release Name' label='Release' validationMode='any' display='prompt'" />
