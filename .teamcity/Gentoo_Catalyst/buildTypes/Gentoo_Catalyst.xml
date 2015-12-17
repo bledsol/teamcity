@@ -54,7 +54,7 @@ if [[ ! -L stage3-amd64-hardened-latest.tar.bz2 ]]
 then
     ln -s stage3-amd64-hardened-20151210.tar.bz2 stage3-amd64-hardened-latest.tar.bz2
 fi
-sed -i 's/###SNAPSHOT_ID###/"$(date +%Y).$(date +%m).$(date +%d)"/' stage1.spec
+sed -i "s/###SNAPSHOT_ID###/"$(date +%Y).$(date +%m).$(date +%d)"/" stage1.spec
 sudo /usr/bin/catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"
 sudo /usr/bin/catalyst -f stage1.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
