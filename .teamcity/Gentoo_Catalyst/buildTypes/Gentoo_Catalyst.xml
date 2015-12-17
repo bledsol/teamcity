@@ -33,7 +33,7 @@ else
     FETCH_STAGE=1
 fi
 
-if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum )
+if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
 then
      echo "Not fetching, file exists and checksums match"
 else
