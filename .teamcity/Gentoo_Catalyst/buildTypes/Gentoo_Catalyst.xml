@@ -96,7 +96,9 @@ wget https://gitweb.gentoo.org/proj/releng.git/tree/releases/weekly/specs/amd64/
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Gentoo_Catalyst_GentooReleaseEng" />
+      <vcs-entry-ref root-id="Gentoo_Catalyst_GentooReleaseEng">
+        <checkout-rule rule="+:.=&gt;/var/data/catalyst/release/" />
+      </vcs-entry-ref>
     </vcs-settings>
     <requirements />
     <build-triggers />
