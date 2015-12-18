@@ -22,7 +22,7 @@
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[[[ -d /var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target% ]] || mkdir -p /var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%
+          <param name="script.content"><![CDATA[[[ -d "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%" ]] || mkdir -p "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
 echo "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
 cd /var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%
 
