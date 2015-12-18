@@ -60,8 +60,8 @@ fi
 
 sed -e "s/###SUB_ARCH###/%param.subarch%/" -e "s/###VERSION###/%param.version%/" -e "s/###REL_TYPE###/%param.release.type%/" -e "s/###REL_PROFILE###/%param.profile%/" -e "s/###REL_SNAPSHOT###/%param.snapshot%/" -e "s/###SRC_PATH###/%param.source.path%/" stage1.spec.template > stage1.spec
 
-sudo /usr/bin/catalyst -s "$(date +%Y).$(date +%m).$(date +%d)"
-sudo /usr/bin/catalyst -f stage1.spec]]></param>
+echo sudo /usr/bin/catalyst -s %param.snapshot%
+echo sudo /usr/bin/catalyst -f stage1.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
