@@ -29,6 +29,7 @@ REL_TYPE="%param.release.type%"
 REL_PROFILE="%param.profile%"
 REL_SNAPSHOT="%param.snapshot%"
 SRC_PATH="%param.source.path%"
+TARGET="%param.target%"
 
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
