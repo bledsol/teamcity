@@ -13,6 +13,7 @@
       <param name="param.profile" value="hardened/linux/amd64" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
       <param name="param.release" value="Default" spec="text description='Release' label='Release' validationMode='not_empty' display='prompt'" />
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
+      <param name="param.snapshot" value="current" />
       <param name="param.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
       <param name="param.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
       <param name="param.version" value="2015.12.17" spec="text description='Version Stamp' label='Version' validationMode='not_empty' display='normal'" />
