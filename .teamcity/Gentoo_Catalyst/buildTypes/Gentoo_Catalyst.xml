@@ -24,7 +24,6 @@
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
 
-
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
 
