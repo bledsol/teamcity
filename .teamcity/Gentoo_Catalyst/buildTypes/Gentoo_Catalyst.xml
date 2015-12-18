@@ -22,6 +22,7 @@
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
+BUILD_VER="%param.version%"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
@@ -33,7 +34,7 @@ do
 done
 
 echo "Fetching hashes"
-wget -O stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-%param.version%.tar.bz2.DIGESTS.asc || exit 1
+wget -O stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc || exit 1
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum || exit 1
 wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig || exit 1
 
