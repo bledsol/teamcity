@@ -22,9 +22,11 @@
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[[[ -d "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%" ]] || mkdir -p "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
-echo "/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
-cd /var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%
+          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
+
+
+[[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
+cd ${WORK_DIR}
 
 echo "Cleaning up old hashfiles"
 for file in "stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig"
