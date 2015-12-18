@@ -30,6 +30,7 @@ REL_PROFILE="%param.profile%"
 REL_SNAPSHOT="%param.snapshot%"
 SRC_PATH="%param.source.path%"
 
+
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
 
@@ -65,7 +66,7 @@ fi
 (( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o stage3-amd64-hardened-latest.tar.bz2
 (( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 
-echo sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_PROFILE}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${SRC_PATH}/" stage1.spec.template > stage1.spec
+echo sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/${SUB_ARCH}\/stage3-amd64-live/" stage1.spec.template > stage1.spec
 
 echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
 echo sudo /usr/bin/catalyst -f stage1.spec]]></param>
