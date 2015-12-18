@@ -75,11 +75,11 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/
 echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
 sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
 
+EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log)
+
 while (( $? == 0 )) 
 do
   [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
-  EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log)
-
   EMERGE_STAT=$(genlop -c -q -i -t -f ${EMERGE_LOG}|egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
   [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
   jobs | grep Running &> /dev/null && sleep 1
