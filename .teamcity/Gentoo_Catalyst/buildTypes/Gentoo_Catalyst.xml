@@ -6,6 +6,7 @@
     <disabled-settings>
       <setting-ref ref="RUNNER_41" />
       <setting-ref ref="RUNNER_42" />
+      <setting-ref ref="RUNNER_43" />
     </disabled-settings>
     <parameters>
       <param name="param.builid" value="2015.12.17" spec="text description='Build ID' label='BuildId' validationMode='not_empty' display='prompt'" />
