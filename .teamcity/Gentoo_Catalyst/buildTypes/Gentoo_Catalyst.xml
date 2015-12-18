@@ -44,8 +44,7 @@ if [[ -f stage3-amd64-hardened-latest.tar.bz2 ]] && ( grep $(sha512sum stage3-am
 then
     echo "Not fetching, file exists and checksums match"
 else
-    echo "Clobbering stagnant stage"
-    rm stage3-amd64-hardened-latest.tar.bz2
+    [[ -f stage3-amd64-hardened-latest.tar.bz2 ]] && echo "Clobbering stagnant stage" && rm stage3-amd64-hardened-latest.tar.bz2
     FETCH_STAGE=1
 fi
 
@@ -54,10 +53,10 @@ then
      echo "Not fetching, file exists and checksums match"
 else
     FETCH_PORTAGE=1
-    echo "Clobbering stagnant snapshot"
+    [[ -f portage-latest.tar.bz2 ]] && echo "Clobbering stagnant snapshot" && rm portage-latest.tar.bz2
 fi
 
-(( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD}.tar.bz2 -o stage3-amd64-hardened-latest.tar.bz2
+(( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o stage3-amd64-hardened-latest.tar.bz2
 (( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 
 sed -e "s/###SUB_ARCH###/%param.subarch%/" -e "s/###VERSION###/%param.version%/" -e "s/###REL_TYPE###/%param.release.type%/" -e "s/###REL_PROFILE###/%param.profile%/" -e "s/###REL_SNAPSHOT###/%param.snapshot%/" -e "s/###SRC_PATH###/%param.source.path%/" stage1.spec.template > stage1.spec
