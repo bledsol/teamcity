@@ -34,17 +34,11 @@ TARGET="%param.target%"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
+rm stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc
 
-echo "Cleaning up old hashfiles"
-for file in "stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig"
-do
- rm $file
-done
 
 echo "Fetching hashes"
 wget -O stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc || exit 1
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum || exit 1
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig || exit 1
 
 [[ -f stage1.spec.template ]] || exit 1
 
@@ -57,6 +51,12 @@ else
 fi
 
 cd /var/data/catalyst/snapshots/
+rm portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig
+echo "Fetching portage sums"
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum || exit 1
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig || exit 1
+
+
 if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
 then
      echo "Not fetching, file exists and checksums match"
