@@ -109,7 +109,7 @@ cd ${WORK_DIR}
 [[ -f stage2.spec.template ]] || exit
 
 echo "Mangling template"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/${SUB_ARCH}\/${TARGET}\/stage1-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage2.spec.template > stage2.spec
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${SNAPSHOT}/" stage2.spec.template > stage2.spec
 sudo /usr/bin/catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
