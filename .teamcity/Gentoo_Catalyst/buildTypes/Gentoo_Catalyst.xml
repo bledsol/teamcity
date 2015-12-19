@@ -32,30 +32,32 @@ TARGET="%param.target%"
 
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
+
 cd ${WORK_DIR}
-rm stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc
-
-
-echo "Fetching hashes"
-wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc || exit 1
-
 echo "Checking for templates"
 [[ -f stage1.spec.header.template && -f stage1.spec.use.template && -f stage1.spec.pkg.template ]] || exit 1
+
+cd /var/data/catalyst/builds/${REL_TYPE}
+[[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc ]] && rm stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc
+echo "Fetching hashes"
+wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null || exit 1
 
 if [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-${BUILD_VER}.tar.bz2|awk '{ print $1 }' ) stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null )
 then
     echo "Not fetching, file exists and checksums match"
+    FETCH_STAGE=0
+elif [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
+then
+    echo "Checksum failed, you should investigate" && exit 1
 else
-    [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]] && echo "Clobbering stagnant stage" && rm stage3-amd64-hardened-${BUILD_VER}.tar.bz2
     FETCH_STAGE=1
 fi
 
 cd /var/data/catalyst/snapshots/
 rm portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig
 echo "Fetching portage sums"
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum || exit 1
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig || exit 1
-
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null || exit 1
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null || exit 1
 
 if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
 then
@@ -65,16 +67,17 @@ else
     [[ -f portage-latest.tar.bz2 ]] && echo "Clobbering stagnant snapshot" && rm portage-latest.tar.bz2
 fi
 
-(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
+(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 &> /dev/null
 
-cd -
+cd /var/data/catalyst/builds/${REL_TYPE}
 
-(( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null 
+(( $? == 0 )) || exit 1
 
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" stage1.spec.header.template > stage1.spec
-echo >> stage1.spec
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" stage1.spec.header.template > stage1.spec || exit 1
+echo >> stage1.spec || exit 1 
 cat stage1.spec.use.template >> stage1.spec
-echo >> stage1.spec
+echo >> stage1.spec || exit 1
 cat stage1.spec.pkg.template >> stage1.spec
 
 echo "Taking portage snapshot"
