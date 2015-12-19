@@ -77,17 +77,17 @@ cat stage1.spec.use.template >> stage1.spec
 echo >> stage1.spec
 cat stage1.spec.pkg.template >> stage1.spec
 
-echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
-echo sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
+sudo /usr/bin/catalyst -s ${SNAPSHOT}
+sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
 
-EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log)
+EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
 
 while (( $? == 0 )) 
 do
   [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
   EMERGE_STAT=$(genlop -c -q -i -t -f ${EMERGE_LOG}|egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
   [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
-  jobs | grep Running &> /dev/null && sleep 1
+  sleep 1 && jobs | grep Running &> /dev/null
 done
 
 cat catalyst.out]]></param>
