@@ -127,8 +127,9 @@ TARGET="%param.target%"
 
 TEMPLATES="stage2.spec.livecd.template stage2.spec.boot.template stage2.spec.livecd-post.template"
 
-
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
+
+touch ${SPEC_FILE} || exit 1
 
 [[ -f stage2.spec.header.template ]] || exit 1
 
