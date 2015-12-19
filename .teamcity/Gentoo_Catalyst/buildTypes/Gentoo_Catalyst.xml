@@ -107,6 +107,7 @@ echo "Fin."
       <runner id="RUNNER_43" name="Stage 2 Deployment" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
+SPEC_FILE="${WORK_DIR}/stage2.spec"
 BUILD_VER="%param.version%"
 SNAPSHOT="%param.snapshot%"
 SUB_ARCH="%param.subarch%"
@@ -118,29 +119,32 @@ TARGET="%param.target%"
 
 TEMPLATES="stage2.spec.livecd.template stage2.spec.boot.template stage2.spec.livecd-post.template"
 
+
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
-cd ${WORK_DIR}
 
 [[ -f stage2.spec.header.template ]] || exit 1
+
+cd catalyst
 
 for template in ${TEMPLATES[@]}
 do
     [[ -f $template ]] || exit 1
 done
 
-
 echo "Mangling template"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/" stage2.spec.header.template > stage2.spec
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/" stage2.spec.header.template > ${SPEC_FILE}
 
 echo "Processing template headers"
 for template in ${TEMPLATES[@]}
 do
-    echo >>  stage2.spec
-    cat $template >> stage2.spec || exit 1
+    echo >>  ${SPEC_FILE}
+    cat $template >> ${SPEC_FILE} || exit 1
 done
+
+cd ${WORK_DIR}
     
 echo "Running catalyst scripts"
-sudo /usr/bin/catalyst -f stage2.spec]]></param>
+sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
