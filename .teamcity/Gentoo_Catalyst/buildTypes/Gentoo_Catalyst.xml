@@ -107,15 +107,31 @@ REL_SNAPSHOT="%param.snapshot%"
 SRC_PATH="%param.source.path%"
 TARGET="%param.target%"
 
+TEMPLATES="stage2.spec.livecd.template stage2.spec.boot.template stage2.spec.livecd-post.template"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
 
-[[ -f stage2.spec.template ]] || exit
+[[ -f stage2.spec.header.template ]] || exit 1
+
+for template in ${TEMPLATE[@]}
+do
+    [[ -f $template ]] || exit 1
+done
+
 
 echo "Mangling template"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${SNAPSHOT}/" stage2.spec.template > stage2.spec
-sudo /usr/bin/catalyst -f stage2.spec]]></param>
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${SNAPSHOT}/" stage2.spec.header.template > stage2.spec
+
+echo "Processing template headers"
+for template in ${TEMPLATE[@]}
+do
+    echo >>  stage2.spec
+    cat $template >> stage2.spec || exit 1
+done
+    
+echo "Running catalyst scripts"
+echo sudo /usr/bin/catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
