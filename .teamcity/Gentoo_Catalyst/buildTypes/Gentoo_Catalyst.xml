@@ -70,7 +70,7 @@ cd -
 
 (( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o stage3-amd64-hardened-latest.tar.bz2
 
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/${SUB_ARCH}\/${TARGET}\/stage3-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage1.spec.template > stage1.spec
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage1.spec.template > stage1.spec
 
 echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
 sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
