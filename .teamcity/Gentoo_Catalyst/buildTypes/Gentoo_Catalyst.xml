@@ -20,7 +20,7 @@
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
+          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%"
 SPEC_FILE="${WORK_DIR}/stage1.spec"
 BUILD_VER="%param.version%"
 SNAPSHOT="%param.snapshot%"
@@ -40,6 +40,8 @@ for template in ${TEMPLATES[@]}
 do 
     [[ -f $template ]] || exit 1
 done
+
+touch ${SPEC_FILE} || exit 1
 
 echo "Mangling templates"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" stage1.spec.header.template > ${SPEC_FILE} || exit 1
@@ -92,7 +94,7 @@ cd ${WORK_DIR}
 echo "Taking portage snapshot"
 sudo /usr/bin/catalyst -s ${SNAPSHOT}
 echo "Running catalyst stage1"
-sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+sudo /usr/bin/catalyst -f $(basename ${SPEC_FILE}) || exit 1
 echo "Fin."
 
 #EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
