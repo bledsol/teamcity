@@ -114,7 +114,7 @@ cd ${WORK_DIR}
 
 [[ -f stage2.spec.header.template ]] || exit 1
 
-for template in ${TEMPLATE[@]}
+for template in ${TEMPLATES[@]}
 do
     [[ -f $template ]] || exit 1
 done
@@ -124,7 +124,7 @@ echo "Mangling template"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${SNAPSHOT}/" stage2.spec.header.template > stage2.spec
 
 echo "Processing template headers"
-for template in ${TEMPLATE[@]}
+for template in ${TEMPLATES[@]}
 do
     echo >>  stage2.spec
     cat $template >> stage2.spec || exit 1
