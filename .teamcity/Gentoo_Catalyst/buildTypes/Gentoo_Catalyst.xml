@@ -40,7 +40,8 @@ rm stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc
 echo "Fetching hashes"
 wget -O stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc || exit 1
 
-[[ -f stage1.spec.template ]] || exit 1
+echo "Checking for templates"
+[[ -f stage1.spec.header.template && -f stage1.spec.use.template && -f stage1.spec.pkg.template ]] || exit 1
 
 if [[ -f stage3-amd64-hardened-latest.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-latest.tar.bz2|awk '{ print $1 }' ) stage3-amd64-hardened-latest.tar.bz2.DIGESTS.asc &> /dev/null )
 then
@@ -64,13 +65,17 @@ else
     FETCH_PORTAGE=1
     [[ -f portage-latest.tar.bz2 ]] && echo "Clobbering stagnant snapshot" && rm portage-latest.tar.bz2
 fi
+
 (( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2
 
 cd -
 
 (( FETCH_STAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o stage3-amd64-hardened-latest.tar.bz2
 
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage1.spec.template > stage1.spec
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage1.spec.header.template > stage1.spec
+echo >> stage1.spec
+cat stage1.spec.use.template >> stage1.spec
+cat stage1.spec.pkg.template >> stage1.spec
 
 echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
 sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
