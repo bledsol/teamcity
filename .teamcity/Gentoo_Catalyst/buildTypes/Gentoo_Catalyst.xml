@@ -10,7 +10,7 @@
     </disabled-settings>
     <parameters>
       <param name="param.profile" value="hardened/linux/amd64" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
-      <param name="param.release" value="Default" spec="text description='Release' label='Release' validationMode='not_empty' display='prompt'" />
+      <param name="param.release" value="hardened" spec="text description='Release' label='Release' validationMode='not_empty' display='prompt'" />
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
       <param name="param.snapshot" value="latest" />
       <param name="param.source.path" value="hardened/amd64/stage3-amd64-live" />
