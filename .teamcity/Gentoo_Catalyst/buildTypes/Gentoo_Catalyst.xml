@@ -34,7 +34,7 @@ TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
-cd catalyst
+cd catalyst/templates
 echo "Checking for templates"
 for template in ${TEMPLATES[@]}
 do 
