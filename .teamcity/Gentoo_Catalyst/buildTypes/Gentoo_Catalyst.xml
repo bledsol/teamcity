@@ -130,7 +130,7 @@ TEMPLATES="stage2.spec.livecd.template stage2.spec.boot.template stage2.spec.liv
 
 [[ -f stage2.spec.header.template ]] || exit 1
 
-cd catalyst
+cd catalyst/templates
 
 for template in ${TEMPLATES[@]}
 do
