@@ -131,7 +131,7 @@ do
 done
     
 echo "Running catalyst scripts"
-echo sudo /usr/bin/catalyst -f stage2.spec]]></param>
+sudo /usr/bin/catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
