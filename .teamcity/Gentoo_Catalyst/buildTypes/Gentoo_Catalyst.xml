@@ -72,7 +72,7 @@ fi
 
 cd /var/data/catalyst/builds/${REL_TYPE}
 
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null 
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 
 (( $? == 0 )) || exit 1
 
 
