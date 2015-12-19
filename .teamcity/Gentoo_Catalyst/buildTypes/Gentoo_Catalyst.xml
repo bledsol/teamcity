@@ -131,10 +131,10 @@ TEMPLATES="stage2.spec.livecd.template stage2.spec.boot.template stage2.spec.liv
 
 touch ${SPEC_FILE} || exit 1
 
-[[ -f stage2.spec.header.template ]] || exit 1
 
 cd catalyst/templates
 
+[[ -f stage2.spec.header.template ]] || exit 1
 for template in ${TEMPLATES[@]}
 do
     [[ -f $template ]] || exit 1
