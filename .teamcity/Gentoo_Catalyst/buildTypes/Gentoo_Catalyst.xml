@@ -78,7 +78,7 @@ echo >> stage1.spec
 cat stage1.spec.pkg.template >> stage1.spec
 
 echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
-sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
+echo sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
 
 EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log)
 
