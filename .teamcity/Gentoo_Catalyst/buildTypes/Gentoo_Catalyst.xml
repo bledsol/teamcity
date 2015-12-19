@@ -112,7 +112,7 @@ echo "Fin."
       </runner>
       <runner id="RUNNER_43" name="Stage 2 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
+          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%"
 SPEC_FILE="${WORK_DIR}/stage2.spec"
 BUILD_VER="%param.version%"
 SNAPSHOT="%param.snapshot%"
