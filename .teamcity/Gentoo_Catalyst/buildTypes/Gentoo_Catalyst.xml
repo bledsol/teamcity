@@ -77,20 +77,23 @@ cat stage1.spec.use.template >> stage1.spec
 echo >> stage1.spec
 cat stage1.spec.pkg.template >> stage1.spec
 
+echo "Taking portage snapshot"
 sudo /usr/bin/catalyst -s ${SNAPSHOT}
-sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
+echo "Running catalyst stage1"
+sudo /usr/bin/catalyst -f stage1.spec || exit 1
+echo "Fin."
 
-EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
+#EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
 
-while (( $? == 0 )) 
-do
-  [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
-  EMERGE_STAT=$(genlop -c -q -i -t -f ${EMERGE_LOG}|egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
-  [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
-  sleep 1 && jobs | grep Running &> /dev/null
-done
-
-cat catalyst.out]]></param>
+#while (( $? == 0 )) 
+#do
+#  [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
+#  EMERGE_STAT=$(genlop -c -q -i -t -f ${EMERGE_LOG}|egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
+#  [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
+#  sleep 1 && jobs | grep Running &> /dev/null
+#done
+#
+#cat catalyst.out]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
