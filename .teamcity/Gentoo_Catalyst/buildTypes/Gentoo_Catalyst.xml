@@ -55,11 +55,11 @@ fi
 
 cd /var/data/catalyst/snapshots/
 rm portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig
-echo "Fetching portage sums"
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig
 
-exit 1
+echo "Fetching portage sums"
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null
+wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null
+
 if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
 then
      echo "Not fetching, file exists and checksums match"
