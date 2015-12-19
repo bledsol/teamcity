@@ -74,6 +74,9 @@ cd /var/data/catalyst/builds/${REL_TYPE}
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null 
 (( $? == 0 )) || exit 1
 
+
+cd ${WORK_DIR}
+
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" stage1.spec.header.template > stage1.spec || exit 1
 echo >> stage1.spec || exit 1 
 cat stage1.spec.use.template >> stage1.spec
