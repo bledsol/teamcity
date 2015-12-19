@@ -92,12 +92,12 @@ cat catalyst.out]]></param>
       </runner>
       <runner id="RUNNER_43" name="Stage 2 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[BUILD='%param.builid%'
+          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%/%param.subarch%/%param.target%"
 
-[[ -d /var/data/catalyst/builds/%param.release% ]] || mkdir -p /var/data/catalyst/builds/%param.release% 
-cd /var/data/catalyst/builds/%param.release%
+[[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
+cd ${WORK_DIR}
 
-[[ -f stage2.spec ]] || wget -O stage2.spec "https://gitweb.gentoo.org/proj/releng.git/plain/releases/weekly/specs/amd64/livecd-stage2.spec"
+[[ -f stage2.spec.template ]] || exit
 
 sudo /usr/bin/catalyst -f stage2.spec]]></param>
           <param name="teamcity.step.mode" value="default" />
