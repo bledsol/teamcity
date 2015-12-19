@@ -74,10 +74,11 @@ cd -
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${SNAPSHOT}/" stage1.spec.header.template > stage1.spec
 echo >> stage1.spec
 cat stage1.spec.use.template >> stage1.spec
+echo >> stage1.spec
 cat stage1.spec.pkg.template >> stage1.spec
 
-sudo /usr/bin/catalyst -s ${SNAPSHOT}
-echo sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
+echo sudo /usr/bin/catalyst -s ${SNAPSHOT}
+sudo /usr/bin/catalyst -f stage1.spec &> catalyst.out &
 
 EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log)
 
