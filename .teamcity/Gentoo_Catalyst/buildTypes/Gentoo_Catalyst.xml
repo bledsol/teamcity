@@ -32,7 +32,7 @@
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
     TARGET="%param.target%"\
-    TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template"\
+    TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template""
 do
     echo ${var}
 done]]></param>
