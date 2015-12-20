@@ -88,11 +88,11 @@ else
     [[ -f portage-latest.tar.bz2 ]] && echo "Clobbering stagnant snapshot" && rm portage-latest.tar.bz2
 fi
 
-(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 &> /dev/null
+(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${WORK_DIR}/portage-latest.tar.bz2 &> /dev/null
 
 cd /var/data/catalyst/builds/${REL_TYPE}
 
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
 (( FETCH_STAGE == 0 )) && echo "Not fetching stage"
 cd ${WORK_DIR}
