@@ -171,7 +171,8 @@ do
 done
 
 echo "Running catalyst scripts"
-sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE}]]></param>
+cd ${WORK_DIR}
+sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
