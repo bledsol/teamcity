@@ -76,7 +76,7 @@ echo "Checking build hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
     cd ${WORK_DIR}
-    grep stage3-amd64-hardened-${BUILD_VER}.tar.bz2 stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc > stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum
+    echo -e "# SHA512 HASH\n" && grep stage3-amd64-hardened-${BUILD_VER}.tar.bz2 stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc > stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum
     sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum &> /dev/null || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
