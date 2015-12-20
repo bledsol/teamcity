@@ -168,7 +168,6 @@ do
     cat ${TEMPLATE_DIR}/$template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 done
 
-exit
 echo "Running catalyst scripts"
 sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE}]]></param>
           <param name="teamcity.step.mode" value="default" />
