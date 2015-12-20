@@ -37,7 +37,7 @@ done > build-vars-common.sh]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
+      <runner id="RUNNER_39" name="Stage 1 Build" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u
 source $(pwd)/build-vars-common.sh || exit 1
