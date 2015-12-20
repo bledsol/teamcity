@@ -154,6 +154,8 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###SRC_PATH###/${REL_TYPE}\/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/" \
     ${TEMPLATE_DIR}/stage2.spec.header.template > ${WORK_DIR}/${SPEC_FILE}
 
+echo >>  ${WORK_DIR}/${SPEC_FILE}
+
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/" \
     -e "s/###VERSION###/${VERSION}/" \
