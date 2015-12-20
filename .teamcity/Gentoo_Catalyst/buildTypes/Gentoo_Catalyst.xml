@@ -5,7 +5,6 @@
   <settings>
     <disabled-settings>
       <setting-ref ref="RUNNER_39" />
-      <setting-ref ref="RUNNER_41" />
       <setting-ref ref="RUNNER_42" />
       <setting-ref ref="RUNNER_43" />
     </disabled-settings>
