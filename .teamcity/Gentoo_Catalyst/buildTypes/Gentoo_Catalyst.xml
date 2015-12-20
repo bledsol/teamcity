@@ -33,7 +33,11 @@
     TARGET="%param.target%""
 do
     echo ${var}
-done > build-vars-common.sh]]></param>
+done > build-vars-common.sh
+ls
+echo 
+echo
+pwd]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
