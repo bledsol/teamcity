@@ -20,7 +20,7 @@
     <build-runners>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%"
+          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.name%"
 TEMPLATE_DIR="/etc/catalyst/templates"
 SPEC_FILE="stage1.spec"
 BUILD_VER="%param.version%"
