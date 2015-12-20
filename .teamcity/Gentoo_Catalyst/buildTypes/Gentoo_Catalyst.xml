@@ -40,7 +40,9 @@ done > build-vars-common.sh]]></param>
       </runner>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
+          <param name="script.content"><![CDATA[set -u
+
+source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
