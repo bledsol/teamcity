@@ -22,6 +22,7 @@
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.type%"
+TEMPLATE_DIR="/etc/catalyst/templates"
 SPEC_FILE="stage1.spec"
 BUILD_VER="%param.version%"
 SNAPSHOT="%param.snapshot%"
@@ -35,26 +36,32 @@ TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
-cd catalyst/templates
 echo "Checking for templates"
 for template in ${TEMPLATES[@]}
 do 
-    [[ -f $template ]] || exit 1
+    [[ -f ${TEMPLATE_DIR}/${template} ]] || ( echo "Missing template: ${template}" && exit 1 )
 done
 
 touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Mangling templates"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" -e "s/###VERSION###/${BUILD_VER}/" -e "s/###REL_TYPE###/${REL_TYPE}/" -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" stage1.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1 
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
+    -e "s/###VERSION###/${BUILD_VER}/" \
+    -e "s/###REL_TYPE###/${REL_TYPE}/" \
+    -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" \
+    -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
+    -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
+    stage1.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
+
+echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 cat stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1 
+echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 cat stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 
 cd /var/data/catalyst/builds/${REL_TYPE}
 [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc ]] && rm stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc
 echo "Fetching hashes"
-wget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null || exit 1
+wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null || exit 1
 
 if [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-${BUILD_VER}.tar.bz2|awk '{ print $1 }' ) stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null )
 then
@@ -71,8 +78,8 @@ cd /var/data/catalyst/snapshots/
 rm portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig
 
 echo "Fetching portage sums"
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null
-wget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null
+wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null
+wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null
 
 if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
 then
@@ -93,9 +100,9 @@ cd ${WORK_DIR}
 
 
 echo "Taking portage snapshot"
-sudo /usr/bin/catalyst -s ${SNAPSHOT}
+#sudo /usr/bin/catalyst -s ${SNAPSHOT}
 echo "Running catalyst stage1"
-sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+#sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 echo "Fin."
 
 #EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
