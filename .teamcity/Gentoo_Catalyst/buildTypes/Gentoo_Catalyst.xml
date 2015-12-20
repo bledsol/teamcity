@@ -26,6 +26,7 @@
     SNAPSHOT="%param.snapshot%"\
     SUB_ARCH="%param.subarch%"\
     REL_TYPE="%param.release.type%"\
+    REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
