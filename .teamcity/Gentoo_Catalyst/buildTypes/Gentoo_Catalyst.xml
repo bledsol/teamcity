@@ -62,10 +62,10 @@ cat ${TEMPLATE_DIR}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 cat ${TEMPLATE_DIR}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 
-if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc ]] 
+if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS ]] 
 then
     echo "Fetching build hashes"
-    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null || exit 1
+    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null || exit 1
 fi
 
 echo "Fetching portage hashes"
@@ -76,8 +76,7 @@ echo "Checking build hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
     cd ${WORK_DIR}
-    echo -e "# SHA512 HASH\n $(grep stage3-amd64-hardened-${BUILD_VER}.tar.bz2 stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc)" > stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum
-    sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum &> /dev/null || exit 1
+    ( sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.md5sum | egrep -e ": OK$" -e "stage3-amd64-hardened-${BUILD_VER}.tar.bz2" &> /dev/null ) || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
