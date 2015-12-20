@@ -23,7 +23,7 @@
         <parameters>
           <param name="script.content"><![CDATA[for var in "WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
-    SPEC_FILE="stage2.spec"\
+    SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     BUILD_VER="%param.version%"\
     SNAPSHOT="%param.snapshot%"\
     SUB_ARCH="%param.subarch%"\
@@ -32,10 +32,9 @@
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
     TARGET="%param.target%"\
-    TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template""
 do
     echo ${var}
-done > build-vars.sh]]></param>
+done > build-vars-common.sh]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
