@@ -41,18 +41,20 @@ done > build-vars-common.sh]]></param>
       </runner>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.name%"
-TEMPLATE_DIR="/etc/catalyst/templates"
-SNAPSHOT_DIR="/var/data/catalyst/snapshots"
+          <param name="script.content"><![CDATA[#WORK_DIR="/var/data/catalyst/builds/%param.release.name%"
+#TEMPLATE_DIR="/etc/catalyst/templates"
+#SNAPSHOT_DIR="/var/data/catalyst/snapshots"
+#BUILD_VER="%param.version%"
+#SNAPSHOT="%param.snapshot%"
+#SUB_ARCH="%param.subarch%"
+#REL_TYPE="%param.release.type%"
+#REL_PROFILE="%param.profile%"
+#REL_SNAPSHOT="%param.snapshot%"
+#SRC_PATH="%param.source.path%"
+#TARGET="%param.target%"
+source build-vars-common.sh || exit 1
+
 SPEC_FILE="stage1.spec"
-BUILD_VER="%param.version%"
-SNAPSHOT="%param.snapshot%"
-SUB_ARCH="%param.subarch%"
-REL_TYPE="%param.release.type%"
-REL_PROFILE="%param.profile%"
-REL_SNAPSHOT="%param.snapshot%"
-SRC_PATH="%param.source.path%"
-TARGET="%param.target%"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
@@ -117,6 +119,8 @@ fi
 
 (( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
+
+exit 0
 
 echo "Taking portage snapshot"
 sudo /usr/bin/catalyst -s ${SNAPSHOT}
