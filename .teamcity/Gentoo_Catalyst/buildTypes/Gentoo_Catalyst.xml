@@ -99,8 +99,10 @@ fi
 
 echo "Taking portage snapshot"
 sudo /usr/bin/catalyst -s ${SNAPSHOT}
+
 echo "Running catalyst stage1"
-sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
+cd ${WORK_DIR}
+sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
 echo "Fin."
 
 #EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
