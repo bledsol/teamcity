@@ -158,7 +158,7 @@ echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/" \
-    -e "s/###VERSION###/${VERSION}/" \
+    -e "s/###VERSION###/${BUILD_VER}/" \
     ${TEMPLATE_DIR}/stage2.spec.livecd.template >> ${WORK_DIR}/${SPEC_FILE} 
 
 echo "Processing template headers"
