@@ -39,7 +39,11 @@ TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.
 echo "Checking for templates"
 for template in ${TEMPLATES[@]}
 do 
-    [[ -f ${TEMPLATE_DIR}/${template} ]] || ( echo "Missing template: ${template}" && exit 1 )
+    if [[ -f ${TEMPLATE_DIR}/${template} ]]
+    then
+        echo "Missing template: ${template}" 
+        exit 1
+    fi
 done
 
 touch ${WORK_DIR}/${SPEC_FILE} || exit 1
@@ -68,15 +72,17 @@ echo "Fetching portage hashes"
 [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.md5sum ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null )
 [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.gpgsig ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null )
 
-echo "checking hashes"
+echo "Checking hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
+    cd ${WORK_DIR}
     ( sha512sum -c ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null ) || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
     FETCH_STAGE=1
 fi
+
 if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
 then
     cd ${SNAPSHOT_DIR}
