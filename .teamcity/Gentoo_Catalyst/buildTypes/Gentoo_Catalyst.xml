@@ -99,7 +99,8 @@ if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
 then
     cd ${SNAPSHOT_DIR}
     md5sum -c portage-latest.tar.bz2.md5sum || exit 1
-     echo "Not fetching, file exists and checksums match"
+    echo "Not fetching, file exists and checksums match"
+    FETCH_PORTAGE=0
     cd -
 else
     FETCH_PORTAGE=1
