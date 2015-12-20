@@ -20,6 +20,27 @@
       <param name="param.version" value="20151217" spec="text description='Version Stamp' label='Version' validationMode='not_empty' display='prompt'" />
     </parameters>
     <build-runners>
+      <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[for var in "WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
+    TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
+    SPEC_FILE="stage2.spec"\
+    BUILD_VER="%param.version%"\
+    SNAPSHOT="%param.snapshot%"\
+    SUB_ARCH="%param.subarch%"\
+    REL_TYPE="%param.release.type%"\
+    REL_PROFILE="%param.profile%"\
+    REL_SNAPSHOT="%param.snapshot%"\
+    SRC_PATH="%param.source.path%"\
+    TARGET="%param.target%"\
+    TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template"\
+do
+    echo ${var}
+done]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_39" name="Stage 1 Deployment" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.name%"
@@ -175,27 +196,6 @@ done
 echo "Running catalyst scripts"
 cd ${WORK_DIR}
 sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[for var in "WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
-    TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
-    SPEC_FILE="stage2.spec"\
-    BUILD_VER="%param.version%"\
-    SNAPSHOT="%param.snapshot%"\
-    SUB_ARCH="%param.subarch%"\
-    REL_TYPE="%param.release.type%"\
-    REL_PROFILE="%param.profile%"\
-    REL_SNAPSHOT="%param.snapshot%"\
-    SRC_PATH="%param.source.path%"\
-    TARGET="%param.target%"\
-    TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template"\
-do
-    echo ${var}
-done]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
