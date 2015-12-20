@@ -174,7 +174,7 @@ do
     echo >>  ${WORK_DIR}/${SPEC_FILE}
     cat ${TEMPLATE_DIR}/$template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 done
-
+exit
 echo "Running catalyst scripts"
 cd ${WORK_DIR}
 sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
