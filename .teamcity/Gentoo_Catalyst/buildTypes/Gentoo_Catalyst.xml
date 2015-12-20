@@ -51,7 +51,7 @@ done > build-vars-common.sh]]></param>
 #REL_SNAPSHOT="%param.snapshot%"
 #SRC_PATH="%param.source.path%"
 #TARGET="%param.target%"
-source ./build-vars-common.sh || exit 1
+bash ./build-vars-common.sh || exit 1
 
 SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
