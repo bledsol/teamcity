@@ -22,6 +22,7 @@
         <parameters>
           <param name="script.content"><![CDATA[WORK_DIR="/var/data/catalyst/builds/%param.release.name%"
 TEMPLATE_DIR="/etc/catalyst/templates"
+SNAPSHOT_DIR="/var/data/catalyst/snapshots"
 SPEC_FILE="stage1.spec"
 BUILD_VER="%param.version%"
 SNAPSHOT="%param.snapshot%"
@@ -57,46 +58,33 @@ cat ${TEMPLATE_DIR}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 cat ${TEMPLATE_DIR}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 
-cd /var/data/catalyst/builds/${REL_NAME}
-[[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc ]] && rm stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc
-echo "Fetching hashes"
+[[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc ]] && rm ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc
+echo "Fetching build hashes"
 wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null || exit 1
 
-if [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]] && ( grep $(sha512sum stage3-amd64-hardened-${BUILD_VER}.tar.bz2|awk '{ print $1 }' ) stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null )
+echo "Fetching portage hashes"
+[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.md5sum ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null )
+[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.gpgsig ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null )
+
+if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
+    ( sha512sum -c ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null ) || ( echo  "Build Checksum failed, you should investigate" && exit 1 )
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
-elif [[ -f stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
-then
-    echo "Checksum failed, you should investigate" && exit 1
 else
     FETCH_STAGE=1
 fi
 
-cd /var/data/catalyst/snapshots/
-rm portage-latest.tar.bz2.md5sum portage-latest.tar.bz2.gpgsig
-
-echo "Fetching portage sums"
-wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null
-wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null
-
-if [[ -f portage-latest.tar.bz2 ]] && ( grep $(md5sum portage-latest.tar.bz2) portage-latest.tar.bz2.md5sum &> /dev/null )
+if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
 then
+    ( sha512sum -c ${SNAPSHOT_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS.asc &> /dev/null ) || ( echo "Portage failed checksums, please do the needful" && exit 1 )
      echo "Not fetching, file exists and checksums match"
 else
     FETCH_PORTAGE=1
-    [[ -f portage-latest.tar.bz2 ]] && echo "Clobbering stagnant snapshot" && rm portage-latest.tar.bz2
 fi
 
-(( FETCH_PORTAGE == 1 )) && lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${WORK_DIR}/portage-latest.tar.bz2 &> /dev/null
-
-cd /var/data/catalyst/builds/${REL_TYPE}
-
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && cd /var/data/catalyst/builds/${REL_TYPE} && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
-
-(( FETCH_STAGE == 0 )) && echo "Not fetching stage"
-cd ${WORK_DIR}
-
+(( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
 echo "Taking portage snapshot"
 #sudo /usr/bin/catalyst -s ${SNAPSHOT}
