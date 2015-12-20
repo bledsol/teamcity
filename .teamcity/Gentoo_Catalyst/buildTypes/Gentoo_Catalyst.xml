@@ -98,9 +98,9 @@ fi
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
 echo "Taking portage snapshot"
-#sudo /usr/bin/catalyst -s ${SNAPSHOT}
+sudo /usr/bin/catalyst -s ${SNAPSHOT}
 echo "Running catalyst stage1"
-#sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
+sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 echo "Fin."
 
 #EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
