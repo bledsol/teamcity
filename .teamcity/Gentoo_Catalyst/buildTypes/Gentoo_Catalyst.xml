@@ -39,7 +39,7 @@ TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.
 echo "Checking for templates"
 for template in ${TEMPLATES[@]}
 do 
-    if [[ -f ${TEMPLATE_DIR}/${template} ]]
+    if [[ ! -f ${TEMPLATE_DIR}/${template} ]]
     then
         echo "Missing template: ${template}" 
         exit 1
