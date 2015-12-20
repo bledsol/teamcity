@@ -20,7 +20,7 @@
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[for var in "WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
+          <param name="script.content"><![CDATA[for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     BUILD_VER="%param.version%"\
@@ -30,14 +30,10 @@
     REL_PROFILE="%param.profile%"\
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
-    TARGET="%param.target%""
+    TARGET="%param.target%"
 do
     echo ${var}
-done > build-vars-common.sh
-ls
-echo 
-echo
-pwd]]></param>
+done > build-vars-common.sh]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
