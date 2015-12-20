@@ -9,7 +9,9 @@
     <build-runners>
       <runner id="RUNNER_38" name="" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[/usr/bin/sudo /usr/bin/emerge --quiet-build %param.ebuild% &> emerge.log &
+          <param name="script.content"><![CDATA[sudo /bin/mount /var/tmp/portage/
+
+/usr/bin/sudo /usr/bin/emerge --quiet-build %param.ebuild% &> emerge.log &
 
 while (( $? == 0 )) 
 do
@@ -19,7 +21,9 @@ do
   jobs | grep Running &> /dev/null && sleep 1
 done
 
-cat emerge.log]]></param>
+cat emerge.log
+
+sudo /bin/umount /var/tmp/portage/]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
