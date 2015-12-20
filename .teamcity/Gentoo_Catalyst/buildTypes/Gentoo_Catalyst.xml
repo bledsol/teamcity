@@ -87,7 +87,7 @@ echo "Checking build hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
     cd ${WORK_DIR}
-    ( sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS | egrep -e ": OK$" -e "stage3-amd64-hardened-${BUILD_VER}.tar.bz2" ) &>/dev/null || exit 1
+    ( sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS | egrep -e ": OK$" | grep "stage3-amd64-hardened-${BUILD_VER}.tar.bz2" ) &>/dev/null || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
@@ -108,8 +108,6 @@ fi
 
 (( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
-
-exit 0
 
 echo "Taking portage snapshot"
 sudo /usr/bin/catalyst -s ${SNAPSHOT}
