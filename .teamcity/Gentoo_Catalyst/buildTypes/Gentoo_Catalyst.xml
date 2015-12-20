@@ -3,6 +3,9 @@
   <name>Catalyst Deployment</name>
   <description>Gentoo Catalyst Stage Burner</description>
   <settings>
+    <options>
+      <option name="artifactRules" value="/var/data/catalyst/builds/%param.release.name%/%param.subarch%-%param.release.type%-installer-%param.version%.iso" />
+    </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_42" />
     </disabled-settings>
