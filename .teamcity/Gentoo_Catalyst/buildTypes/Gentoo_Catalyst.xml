@@ -66,7 +66,7 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_NAME}/" \
     -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
-    -e "s/###SRC_PATH###/${REL_TYPE}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
+    -e "s/###SRC_PATH###/${REL_NAME}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
     ${TEMPLATE_DIR}/stage1.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
@@ -99,14 +99,14 @@ echo "Checking portage hashes"
 if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
 then
     cd ${SNAPSHOT_DIR}
-    md5sum -c portage-latest.tar.bz2.md5sum || exit 1
+    md5sum -c portage-latest.tar.bz2.md5sum || CLEAN_PORTAGE=1
     echo "Not fetching, file exists and checksums match"
     FETCH_PORTAGE=0
     cd -
 else
     FETCH_PORTAGE=1
 fi
-
+(( CLEAN_PORTAGE == 1 )) && echo "Wiping portage" && rm ${SNAPSHOT_DIR}/portage-latest.tar.bz2*
 (( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
