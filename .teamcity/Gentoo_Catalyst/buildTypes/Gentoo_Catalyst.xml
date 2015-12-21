@@ -80,9 +80,6 @@ then
     wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null || exit 1
 fi
 
-#echo "Fetching portage hashes"
-#[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.md5sum ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null )
-#[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.gpgsig ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null )
 
 echo "Checking build hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
@@ -95,19 +92,6 @@ else
     FETCH_STAGE=1
 fi
 
-#echo "Checking portage hashes"
-#if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
-#then
-#    cd ${SNAPSHOT_DIR}
-#    md5sum -c portage-latest.tar.bz2.md5sum || CLEAN_PORTAGE=1
-#    echo "Not fetching, file exists and checksums match"
-#    FETCH_PORTAGE=0
-#    cd -
-#else
-#    FETCH_PORTAGE=1
-#fi
-#(( CLEAN_PORTAGE == 1 )) && echo "Wiping portage" && rm ${SNAPSHOT_DIR}/portage-latest.tar.bz2
-#(( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
 echo "Taking portage snapshot"
