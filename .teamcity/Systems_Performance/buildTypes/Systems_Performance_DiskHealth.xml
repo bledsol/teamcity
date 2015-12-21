@@ -15,7 +15,7 @@ do
     ( echo "Checking $disk" && sudo /usr/sbin/smartctl -a /dev/${disk} ) > smartctl_out_${disk}.txt
 done
 
-grep  -e 'Model Family' -e 'Device Model' -e 'Pre-fail' -e 'Error Count' -e "^Checking" *.txt]]></param>
+grep  -e 'Model Family' -e 'Device Model' -e 'Pre-fail' -e 'Error Count' -e "^Checking" *.txt > disk_errors.txt]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
