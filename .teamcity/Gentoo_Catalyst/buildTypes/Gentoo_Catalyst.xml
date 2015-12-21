@@ -186,7 +186,14 @@ sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
       </vcs-entry-ref>
     </vcs-settings>
     <requirements />
-    <build-triggers />
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="+:root=Gentoo_Catalyst_GentooCatalyst:templates/**" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
     <build-extensions>
       <extension id="perfmon" type="perfmon">
         <parameters />
