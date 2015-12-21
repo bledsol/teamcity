@@ -15,15 +15,6 @@
       <param name="env.Gentoo.Portage.Updated" value="" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_37" name="" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[touch ./emerge.log
-touch ./sync.log
-touch ./glsa.log]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_1" name="eix-sync" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[PORTAGE_LAST_UP="$(date -d"$(cat /usr/portage/metadata/timestamp.chk)" +%s)"
