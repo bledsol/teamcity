@@ -187,6 +187,11 @@ sudo /usr/bin/catalyst -f ${SPEC_FILE}]]></param>
     </vcs-settings>
     <requirements />
     <build-triggers />
+    <build-extensions>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
+    </build-extensions>
     <cleanup />
   </settings>
 </build-type>
