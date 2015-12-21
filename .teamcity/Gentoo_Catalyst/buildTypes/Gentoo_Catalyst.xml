@@ -100,19 +100,7 @@ sudo /usr/bin/catalyst -s ${SNAPSHOT}
 echo "Running catalyst stage1"
 cd ${WORK_DIR}
 sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
-echo "Fin."
-
-#EMERGE_LOG=$(find /var/data/catalyst/tmp/${REL_TYPE} -name emerge.log &> /dev/null)
-
-#while (( $? == 0 )) 
-#do
-#  [[ -n ${PRINT_STRING} ]] && echo "${PRINT_STRING}"
-#  EMERGE_STAT=$(genlop -c -q -i -t -f ${EMERGE_LOG}|egrep -v -e '!!!' -e 'see manpage'|sed 's/$/ /'|tr -d '\n')
-#  [[ -n ${EMERGE_STAT} ]] && PRINT_STRING=${EMERGE_STAT}
-#  sleep 1 && jobs | grep Running &> /dev/null
-#done
-#
-#cat catalyst.out]]></param>
+echo "Fin."]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
