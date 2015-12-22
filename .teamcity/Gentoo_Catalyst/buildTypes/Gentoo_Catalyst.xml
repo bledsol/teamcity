@@ -34,9 +34,12 @@
     SRC_PATH="%param.source.path%"\
     USERS="%param.users%"\
     TARGET="%param.target%"
+    STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
 do
     echo ${var}
-done > build-vars-common.sh]]></param>
+done > build-vars-common.sh
+[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
+echo "There is a new build: ${STAGE_LATEST}"]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
