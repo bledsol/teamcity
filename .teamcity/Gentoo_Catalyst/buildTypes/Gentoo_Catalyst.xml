@@ -4,6 +4,7 @@
   <description>Gentoo Catalyst Stage Burner</description>
   <settings>
     <disabled-settings>
+      <setting-ref ref="RUNNER_37" />
       <setting-ref ref="RUNNER_42" />
     </disabled-settings>
     <parameters>
