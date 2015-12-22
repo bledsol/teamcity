@@ -17,11 +17,11 @@
     <build-runners>
       <runner id="RUNNER_1" name="eix-sync" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[PORTAGE_LAST_UP="$(date -d"$(cat /usr/portage/metadata/timestamp.chk)" +%s)"
-GLSA_LAST_UP="$(date -d"$(cat /usr/portage/metadata/glsa/timestamp.chk)" +%s)"
+          <param name="script.content"><![CDATA[PORTAGE_LAST_UP="$(date -d"$(cat /var/data/portage/metadata/timestamp.chk)" +%s)"
+GLSA_LAST_UP="$(date -d"$(cat /var/data/portage/metadata/glsa/timestamp.chk)" +%s)"
 
 sudo eix-sync|tee sync.log
-if (( ${PORTAGE_LAST_UP} < $(date -d"$(cat /usr/portage/metadata/timestamp.chk)" +%s) ))
+if (( ${PORTAGE_LAST_UP} < $(date -d"$(cat /var/data/portage/metadata/timestamp.chk)" +%s) ))
 then
   echo "New Sources"
   echo "##teamcity[setParameter name='env.Gentoo.Portage.Updated' value='1']"
@@ -30,7 +30,7 @@ else
   echo "##teamcity[setParameter name='env.Gentoo.Portage.Updated' value='0']"
 fi
 
-if (( ${GLSA_LAST_UP} < $(date -d"$(cat /usr/portage/metadata/glsa/timestamp.chk)" +%s) ))
+if (( ${GLSA_LAST_UP} < $(date -d"$(cat /var/data/portage/metadata/glsa/timestamp.chk)" +%s) ))
 then
   echo "GLSA Update"
   echo "##teamcity[setParameter name='env.Gentoo.GLSA.Updated' value='1']"
