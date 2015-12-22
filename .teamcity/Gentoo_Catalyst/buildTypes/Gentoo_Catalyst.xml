@@ -140,7 +140,8 @@ echo >> ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/" \
-    -e "s/###VERSION###/${BUILD_VER}/" \
+    -e "s/###REL_NAME###/${REL_NAME}/" \
+    -e "s/###BUILD_VER###/${BUILD_VER}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.livecd.template >> ${WORK_DIR}/${SPEC_FILE} 
 
