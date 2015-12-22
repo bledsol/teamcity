@@ -105,7 +105,13 @@ sudo /usr/bin/catalyst -s ${SNAPSHOT}
 
 echo "Running catalyst stage1"
 cd ${WORK_DIR}
-sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+if (( STAGE_RESUME == 0 ))
+then
+    sudo /usr/bin/catalyst -a -f ${SPEC_FILE} || exit 1
+else
+    sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+fi
+
 echo "Fin."]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
