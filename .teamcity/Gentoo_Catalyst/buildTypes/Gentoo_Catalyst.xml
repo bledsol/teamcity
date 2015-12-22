@@ -33,7 +33,8 @@
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
     USERS="%param.users%"\
-    TARGET="%param.target%"
+    TARGET="%param.target%"\
+    STAGE_RESUME="%param.stage.resume%"\
     STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
 do
     echo ${var}
