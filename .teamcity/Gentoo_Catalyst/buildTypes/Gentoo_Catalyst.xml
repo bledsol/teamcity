@@ -20,7 +20,7 @@
       <param name="param.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
       <param name="param.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
       <param name="param.target.host" value="" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
-      <param name="param.users" value="bnadmin" spec="text description='Additional Users' label='Users' validationMode='not_empty' display='normal'" />
+      <param name="param.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.version" value="" spec="text description='Version Stamp' label='Version' validationMode='any' display='prompt'" />
     </parameters>
     <build-runners>
