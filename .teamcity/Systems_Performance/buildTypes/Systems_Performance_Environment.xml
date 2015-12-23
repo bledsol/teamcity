@@ -10,7 +10,7 @@
           <param name="script.content"><![CDATA[sensors
 for disk in $(lsblk -d -n -l -o NAME) 
 do 
-   sudo /usr/sbin/hddtemp /dev/${disk}
+   sudo /usr/sbin/hddtemp /dev/${disk} 2>/dev/null
 done]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
