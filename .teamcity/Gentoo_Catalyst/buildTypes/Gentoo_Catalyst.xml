@@ -49,7 +49,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
 do
     echo ${var}
 done > build-vars-common.sh
-[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
+[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build: ${BUILD_VER}" && exit 0
 echo "There is a new build: ${STAGE_LATEST}"]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
