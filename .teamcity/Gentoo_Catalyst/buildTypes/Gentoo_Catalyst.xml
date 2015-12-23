@@ -141,7 +141,9 @@ echo "Fin."]]></param>
       </runner>
       <runner id="RUNNER_43" name="Stage 2 Build" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[set -u
+          <param name="script.content"><![CDATA[(( %param.stage2.skip% == 1 )) && exit 0
+
+set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
