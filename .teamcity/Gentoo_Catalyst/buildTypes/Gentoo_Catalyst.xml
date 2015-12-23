@@ -21,6 +21,7 @@
       <param name="param.target.host" value="" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
       <param name="param.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.version" value="" spec="text description='Version Stamp' label='Version' validationMode='any' display='prompt'" />
+      <param name="slack.enabled" value="1" spec="checkbox description='Enable Slack Notifications' label='Slack Notify' uncheckedValue='0' display='prompt' checkedValue='1'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
