@@ -221,24 +221,13 @@ echo "Fin."]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_42" name="Fetch Portage" type="simpleRunner">
+      <runner id="RUNNER_42" name="Slack Notification" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[#echo "Fetching portage hashes"
-#[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.md5sum ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.md5sum &> /dev/null )
-#[[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2.gpgsig ]] || ( wget --directory-prefix=${SNAPSHOT_DIR} http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2.gpgsig &> /dev/null )
-#echo "Checking portage hashes"
-#if [[ -f ${SNAPSHOT_DIR}/portage-latest.tar.bz2 ]]
-#then
-#    cd ${SNAPSHOT_DIR}
-#    md5sum -c portage-latest.tar.bz2.md5sum || CLEAN_PORTAGE=1
-#    echo "Not fetching, file exists and checksums match"
-#    FETCH_PORTAGE=0
-#    cd -
-#else
-#    FETCH_PORTAGE=1
-#fi
-#(( CLEAN_PORTAGE == 1 )) && echo "Wiping portage" && rm ${SNAPSHOT_DIR}/portage-latest.tar.bz2
-#(( FETCH_PORTAGE == 1 )) && echo "Fetching portage" && ( lftp -c pget http://distfiles.gentoo.org/snapshots/portage-latest.tar.bz2 -o ${SNAPSHOT_DIR}/portage-latest.tar.bz2 &> /dev/null )]]></param>
+          <param name="script.content"><![CDATA[(( %slack.enabled% == 1 )) || exit 0
+###SLACK_USER###
+###SLACK_CHANNEL###
+###SLACK_KEY###
+###BUILD_BUILDER###]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
