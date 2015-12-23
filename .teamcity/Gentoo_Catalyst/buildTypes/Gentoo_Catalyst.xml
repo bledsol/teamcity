@@ -24,6 +24,9 @@
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
+SUB_ARCH="%param.subarch%"
+REL_TYPE="%param.release.type%"
+
 STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
 if (( ${STAGE_FETCH_LATEST} == 1 ))
 then
