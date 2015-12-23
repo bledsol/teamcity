@@ -39,6 +39,8 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.subarch%"\
     BUILD_VER="${BUILD_VER}"\
+    BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
+    BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"\
     REL_TYPE="%param.release.type%"\
     REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
@@ -47,6 +49,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     SNAPSHOT="%param.snapshot%"\
     USERS="%param.users%"\
     TARGET="%param.target%"\
+    TARGET_HOST="%param.target.host%"\
     STAGE_RESUME="%param.stage.resume%"
 do
     echo ${var}
@@ -54,8 +57,6 @@ done > build-vars-common.sh
 [[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
 echo "There is a new build: ${STAGE_LATEST}"
 
-BUILD_BUILDER="%teamcity.build.triggeredBy.username%"
-BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
 
 rsync -rcv --delete /etc/catalyst/overlays/common/ /etc/catalyst/overlays/${REL_NAME}/
 mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh
