@@ -22,21 +22,29 @@
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
+          <param name="script.content"><![CDATA[STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
+STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
+if (( ${STAGE_FETCH_LATEST} == 1 ))
+then
+    BUILD_VER="${STAGE_LATEST}"
+else
+    BUILD_VER="%param.version%"
+fi
+
+for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
-    BUILD_VER="%param.version%"\
-    SNAPSHOT="%param.snapshot%"\
     SUB_ARCH="%param.subarch%"\
+    BUILD_VER="${BUILD_VER}"\
     REL_TYPE="%param.release.type%"\
     REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
     REL_SNAPSHOT="%param.snapshot%"\
     SRC_PATH="%param.source.path%"\
+    SNAPSHOT="%param.snapshot%"\
     USERS="%param.users%"\
     TARGET="%param.target%"\
-    STAGE_RESUME="%param.stage.resume%"\
-    STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
+    STAGE_RESUME="%param.stage.resume%"
 do
     echo ${var}
 done > build-vars-common.sh
