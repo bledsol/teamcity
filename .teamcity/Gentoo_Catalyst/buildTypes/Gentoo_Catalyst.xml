@@ -5,7 +5,6 @@
   <settings>
     <disabled-settings>
       <setting-ref ref="RUNNER_37" />
-      <setting-ref ref="RUNNER_42" />
     </disabled-settings>
     <parameters>
       <param name="param.profile" value="hardened/linux/amd64" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
