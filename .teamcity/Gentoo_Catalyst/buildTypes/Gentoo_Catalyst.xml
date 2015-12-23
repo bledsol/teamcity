@@ -26,9 +26,6 @@
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
-SUB_ARCH="%param.subarch%"
-REL_TYPE="%param.release.type%"
-
 STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
 if (( ${STAGE_FETCH_LATEST} == 1 ))
 then
@@ -42,8 +39,6 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.subarch%"\
     BUILD_VER="${BUILD_VER}"\
-    BUILD_USER="%teamcity.build.triggeredBy.username%"\
-    BUILD_USER_KEY=$(finger ${BUILD_USER}|egrep ^ssh)\
     REL_TYPE="%param.release.type%"\
     REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
@@ -56,8 +51,15 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
 do
     echo ${var}
 done > build-vars-common.sh
-[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build: ${BUILD_VER}" && exit 0
-echo "There is a new build: ${STAGE_LATEST}"]]></param>
+[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
+echo "There is a new build: ${STAGE_LATEST}"
+
+BUILD_BUILDER="%teamcity.build.triggeredBy.username%"
+BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
+
+rsync -rcv --delete /etc/catalyst/overlays/common/ /etc/catalyst/overlays/${REL_NAME}/
+mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh
+echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh/authorized_keys]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
