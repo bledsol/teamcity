@@ -26,16 +26,7 @@
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
-STAGE_LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)
-if (( ${STAGE_FETCH_LATEST} == 1 ))
-then
-    BUILD_VER="${STAGE_LATEST}"
-else
-    BUILD_VER="%param.version%"
-fi
-
-for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
+          <param name="script.content"><![CDATA[for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.subarch%"\
@@ -51,10 +42,20 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
     USERS="%param.users%"\
     TARGET="%param.target%"\
     TARGET_HOST="%param.target.host%"\
-    STAGE_RESUME="%param.stage.resume%"
+    STAGE_RESUME="%param.stage.resume%"\
+    STAGE_FETCH_LATEST="%param.stage.fetchLatest%"\
+    STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"\
+    if (( ${STAGE_FETCH_LATEST} == 1 ))
+    then
+        BUILD_VER="${STAGE_LATEST}"
+    else
+        BUILD_VER="%param.version%"
+    fi
 do
     echo ${var}
 done > build-vars-common.sh
+
+[[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
 [[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
 echo "There is a new build: ${STAGE_LATEST}"
 
