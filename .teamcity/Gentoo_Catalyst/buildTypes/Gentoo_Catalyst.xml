@@ -42,20 +42,23 @@
     USERS="%param.users%"\
     TARGET="%param.target%"\
     TARGET_HOST="%param.target.host%"\
-    STAGE_RESUME="%param.stage.resume%"\
-    STAGE_FETCH_LATEST="%param.stage.fetchLatest%"\
-    STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"\
-    if (( ${STAGE_FETCH_LATEST} == 1 ))
-    then
-        BUILD_VER="${STAGE_LATEST}"
-    else
-        BUILD_VER="%param.version%"
-    fi
+    STAGE_RESUME="%param.stage.resume%"
 do
     echo ${var}
 done > build-vars-common.sh
 
+STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"
+STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
+
+if (( ${STAGE_FETCH_LATEST} == 1 ))
+then
+    BUILD_VER="${STAGE_LATEST}"
+else
+    BUILD_VER="%param.version%"
+fi
 [[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
+echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
+
 [[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
 echo "There is a new build: ${STAGE_LATEST}"
 
