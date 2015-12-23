@@ -10,6 +10,7 @@
       <param name="param.profile" value="hardened/linux/amd64" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
       <param name="param.release.name" value="ccon" spec="text description='Name of release' label='Name' validationMode='not_empty' display='prompt'" />
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
+      <param name="param.slack.channel" value="general" />
       <param name="param.snapshot" value="latest" />
       <param name="param.source.path" value="hardened/amd64/stage3-amd64-live" />
       <param name="param.stage.fetchLatest" value="1" spec="checkbox description='Fetch Latest Stage' label='Fetch Latest' uncheckedValue='0' display='prompt' checkedValue='1'" />
