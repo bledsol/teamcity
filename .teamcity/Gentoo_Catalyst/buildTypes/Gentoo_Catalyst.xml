@@ -107,7 +107,8 @@ cat ${TEMPLATE_DIR}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS ]] 
 then
     echo "Fetching build hashes"
-    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null || exit 1
+    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null
+    (( $? > 0 )) && echo "Could not fetch stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS to ${WORK_DIR}" && exit 1
 fi
 
 
