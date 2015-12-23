@@ -224,10 +224,17 @@ echo "Fin."]]></param>
       <runner id="RUNNER_42" name="Slack Notification" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %slack.enabled% == 1 )) || exit 0
-###SLACK_USER###
-###SLACK_CHANNEL###
-###SLACK_KEY###
-###BUILD_BUILDER###]]></param>
+
+set -u -o pipefail
+
+SLACK_KEY=$(egrep ^${REL_NAME} /etc/catalyst/keys/slack.api|cut -d: -f2)
+SLACK_USER=%param.slack.user%
+SLACK_CHANNEL=%param.slack.channel%
+
+sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
+    -e "s/###SLACK_CHANNEL###/${SLACK_CHANNEL}/"\
+    -e "s/###SLACK_KEY###/${SLACK_KEY}/"\
+    -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/" /etc/catalyst/templates/common/slack-notify.start.template > /etc/catalyst/overlays/${REL_NAME}/etc/local.d/slack-notify.start]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
