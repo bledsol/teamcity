@@ -157,7 +157,6 @@ TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template"
 
 touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-
 [[ -f ${TEMPLATE_DIR}/stage2.spec.header.template ]] || exit 1
 for template in ${TEMPLATES[@]}
 do
