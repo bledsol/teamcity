@@ -183,6 +183,9 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.livecd.template >> ${WORK_DIR}/${SPEC_FILE} 
 
+sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g"\
+    -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template > /etc/catalyst/scripts/${REL_NAME}/wrangle.sh
+
 echo "Processing template headers"
 for template in ${TEMPLATES[@]}
 do
