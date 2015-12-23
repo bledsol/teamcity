@@ -81,6 +81,8 @@ echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root_overlay/home
 
 set -u -o pipefail
 
+source $(pwd)/build-vars-common.sh || exit 1
+
 SLACK_KEY=$(egrep ^${REL_NAME} /etc/catalyst/keys/slack.api|cut -d: -f2)
 SLACK_USER=%param.slack.user%
 SLACK_CHANNEL=%param.slack.channel%
