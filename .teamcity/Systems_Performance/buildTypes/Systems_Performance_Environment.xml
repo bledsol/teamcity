@@ -4,7 +4,19 @@
   <description>Check the temps</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_40" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[sensors
+for disk in $(lsblk -d -n -l -o NAME) 
+do 
+   sudo /usr/sbin/hddtemp /dev/${disk}
+done]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings />
     <requirements />
     <build-triggers />
