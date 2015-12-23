@@ -13,6 +13,7 @@
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
       <param name="param.snapshot" value="latest" />
       <param name="param.source.path" value="hardened/amd64/stage3-amd64-live" />
+      <param name="param.stage.fetchLatest" value="1" spec="checkbox description='Fetch Latest Stage' label='Fetch Latest' uncheckedValue='0' display='normal' checkedValue='1'" />
       <param name="param.stage.resume" value="1" spec="checkbox description='Auto Resume Catalyst Build' label='Autoresume' uncheckedValue='0' display='normal' checkedValue='1'" />
       <param name="param.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
       <param name="param.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
