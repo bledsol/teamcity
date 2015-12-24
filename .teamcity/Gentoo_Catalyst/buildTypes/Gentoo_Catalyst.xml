@@ -199,17 +199,12 @@ set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
-TEMPLATES="stage2.spec.boot.template stage2.spec.livecd-post.template"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
 touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 [[ -f ${TEMPLATE_DIR}/stage2.spec.header.template ]] || exit 1
-for template in ${TEMPLATES[@]}
-do
-    [[ -f ${TEMPLATE_DIR}/${template} ]] || exit 1
-done
 
 echo "Mangling templates"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
@@ -229,15 +224,18 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.livecd.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
+echo >>  ${WORK_DIR}/${SPEC_FILE}
+
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
+    -e "s/###REL_TYPE###/${REL_TYPE}/" \
+    -e "s/###REL_NAME###/${REL_NAME}/" \
+    ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+
+echo >>  ${WORK_DIR}/${SPEC_FILE}
+cat ${TEMPLATE_DIR}/stage2.spec.livecd-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g"\
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template > /etc/catalyst/scripts/${REL_NAME}/wrangle.sh || exit 1
-
-echo "Processing template headers"
-for template in ${TEMPLATES[@]}
-do
-    echo >>  ${WORK_DIR}/${SPEC_FILE}
-    cat ${TEMPLATE_DIR}/$template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-done
 
 echo "Running catalyst scripts"
 cd ${WORK_DIR}
