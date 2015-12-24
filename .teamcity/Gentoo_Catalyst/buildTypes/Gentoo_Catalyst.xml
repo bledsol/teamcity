@@ -8,7 +8,7 @@
     </disabled-settings>
     <parameters>
       <param name="param.catalyst.build.fetch.latest" value="1" spec="checkbox description='Fetch Latest Stage' label='Fetch Latest' uncheckedValue='0' display='prompt' checkedValue='1'" />
-      <param name="param.catalyst.build.profile" value="%param.catalyst.build.release.type%/linux/%param.catalyst.build.subarch%" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
+      <param name="param.catalyst.build.profile" value="%param.catalyst.build.release.type%/linux/%param.catalyst.build.subarch%%param.catalyst.build.release.multilib%%param.catalyst.build.release.selinux%" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
       <param name="param.catalyst.build.release.multilib" value="" spec="checkbox description='Enable Multilib' label='Multilib' uncheckedValue='/no-multilib' display='prompt' checkedValue='true'" />
       <param name="param.catalyst.build.release.name" value="ccon" spec="text description='Name of release' label='Name' validationMode='not_empty' display='prompt'" />
       <param name="param.catalyst.build.release.selinux" value="" spec="checkbox description='Enable Selinux' label='Selinux' display='prompt' checkedValue='/selinux'" />
