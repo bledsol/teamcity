@@ -36,7 +36,7 @@
 CATALYST_ARGS=""
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
-(( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
+(( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
 (( %param.catalyst.build.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
 
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
