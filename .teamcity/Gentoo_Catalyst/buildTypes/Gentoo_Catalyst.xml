@@ -26,7 +26,6 @@
       <param name="param.stage2.skip" value="0" spec="checkbox description='Skip Building Stage 2' label='Skip Stage 2' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
       <param name="param.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
-      <param name="param.target.host" value="scout" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
