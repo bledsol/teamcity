@@ -224,29 +224,29 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_NAME}/" \
     -e "s/###REL_PROFILE###/${REL_TYPE}\/linux\/${SUB_ARCH}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
-    -e "s/###SRC_PATH###/${REL_NAME}\/${REL_TARGET}-stage1-${SUB_ARCH}-${BUILD_VER}/" \
+    -e "s/###SRC_PATH###/${REL_NAME}\/${TARGET}-stage1-${SUB_ARCH}-${BUILD_VER}/" \
     ${TEMPLATE_DIR}/stage2.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >> ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/" \
-    -e "s/###REL_TARGET###/${REL_TARGET}/g" \
+    -e "s/###REL_TARGET###/${TARGET}/g" \
     -e "s/###REL_NAME###/${REL_NAME}/g" \
     -e "s/###BUILD_VER###/${BUILD_VER}/" \
     -e "s/###USERS###/${USERS}/" \
-    ${TEMPLATE_DIR}/stage2.spec.${REL_TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+    ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/g" \
-    -e "s/###REL_NAME###/${REL_TARGET}/" \
+    -e "s/###REL_NAME###/${TARGET}/" \
     -e "s/###KERNEL_VERSION###/${KERNEL_VERSION}/" \
     ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >>  ${WORK_DIR}/${SPEC_FILE}
-cat ${TEMPLATE_DIR}/stage2.spec.${REL_TARGET}-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+cat ${TEMPLATE_DIR}/stage2.spec.${TARGET}-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Mangling common scripts"
 
