@@ -36,7 +36,9 @@
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u -o pipefail
+
 CATALYST_ARGS=""
+
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
 (( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
@@ -46,7 +48,6 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     TEMPLATE_DIR="/etc/catalyst/templates/%param.catalyst.build.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.catalyst.build.subarch%"\
-    BUILD_VER="${BUILD_VER}"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
     CATALYST_ARGS="${CATALYST_ARGS}"\
     REL_TYPE="%param.catalyst.build.release.type%"\
