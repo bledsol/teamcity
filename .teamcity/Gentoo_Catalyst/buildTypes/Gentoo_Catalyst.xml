@@ -97,6 +97,19 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_44" name="Build Overlays" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[set -u
+source $(pwd)/build-vars-common.sh || exit 1
+
+rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
+rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
+mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh || exit 1
+echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_39" name="Stage 1 Build" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.stage1.skip% == 1 )) && exit 0 
@@ -255,19 +268,6 @@ echo "Fin."]]></param>
         -monitor stdio \
         -name "${SUB_ARCH}-hardened ${BUILD_VER}" \
         $@]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_44" name="Build Overlays" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[set -u
-source $(pwd)/build-vars-common.sh || exit 1
-
-rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
-rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
-mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh || exit 1
-echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
