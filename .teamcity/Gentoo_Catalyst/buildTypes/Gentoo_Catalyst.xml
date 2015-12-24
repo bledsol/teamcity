@@ -102,7 +102,6 @@ echo "Synchronizing Overlays"
 rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
 rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
 
-[[ -z ${BUILD_BUILDER_KEY} ]] && exit 1
 echo "Installing Authorized Keys"
 mkdir -p /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh || exit 1
 echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
