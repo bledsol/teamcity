@@ -250,6 +250,11 @@ echo "BUILD_BUILDER_KEY=\"${BUILD_BUILDER_KEY}\"" >> /var/data/catalyst/tmp/${RE
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template >> /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh || exit 1
 
+if (( %param.catalyst.post.slack.enabled% == 1 ))
+then
+    cat /var/data/catalyst/tmp/${REL_NAME}-slack.sh >> /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh
+fi 
+
 cd ${WORK_DIR}
 if [[ -z ${CATALYST_ARGS} ]]
 then
