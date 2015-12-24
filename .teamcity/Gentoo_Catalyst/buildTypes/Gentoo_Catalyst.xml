@@ -88,11 +88,7 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
           <param name="script.content"><![CDATA[set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
-[[ -f /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || cp /etc/catalyst/kernels/amd64-hardened-4.1.12-livecd.config /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config
-
-echo "Synchronizing Overlays"
-sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
-sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
+[[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || exit 1
 
 (( %param.catalyst.pre.ccache.clear% == 0 )) && exit 0
 echo "Clearing Compile Cache"
