@@ -38,6 +38,7 @@ CATALYST_ARGS=""
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
+(( %param.catalyst.build.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
 
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/%param.catalyst.build.release.name%"\
@@ -45,6 +46,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     SUB_ARCH="%param.catalyst.build.subarch%"\
     BUILD_VER="${BUILD_VER}"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
+    CATALYST_ARGS="${CATALYST_ARGS}"\
     REL_TYPE="%param.catalyst.build.release.type%"\
     REL_NAME="%param.catalyst.build.release.name%"\
     REL_PROFILE="%param.catalyst.build.profile%"\
