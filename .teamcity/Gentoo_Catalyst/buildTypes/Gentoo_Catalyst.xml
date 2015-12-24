@@ -51,6 +51,7 @@ done > build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
 
+echo ${BUILD_BUILDER}
 [[ -z ${BUILD_BUILDER_KEY} ]] && exit 1
 
 STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"
