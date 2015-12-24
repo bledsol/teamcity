@@ -21,6 +21,7 @@
       <param name="param.catalyst.build.version" value="" spec="text description='Version Stamp' label='Version' validationMode='any' display='prompt'" />
       <param name="param.catalyst.post.emerge" value="" spec="text description='Additional packages to merge' label='Emerge' validationMode='any' display='prompt'" />
       <param name="param.catalyst.post.slack.enabled" value="1" spec="checkbox description='Enable Slack Notifications' label='Slack Notify' uncheckedValue='0' display='prompt' checkedValue='1'" />
+      <param name="param.catalyst.post.slack.user" value="marvyn" />
       <param name="param.catalyst.post.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.catalyst.pre.ccache.clear" value="0" spec="checkbox description='Clear the C Cache, generally the thing to do if compile fails' label='Clear Ccache' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
