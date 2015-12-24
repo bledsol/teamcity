@@ -250,15 +250,14 @@ echo "BUILD_BUILDER_KEY=\"${BUILD_BUILDER_KEY}\"" >>  /etc/catalyst/scripts/${RE
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template >> /etc/catalyst/scripts/${REL_NAME}/wrangle.sh || exit 1
 
-echo "Running catalyst scripts"
 cd ${WORK_DIR}
-if (( STAGE_RESUME == 0 ))
+if [[ -z ${CATALYST_ARGS} ]]
 then
-    echo "Clearing resume flags..."
-    sudo /usr/bin/catalyst -a -f ${SPEC_FILE} || exit 1
-else
-    echo "Resuming if able..."
+    echo "Running Stage 2 build"
     sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+else
+    echo "Running Stage 2 build with args: ${CATALYST_ARGS}"
+    sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE} || exit 1
 fi
 
 [[ -f /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso ]] && mv /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso* /var/data/images/iso/
