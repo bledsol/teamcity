@@ -68,6 +68,20 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_44" name="Build Overlays" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[set -u
+source $(pwd)/build-vars-common.sh || exit 1
+
+[[ -f /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || cp /etc/catalyst/kernels/amd64-hardened-4.1.12-livecd.config /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config
+
+echo "Synchronizing Overlays"
+sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
+sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_42" name="Slack Notification" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %slack.enabled% == 1 )) || exit 0
@@ -88,20 +102,6 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
     -e "s/###SLACK_KEY###/${SLACK_KEY}/"\
     -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/" /etc/catalyst/templates/common/slack-notify.start.template > ./slacktmp
 sudo /usr/bin/rsync ./slacktmp /etc/catalyst/overlays/${REL_NAME}/root/etc/local.d/slack-notify.start]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_44" name="Build Overlays" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[set -u
-source $(pwd)/build-vars-common.sh || exit 1
-
-[[ -f /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || cp /etc/catalyst/kernels/amd64-hardened-4.1.12-livecd.config /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config
-
-echo "Synchronizing Overlays"
-sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
-sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
