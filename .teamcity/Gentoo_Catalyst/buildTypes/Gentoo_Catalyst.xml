@@ -50,6 +50,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     SUB_ARCH="%param.catalyst.build.subarch%"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
     CATALYST_ARGS="'${CATALYST_ARGS}'"\
+    KERNEL_VERSION="%param.catalyst.build.kernel.version%"\
     REL_TYPE="%param.catalyst.build.release.type%"\
     REL_NAME="%param.catalyst.build.release.name%"\
     REL_PROFILE="%param.catalyst.build.profile%"\
