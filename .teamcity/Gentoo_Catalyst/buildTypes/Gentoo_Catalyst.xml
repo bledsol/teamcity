@@ -98,6 +98,8 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
 
+[[ -f /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || cp /etc/catalyst/kernels/amd64-hardened-4.1.12-livecd.config /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config
+
 echo "Synchronizing Overlays"
 rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
 rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
