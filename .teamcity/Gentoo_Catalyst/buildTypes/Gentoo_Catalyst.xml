@@ -101,7 +101,8 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
     -e "s/###SLACK_CHANNEL###/${SLACK_CHANNEL}/"\
     -e "s/###SLACK_KEY###/${SLACK_KEY}/"\
     -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/" /etc/catalyst/templates/common/slack-notify.start.template > ./slacktmp
-sudo /usr/bin/rsync ./slacktmp /etc/catalyst/overlays/${REL_NAME}/root/etc/local.d/slack-notify.start]]></param>
+sudo /usr/bin/rsync ./slacktmp /etc/catalyst/overlays/${REL_NAME}/root/etc/local.d/slack-notify.start
+rm ./slacktmp]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
