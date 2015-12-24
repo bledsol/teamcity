@@ -31,22 +31,22 @@
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[for var in WORK_DIR="/var/data/catalyst/builds/%param.release.name%"\
-    TEMPLATE_DIR="/etc/catalyst/templates/%param.release.name%"\
+          <param name="script.content"><![CDATA[for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
+    TEMPLATE_DIR="/etc/catalyst/templates/%param.catalyst.build.release.name%"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
-    SUB_ARCH="%param.subarch%"\
+    SUB_ARCH="%param.catalyst.build.subarch%"\
     BUILD_VER="${BUILD_VER}"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
-    REL_TYPE="%param.release.type%"\
-    REL_NAME="%param.release.name%"\
-    REL_PROFILE="%param.profile%"\
-    REL_SNAPSHOT="%param.snapshot%"\
-    SRC_PATH="%param.source.path%"\
-    SNAPSHOT="%param.snapshot%"\
-    USERS="%param.users%"\
-    TARGET="%param.target%"\
-    TARGET_HOST="%param.target.host%"\
-    STAGE_RESUME="%param.stage.resume%"
+    REL_TYPE="%param.catalyst.build.release.type%"\
+    REL_NAME="%param.catalyst.build.release.name%"\
+    REL_PROFILE="%param.catalyst.build.profile%"\
+    REL_SNAPSHOT="%param.catalyst.build.snapshot%"\
+    SRC_PATH="%param.catalyst.build.source.path%"\
+    SNAPSHOT="%param.catalyst.build.snapshot%"\
+    USERS="%param.catalyst.post.users%"\
+    TARGET="%param.catalyst.build.target%"\
+    TARGET_HOST="%param.catalyst.build.target.host%"\
+    STAGE_RESUME="%param.catalyst.build.resume%"
 do
     echo ${var}
 done > build-vars-common.sh
@@ -54,13 +54,13 @@ done > build-vars-common.sh
 source $(pwd)/build-vars-common.sh || exit 1
 
 STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"
-STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
+STAGE_FETCH_LATEST="%param.catalyst.build.fetch.latest%"
 
 if (( ${STAGE_FETCH_LATEST} == 1 ))
 then
     BUILD_VER="${STAGE_LATEST}"
 else
-    BUILD_VER="%param.version%"
+    BUILD_VER="%param.catalyst.build.version%"
 fi
 [[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
 echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
