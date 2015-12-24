@@ -240,7 +240,7 @@ echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TYPE###/${REL_TYPE}/g" \
-    -e "s/###REL_NAME###/${TARGET}/" \
+    -e "s/###REL_TARGET###/${TARGET}/" \
     -e "s/###KERNEL_VERSION###/${KERNEL_VERSION}/" \
     ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
