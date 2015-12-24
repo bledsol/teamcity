@@ -26,7 +26,6 @@
       <param name="param.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
       <param name="param.slack.channel" value="general" />
       <param name="param.slack.user" value="marvyn" />
-      <param name="param.snapshot" value="latest" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
