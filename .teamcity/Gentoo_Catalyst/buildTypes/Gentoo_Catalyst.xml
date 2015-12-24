@@ -68,9 +68,10 @@ echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
 echo "There is a new build: ${STAGE_LATEST}"
 
 
-rsync -rcv --delete /etc/catalyst/overlays/common/ /etc/catalyst/overlays/${REL_NAME}/
-mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh
-echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh/authorized_keys]]></param>
+rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
+rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
+mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh || exit 1
+echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
