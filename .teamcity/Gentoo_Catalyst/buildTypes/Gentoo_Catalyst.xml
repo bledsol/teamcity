@@ -195,6 +195,7 @@ set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
+BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
