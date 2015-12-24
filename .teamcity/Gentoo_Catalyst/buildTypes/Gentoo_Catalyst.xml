@@ -26,7 +26,6 @@
       <param name="param.slack.channel" value="general" />
       <param name="param.slack.user" value="marvyn" />
       <param name="param.snapshot" value="latest" />
-      <param name="param.stage.resume" value="1" spec="checkbox description='Auto Resume Catalyst Build' label='Autoresume' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.stage1.skip" value="0" spec="checkbox description='Skip Building Stage 1' label='Skip Stage 1' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.stage2.skip" value="0" spec="checkbox description='Skip Building Stage 2' label='Skip Stage 2' uncheckedValue='0' display='prompt' checkedValue='1'" />
     </parameters>
