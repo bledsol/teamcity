@@ -170,7 +170,6 @@ then
     (( $? > 0 )) && echo "Could not fetch stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS to ${WORK_DIR}" && exit 1
 fi
 
-
 echo "Checking build hashes"
 if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
 then
@@ -187,14 +186,14 @@ fi
 echo "Taking portage snapshot"
 if [[ -z ${CATALYST_ARGS} ]]
 then
-   sudo /usr/bin/catalyst -s ${SNAPSHOT}
+   sudo /usr/bin/catalyst -s ${SNAPSHOT} || exit 1
    echo "Running stage 1 build"
-   sudo /usr/bin/catalyst -f ${SPEC_FILE}
+   sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 else
    echo "Using args: ${CATALYST_ARGS}"
-   sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT}
+   sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT} || exit 1
    echo "Running stage 2 build"
-   sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE}
+   sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 fi
 
 echo "Fin."]]></param>
