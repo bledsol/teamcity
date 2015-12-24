@@ -92,7 +92,7 @@ sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${
       </runner>
       <runner id="RUNNER_42" name="Slack Notification" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[(( %slack.enabled% == 1 )) || exit 0
+          <param name="script.content"><![CDATA[(( %param.catalyst.post.slack.enabled% == 1 )) || exit 0
 
 set -u -o pipefail
 
