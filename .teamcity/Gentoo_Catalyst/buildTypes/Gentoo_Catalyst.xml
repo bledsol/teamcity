@@ -7,7 +7,7 @@
       <setting-ref ref="RUNNER_37" />
     </disabled-settings>
     <parameters>
-      <param name="param.ccache.clear" value="0" spec="checkbox description='Clear the C Cache, generally the thing to do if compile fails' label='Clear Ccache' uncheckedValue='0' display='prompt' checkedValue='1'" />
+      <param name="param.catalyst.ccache.clear" value="0" spec="checkbox description='Clear the C Cache, generally the thing to do if compile fails' label='Clear Ccache' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.portage.emerge" value="" spec="text description='Additional packages to merge' label='Emerge' validationMode='any' display='prompt'" />
       <param name="param.profile" value="hardened/linux/amd64" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
       <param name="param.release.name" value="ccon" spec="text description='Name of release' label='Name' validationMode='not_empty' display='prompt'" />
