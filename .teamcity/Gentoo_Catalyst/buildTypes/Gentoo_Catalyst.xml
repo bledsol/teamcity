@@ -34,7 +34,6 @@
     SUB_ARCH="%param.subarch%"\
     BUILD_VER="${BUILD_VER}"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
-    BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)" \
     REL_TYPE="%param.release.type%"\
     REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
@@ -50,10 +49,6 @@ do
 done > build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
-
-echo "$(finger ${BUILD_BUILDER} |egrep ^ssh)"
-
-[[ -z ${BUILD_BUILDER_KEY} ]] && exit 1
 
 STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"
 STAGE_FETCH_LATEST="%param.stage.fetchLatest%"
