@@ -28,6 +28,7 @@
       <param name="param.catalyst.post.slack.user" value="marvyn" />
       <param name="param.catalyst.post.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.catalyst.pre.ccache.clear" value="0" spec="checkbox description='Clear the C Cache, generally the thing to do if compile fails' label='Clear Ccache' uncheckedValue='0' display='prompt' checkedValue='1'" />
+      <param name="param.catalyst.pre.fresh" value="0" spec="checkbox description='Clears all temp files and caches' label='Clear All Temp Files' uncheckedValue='0' display='prompt' checkedValue='1'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
