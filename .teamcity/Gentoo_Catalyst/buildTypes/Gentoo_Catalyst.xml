@@ -96,17 +96,11 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
           <param name="script.content"><![CDATA[set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
-BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
-
 [[ -f /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config ]] || cp /etc/catalyst/kernels/amd64-hardened-4.1.12-livecd.config /etc/catalyst/kernels/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-4.1.12-livecd.config
 
 echo "Synchronizing Overlays"
 sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
-sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
-
-echo "Installing Authorized Keys"
-mkdir -p /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh || exit 1
-echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
+sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
