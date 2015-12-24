@@ -99,8 +99,8 @@ set -u -o pipefail
 source $(pwd)/build-vars-common.sh || exit 1
 
 SLACK_KEY=$(egrep ^${REL_NAME} /etc/catalyst/keys/slack.api|cut -d: -f2)
-SLACK_USER=%param.slack.user%
-SLACK_CHANNEL=%param.slack.channel%
+SLACK_USER=%param.catalyst.post.slack.user%
+SLACK_CHANNEL=%param.catalyst.post.slack.channel%
 [[ -d /etc/catalyst/overlays/${REL_NAME}/root/etc/local.d/ ]] || mkdir -p /etc/catalyst/overlays/${REL_NAME}/root/etc/local.d/
 (( $? == 0 )) || exit 1
 
