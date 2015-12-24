@@ -195,6 +195,7 @@ set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
+BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER}|grep ^ssh)"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
@@ -230,7 +231,7 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 cat ${TEMPLATE_DIR}/stage2.spec.livecd-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-BUILD_BUILDER_KEY=$(finger bnadmin|grep ^ssh)
+echo "Mangling common scripts"
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g"\
     -e "s/###BUILD_BUILDER_KEY###/${BUILD_BUILDER_KEY}/"\
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template > /etc/catalyst/scripts/${REL_NAME}/wrangle.sh || exit 1
