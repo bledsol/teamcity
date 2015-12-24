@@ -231,7 +231,7 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 cat ${TEMPLATE_DIR}/stage2.spec.livecd-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-echo "Mangling common scripts ${BUILD_BUILDER} ${BUILD_BUILDER_KEY} ${TARGET_HOST}"
+echo "Mangling common scripts"
 
 echo "#!/bin/bash" >  /etc/catalyst/scripts/${REL_NAME}/wrangle.sh 
 echo "${BUILD_BUILDER_KEY}/" >>  /etc/catalyst/scripts/${REL_NAME}/wrangle.sh 
