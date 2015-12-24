@@ -104,7 +104,7 @@ rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst
 
 [[ -z ${BUILD_BUILDER_KEY} ]] && exit 1
 echo "Installing Authorized Keys"
-mkdir -p /etc/catalyst/overlays/${REL_NAME}/ /etc/catalyst/overlays/${REL_NAME}/root_overlay/home/${BUILD_BUILDER}/.ssh || exit 1
+mkdir -p /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh || exit 1
 echo ${BUILD_BUILDER_KEY} > /etc/catalyst/overlays/${REL_NAME}/root/home/${BUILD_BUILDER}/.ssh/authorized_keys || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
