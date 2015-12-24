@@ -81,7 +81,7 @@ echo "Synchronizing Overlays"
 sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
 sudo /usr/bin/rsync -rca --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
 
-(( %param.ccache.clear% == 0 )) && exit 0
+(( %param.catalyst.pre.ccache.clear% == 0 )) && exit 0
 echo "Clearing Compile Cache"
 sudo /bin/rm /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
 sudo /bin/rm /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1]]></param>
