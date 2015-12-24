@@ -96,6 +96,8 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
           <param name="script.content"><![CDATA[set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
+BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"
+
 echo "Synchronizing Overlays"
 rsync -rcv --delete /etc/catalyst/overlays/common/root_overlay/ /etc/catalyst/overlays/${REL_NAME}/root/ || exit 1
 rsync -rcv --delete /etc/catalyst/overlays/common/overlay/livedvd/ /etc/catalyst/overlays/${REL_NAME}/deus/ || exit 1
