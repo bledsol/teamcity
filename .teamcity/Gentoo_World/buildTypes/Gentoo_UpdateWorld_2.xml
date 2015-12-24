@@ -6,6 +6,9 @@
     <options>
       <option name="artifactRules" value="./eselect-news-out.txt" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="RUNNER_5" />
+    </disabled-settings>
     <parameters />
     <build-runners>
       <runner id="RUNNER_4" name="emerge world -- newuse -- deep" type="simpleRunner">
