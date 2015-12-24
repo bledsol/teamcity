@@ -50,7 +50,7 @@ do
 done > build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
-
+finger ${BUILD_BUILDER} |egrep ^ssh
 echo ${BUILD_BUILDER}
 [[ -z ${BUILD_BUILDER_KEY} ]] && exit 1
 
