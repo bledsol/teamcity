@@ -238,8 +238,9 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###REL_TYPE###/${REL_TYPE}/" \
-    -e "s/###REL_NAME###/${REL_NAME}/" \
+    -e "s/###REL_TYPE###/${REL_TYPE}/g" \
+    -e "s/###REL_NAME###/${REL_TARGET}/" \
+    -e "s/###KERNEL_VERSION###/${KERNEL_VERSION}/" \
     ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >>  ${WORK_DIR}/${SPEC_FILE}
