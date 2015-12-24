@@ -34,7 +34,7 @@
     SUB_ARCH="%param.subarch%"\
     BUILD_VER="${BUILD_VER}"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
-    BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)"\
+    BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER} |egrep ^ssh)" \
     REL_TYPE="%param.release.type%"\
     REL_NAME="%param.release.name%"\
     REL_PROFILE="%param.profile%"\
