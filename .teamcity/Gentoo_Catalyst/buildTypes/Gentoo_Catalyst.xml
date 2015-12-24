@@ -26,7 +26,6 @@
       <param name="param.stage.resume" value="1" spec="checkbox description='Auto Resume Catalyst Build' label='Autoresume' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.stage1.skip" value="0" spec="checkbox description='Skip Building Stage 1' label='Skip Stage 1' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.stage2.skip" value="0" spec="checkbox description='Skip Building Stage 2' label='Skip Stage 2' uncheckedValue='0' display='prompt' checkedValue='1'" />
-      <param name="param.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
