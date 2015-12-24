@@ -265,7 +265,7 @@ else
     sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE} || exit 1
 fi
 
-[[ -f /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso ]] && mv /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso* /var/data/images/iso/
+[[ -f /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso ]] && mv /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso* /var/data/catalyst/iso/
 
 echo "Fin."]]></param>
           <param name="teamcity.step.mode" value="default" />
