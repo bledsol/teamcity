@@ -232,9 +232,11 @@ echo >>  ${WORK_DIR}/${SPEC_FILE}
 cat ${TEMPLATE_DIR}/stage2.spec.livecd-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Mangling common scripts ${BUILD_BUILDER} ${BUILD_BUILDER_KEY} ${TARGET_HOST}"
+
+echo "#!/bin/bash" >  /etc/catalyst/scripts/${REL_NAME}/wrangle.sh 
+echo "${BUILD_BUILDER_KEY}/" >>  /etc/catalyst/scripts/${REL_NAME}/wrangle.sh 
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
-    -e "s/###BUILD_BUILDER_KEY###/${BUILD_BUILDER_KEY}/" \
-    -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template > /etc/catalyst/scripts/${REL_NAME}/wrangle.sh || exit 1
+    -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template >> /etc/catalyst/scripts/${REL_NAME}/wrangle.sh || exit 1
 
 echo "Running catalyst scripts"
 cd ${WORK_DIR}
