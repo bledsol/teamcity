@@ -27,7 +27,6 @@
       <param name="param.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
       <param name="param.target.host" value="scout" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
       <param name="param.users" value="" spec="text validationMode='any' display='normal'" />
-      <param name="param.version" value="" spec="text description='Version Stamp' label='Version' validationMode='any' display='prompt'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
