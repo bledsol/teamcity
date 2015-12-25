@@ -94,7 +94,7 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/
 
-(( %param.catalyst.pre.ccache.clear% == 0 )) && exit 0
+(( %param.catalyst.args.ccache.clear% == 0 )) && exit 0
 echo "Clearing Compile Cache"
 sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
 sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1]]></param>
