@@ -45,6 +45,8 @@ CATALYST_ARGS=""
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
 (( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
 (( %param.catalyst.args.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
+REL_PROFILE="%param.catalyst.build.profile%"
+REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\/')
 
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/common"\
@@ -55,7 +57,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     KERNEL_VERSION="%param.catalyst.build.kernel.version%"\
     REL_TYPE="%param.catalyst.build.release.type%"\
     REL_NAME="%param.catalyst.build.release.name%"\
-    REL_PROFILE="%param.catalyst.build.profile%"\
+    REL_PROFILE="${REL_PROFILE}"\
     REL_SNAPSHOT="%param.catalyst.build.snapshot%"\
     SRC_PATH="%param.catalyst.build.source.path%"\
     SNAPSHOT="%param.catalyst.build.snapshot%"\
