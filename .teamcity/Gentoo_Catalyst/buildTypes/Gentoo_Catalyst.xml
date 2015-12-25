@@ -240,10 +240,6 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-if (( %param.catalyst.post.slack.enabled% == 1 ))
-then
-    echo "livecd/root_overlay: /var/data/catalyst/tmp/${TARGET}-root" >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-fi
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
