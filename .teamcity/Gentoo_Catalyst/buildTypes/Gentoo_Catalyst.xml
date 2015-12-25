@@ -237,7 +237,7 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
 
 if (( %param.catalyst.post.slack.enabled% == 1 ))
 then
-    echo "livecd/root_overlay: /var/data/catalyst/tmp/${TARGET}/root" >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+    echo "livecd/root_overlay: /var/data/catalyst/tmp/${TARGET}-root" >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 fi
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
