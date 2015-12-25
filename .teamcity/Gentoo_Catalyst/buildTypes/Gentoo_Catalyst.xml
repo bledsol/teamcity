@@ -112,7 +112,10 @@ SLACK_KEY=$(egrep ^${REL_NAME} /etc/catalyst/keys/slack.api|cut -d: -f2)
 SLACK_USER=%param.catalyst.post.slack.user%
 SLACK_CHANNEL=%param.catalyst.post.slack.channel%
 
+echo "Checking for key"
 [[ -z ${SLACK_KEY} ]] && exit 1
+
+echo "Checking for hacky overlay"
 [[ -d /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/ ]] || mkdir -p /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/
 (( $? == 0 )) || exit 1
 
