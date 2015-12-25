@@ -92,7 +92,7 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
-rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/
+rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/ || exit 1
 
 (( %param.catalyst.args.ccache.clear% == 0 )) && exit 0
 echo "Clearing Compile Cache"
