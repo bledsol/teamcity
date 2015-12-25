@@ -131,7 +131,7 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
       </runner>
       <runner id="RUNNER_39" name="Stage 1 Build" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.build.stage1.skip% == 1 )) && exit 0 
+          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage1.skip% == 1 )) && exit 0 
 
 set -u
 source $(pwd)/build-vars-common.sh || exit 1
