@@ -46,7 +46,7 @@ CATALYST_ARGS=""
 (( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
 (( %param.catalyst.args.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
 REL_PROFILE="%param.catalyst.build.profile%"
-REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\/')
+REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\//')
 echo ${REL_PROFILE}
 exit 1
 
