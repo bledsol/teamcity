@@ -47,6 +47,8 @@ CATALYST_ARGS=""
 (( %param.catalyst.args.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
 REL_PROFILE="%param.catalyst.build.profile%"
 REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\/')
+echo ${REL_PROFILE}
+exit 1
 
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
     TEMPLATE_DIR="/etc/catalyst/templates/common"\
