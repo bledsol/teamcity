@@ -291,9 +291,6 @@ echo "Fin."]]></param>
       </runner>
     </build-runners>
     <vcs-settings>
-      <vcs-entry-ref root-id="Gentoo_Catalyst_GentooReleaseEng">
-        <checkout-rule rule="+:.=&gt;/etc/catalyst/release/" />
-      </vcs-entry-ref>
       <vcs-entry-ref root-id="Gentoo_Catalyst_GentooCatalyst">
         <checkout-rule rule="+:.=&gt;catalyst/" />
       </vcs-entry-ref>
