@@ -13,6 +13,7 @@
       <param name="param.catalyst.args.purge" value="0" spec="checkbox description='Purge previous builds' label='Purge' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.resume" value="1" spec="checkbox description='Auto Resume Catalyst Build' label='Autoresume' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.slack.enabled" value="1" spec="checkbox description='Enable Slack Notifications' label='Slack Notify' uncheckedValue='0' display='prompt' checkedValue='1'" />
+      <param name="param.catalyst.args.stage1.skip" value="0" spec="checkbox description='Skip Building Stage 1' label='Skip Stage 1' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.verbose" value="0" spec="checkbox description='Enable Verbosity' label='Verbose' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.build.kernel.version" value="4.1.12" spec="text description='Version of Kernel to Install inside Stages' label='Kernel Version' validationMode='not_empty' display='prompt'" />
       <param name="param.catalyst.build.profile" value="%param.catalyst.build.release.type%/linux/%param.catalyst.build.subarch%%param.catalyst.build.release.multilib%%param.catalyst.build.release.selinux%" spec="text description='Gentoo Profile' label='Profile' validationMode='not_empty' display='normal'" />
@@ -22,7 +23,6 @@
       <param name="param.catalyst.build.release.type" value="hardened" spec="text description='Release Type' label='Type' validationMode='not_empty' display='normal'" />
       <param name="param.catalyst.build.snapshot" value="latest" />
       <param name="param.catalyst.build.source.path" value="%param.catalyst.build.release.type%/%param.catalyst.build.subarch%/stage3-%param.catalyst.build.subarch%-%param.catalyst.build.target%" />
-      <param name="param.catalyst.build.stage1.skip" value="0" spec="checkbox description='Skip Building Stage 1' label='Skip Stage 1' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.build.stage2.skip" value="0" spec="checkbox description='Skip Building Stage 2' label='Skip Stage 2' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.build.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
       <param name="param.catalyst.build.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
