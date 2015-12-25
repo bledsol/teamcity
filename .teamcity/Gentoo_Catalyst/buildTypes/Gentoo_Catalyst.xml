@@ -113,7 +113,7 @@ SLACK_USER=%param.catalyst.post.slack.user%
 SLACK_CHANNEL=%param.catalyst.post.slack.channel%
 
 [[ -z ${SLACK_KEY} ]] && exit 1
-[[ -d /var/data/catalyst/tmp/${REL_NAME}/root/etc/local.d/ ]] || mkdir -p /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/
+[[ -d /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/ ]] || mkdir -p /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/
 (( $? == 0 )) || exit 1
 
 sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
