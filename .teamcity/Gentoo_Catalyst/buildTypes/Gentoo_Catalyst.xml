@@ -277,7 +277,9 @@ fi
 
 [[ -f /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso ]] && mv /var/data/catalyst/builds/${REL_NAME}/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso* /var/data/catalyst/iso/
 
-echo "Fin."]]></param>
+echo "Fin."
+BUILD_FIN="$(date +%s)"
+echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso in: $(( BUILD_FIN - BUILD_START)) with filesize: $(du -s /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso) md5: $(md5sum /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso)" >> /var/log/catalyst-build.log]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
