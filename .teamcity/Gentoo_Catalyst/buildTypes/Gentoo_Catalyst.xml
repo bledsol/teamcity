@@ -242,6 +242,7 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_TARGET###/${TARGET}/g" \
     -e "s/###REL_NAME###/${REL_NAME}/g" \
     -e "s/###BUILD_VER###/${BUILD_VER}/" \
+    -e "s/###CPU_COUNT###/${CPU_COUNT}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
