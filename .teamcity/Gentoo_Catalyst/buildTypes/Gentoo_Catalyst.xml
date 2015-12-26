@@ -41,7 +41,6 @@
           <param name="script.content"><![CDATA[set -u -o pipefail
 
 CATALYST_ARGS=""
-BUILD_START="$(date +%s)"
 
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
@@ -51,6 +50,7 @@ REL_PROFILE="%param.catalyst.build.profile%"
 REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\//g')
 echo ${REL_PROFILE}
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
+    BUILD_START="$(date +%s)"\
     TEMPLATE_DIR="/etc/catalyst/templates/common"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.catalyst.build.subarch%"\
