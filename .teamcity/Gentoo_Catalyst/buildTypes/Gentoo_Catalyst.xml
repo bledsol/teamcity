@@ -8,7 +8,6 @@
     </disabled-settings>
     <parameters>
       <param name="param.aws.account.name" value="ccon" spec="text description='AWS Account Name' label='AWS Account Name' validationMode='not_empty' display='prompt'" />
-      <param name="param.build.aws.accountid" value="111111111111" />
       <param name="param.catalyst.args.ccache.clear" value="0" spec="checkbox description='Clear the C Cache, generally the thing to do if compile fails' label='Clear Ccache' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.debug" value="0" spec="checkbox description='Enable Debugging' label='Debug' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.fetch.latest" value="1" spec="checkbox description='Fetch Latest Stage' label='Fetch Latest' uncheckedValue='0' display='prompt' checkedValue='1'" />
