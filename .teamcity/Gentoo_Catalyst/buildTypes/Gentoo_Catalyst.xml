@@ -305,8 +305,10 @@ echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BU
 
 source $(pwd)/build-vars-common.sh || exit 1
 
+AWS_ACCOUNT_ID=$(grep ^%param.aws.account.name% /etc/ec2/accounts.db|cut -d:-f2)
+
 [[ -d /var/srv/images/ami/${REL_NAME}/ ]] || mkdir /var/srv/images/ami/${REL_NAME}/
-echo 'pemkey' | ec2-bundle-image -k /etc/catalyst/keys/key.pem -c /etc/ec2/amitools/cert-ec2.pem  -u %param.build.aws.accountid% -i  /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso -d /var/srv/images/ami/${REL_NAME}/ -r x86_64]]></param>
+echo 'pemkey' | ec2-bundle-image -k /etc/catalyst/keys/key.pem -c /etc/ec2/amitools/cert-ec2.pem  -u ${AWS_ACCOUNT_ID} -i  /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso -d /var/srv/images/ami/${REL_NAME}/ -r x86_64]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
