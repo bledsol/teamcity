@@ -281,10 +281,13 @@ fi
 echo "Fin."
 BUILD_FIN="$(date +%s)"
 BUILD_TIME=$(( BUILD_FIN - BUILD_START))
+
+seconds=0
 hours=$((seconds / 3600))
 seconds=$((seconds % 3600))
 minutes=$((seconds / 60))
 seconds=$((seconds % 60))
+
 BUILD_TIME="${hours}h:${minutes}m:${seconds}s"
 
 echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso in: ${BUILD_TIME} with filesize: $(ls -alFtr /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso|awk '{ print $5 }') md5: $(md5sum /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso|awk '{ print $1 }')" >> /var/log/catalyst-build.log]]></param>
