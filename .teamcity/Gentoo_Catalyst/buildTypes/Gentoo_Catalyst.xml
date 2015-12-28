@@ -282,7 +282,7 @@ echo "Fin."
 BUILD_FIN="$(date +%s)"
 BUILD_TIME=$(( BUILD_FIN - BUILD_START))
 
-seconds=0
+seconds=${BUILD_TIME}
 hours=$((seconds / 3600))
 seconds=$((seconds % 3600))
 minutes=$((seconds / 60))
