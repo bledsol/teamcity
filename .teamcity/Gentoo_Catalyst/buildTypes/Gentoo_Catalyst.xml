@@ -54,6 +54,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     TEMPLATE_DIR="/etc/catalyst/templates/common"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.catalyst.build.subarch%"\
+    PROVISION_METHOD="%param.catalyst.provision.method%"\
     BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
     CATALYST_ARGS="'${CATALYST_ARGS}'"\
     KERNEL_VERSION="%param.catalyst.build.kernel.version%"\
