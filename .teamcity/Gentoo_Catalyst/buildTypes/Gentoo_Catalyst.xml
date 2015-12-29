@@ -52,6 +52,7 @@ echo ${REL_PROFILE}
 for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
     BUILD_START="$(date +%s)"\
     TEMPLATE_DIR="/etc/catalyst/templates/common"\
+    TEMPLATE_BASE="/etc/catalyst/templates"\
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.catalyst.build.subarch%"\
     PROVISION_METHOD="%param.catalyst.provision.method%"\
