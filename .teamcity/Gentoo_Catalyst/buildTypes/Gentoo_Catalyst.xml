@@ -31,7 +31,7 @@
       <param name="param.catalyst.build.target.host" value="scout" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
       <param name="param.catalyst.build.version" value="" spec="text description='Version Stamp' label='Version' validationMode='any' display='prompt'" />
       <param name="param.catalyst.post.emerge" value="" spec="text description='Additional packages to merge' label='Emerge' validationMode='any' display='prompt'" />
-      <param name="param.catalyst.post.slack.channel" value="general" />
+      <param name="param.catalyst.post.slack.channel" value="provisioning" />
       <param name="param.catalyst.post.slack.user" value="marvyn" />
       <param name="param.catalyst.post.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.catalyst.provision.method" value="thin" spec="text regexp='thin||slim||thick' display='prompt' validationMessage='Please specify one of thin, slim or thick' description='Provisioning Method (thin,slim,thick)' label='Provisioning Method' validationMode='regex'" />
