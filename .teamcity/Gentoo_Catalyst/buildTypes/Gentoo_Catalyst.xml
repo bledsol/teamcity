@@ -184,7 +184,7 @@ if [[ -n ${PKG_MERGE[@]} ]]
 then
     for pkg in ${PKG_MERGE[@]}
     do
-        echo $pkg
+        echo " $pkg"
     done >> ${WORK_DIR}/${SPEC_FILE}
 fi
 
