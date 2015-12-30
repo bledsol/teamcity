@@ -176,7 +176,8 @@ echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 cat ${TEMPLATE_DIR}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
+cat ${TEMPLATE_BASE}/common/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
+[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 
 if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS ]] 
 then
