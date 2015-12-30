@@ -119,7 +119,7 @@ set -u -o pipefail
 
 source $(pwd)/build-vars-common.sh || exit 1
 
-SLACK_KEY=$(egrep ^${REL_NAME} /etc/catalyst/keys/slack.api|cut -d: -f2)
+SLACK_KEY=$(egrep ^%param.aws.account.name% /etc/catalyst/keys/slack.api|cut -d: -f2)
 SLACK_USER=%param.catalyst.post.slack.user%
 SLACK_CHANNEL=%param.catalyst.post.slack.channel%
 
