@@ -148,6 +148,7 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
+PKG_MERGE=( %param.catalyst.post.emerge% )
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
@@ -171,13 +172,21 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
     -e "s/###SRC_PATH###/${REL_NAME}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
     ${TEMPLATE_DIR}/stage1.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
-
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+
 cat ${TEMPLATE_DIR}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
+[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.use.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 cat ${TEMPLATE_BASE}/common/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 [[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
+if [[ -n ${PKG_MERGE[@]} ]] 
+then
+    for pkg in ${PKG_MERGE[@]}
+    do
+        echo $pkg
+    done >> ${WORK_DIR}/${SPEC_FILE}
+fi
 
 if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS ]] 
 then
