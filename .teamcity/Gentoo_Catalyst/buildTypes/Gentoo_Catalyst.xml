@@ -180,7 +180,7 @@ echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 cat ${TEMPLATE_BASE}/common/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 [[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-if [[ -n ${PKG_MERGE[@]} ]] 
+if (( ${#PKG_MERGE[@]} > 0 ))
 then
     for pkg in ${PKG_MERGE[@]}
     do
