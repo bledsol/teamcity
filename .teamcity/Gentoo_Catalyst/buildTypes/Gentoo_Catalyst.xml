@@ -278,6 +278,7 @@ echo "Mangling common scripts"
 echo "#!/bin/bash" >  /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh 
 echo "BUILD_BUILDER_KEY=\"${BUILD_BUILDER_KEY}\"" >> /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh 
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
+    -e "s/###TARGET_DOMAIN###/${TARGET_DOMAIN}/g" \
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" /etc/catalyst/templates/common/wrangle.sh.template >> /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh || exit 1
 
 cd ${WORK_DIR}
