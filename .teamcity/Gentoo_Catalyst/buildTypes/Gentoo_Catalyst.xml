@@ -69,6 +69,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     USERS="'%param.catalyst.post.users%'"\
     TARGET="%param.catalyst.build.target%"\
     TARGET_HOST="%param.catalyst.build.target.host%"\
+    TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
     CPU_COUNT="$(nproc)"\
     STAGE_RESUME="%param.catalyst.args.resume%"
 do
