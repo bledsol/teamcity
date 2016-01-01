@@ -325,20 +325,24 @@ IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
 CUR_SRC_IMG=$( sudo /usr/bin/grep 'source file' /etc/libvirt/qemu/${VM_NAME}.xml | cut -d\' -f 2 )
 COUNT=0
 
-[[ ${VM_STATE} == 'running' ]] && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
+[[ ${VM_STATE} == 'running' ]] && echo "Shutting down running VM: ${VM_NAME}" && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
 
 while [[ ${VM_STATE} == 'running' ]]
 do
+    echo "Waiting for VM to halt"
     (( COUNT > 30 )) && echo "Timed out" && exit 1
     VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '{ print $2 }')
     sleep 1
     ((COUNT++))
 done
 
+echo "Comparing IMAGES"
 [[ ${CUR_SRC_IMG} == "${IMG_PATH}/${IMG_NAME}" ]] || exit 1
 
+echo "Starting VM"
 sudo /usr/bin/virsh start --domain ${VM_NAME}
 
+echo "Starting ZMQ"
 /usr/local/bin/zmq_srv.py -i 192.168.122.1 --string $(/usr/bin/pwgen -s -1 50) -ss OK!
 
 [[ ${VM_STATE} == 'running' ]] && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
