@@ -347,6 +347,7 @@ sudo /usr/bin/virsh start --domain ${VM_NAME} || exit 1
 echo "Starting ZMQ"
 /usr/local/bin/zmq_srv.py -i 192.168.122.1 --string $(/usr/bin/pwgen -s -1 50) -ss OK! || exit 1
 
+VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '{ print $2 }')
 [[ ${VM_STATE} == 'running' ]] && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
 exit 0]]></param>
           <param name="teamcity.step.mode" value="default" />
