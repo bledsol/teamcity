@@ -5,6 +5,7 @@
   <settings>
     <disabled-settings>
       <setting-ref ref="RUNNER_37" />
+      <setting-ref ref="RUNNER_39" />
     </disabled-settings>
     <parameters>
       <param name="param.aws.account.name" value="ccon" spec="text description='AWS Account Name' label='AWS Account Name' validationMode='not_empty' display='prompt'" />
