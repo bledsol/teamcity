@@ -321,7 +321,7 @@ VM_NAME="%param.catalyst.build.release.name%"
 IMG_PATH='/var/data/catalyst/iso'
 IMG_PATH_ESC='\/var\/data\/catalyst\/iso'
 IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
-#CUR_SRC_IMG=$( sudo /usr/bin/grep 'source file' /etc/libvirt/qemu/${VM_NAME}.xml | cut -d\' -f 2 )
+CUR_SRC_IMG=$( sudo /usr/bin/grep 'source file' /etc/libvirt/qemu/${VM_NAME}.xml | cut -d\' -f 2 )
 COUNT=0
 
 echo "Checking state of VM"
@@ -331,7 +331,8 @@ VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '
 while [[ ${VM_STATE} == 'running' ]]
 do
     echo "Waiting for VM to halt"
-    (( COUNT > 30 )) && echo "Timed out" && exit 1
+    (( COUNT > 40 )) && echo "Timed out" && exit 1
+    (( COUNT == 20 )) && sudo /usr/bin/virsh destroy --domain ${VM_NAME} 
     VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '{ print $2 }')
     sleep 1
     ((COUNT++))
