@@ -330,8 +330,8 @@ echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BU
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
 
 VM_NAME="%param.catalyst.build.release.name%"
-VM_DOM="%param.catalyst.build.release.domain%"
-VM_REALM="%param.catalyst.build.release.realm%"
+VM_DOM="%param.catalyst.build.target.domain%"
+VM_REALM="%param.catalyst.build.target.realm%"
 VM_GW=$( grep "#${VM_NAME} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 IMG_PATH='/var/data/catalyst/iso'
 IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
