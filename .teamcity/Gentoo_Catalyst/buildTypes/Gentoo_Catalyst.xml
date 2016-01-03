@@ -330,6 +330,9 @@ echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BU
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
 
 VM_NAME="%param.catalyst.build.release.name%"
+VM_DOM="%param.catalyst.build.release.domain%"
+VM_REALM="%param.catalyst.build.release.realm%"
+VM_GW=$( grep "#${VM_NAME} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 IMG_PATH='/var/data/catalyst/iso'
 IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
 COUNT=0
@@ -354,7 +357,7 @@ echo "Starting VM"
 sudo /usr/bin/virsh start --domain ${VM_NAME} || exit 1
 
 echo "Starting ZMQ"
-/usr/local/bin/zmq_srv.py -i 192.168.122.1 --string $(/usr/bin/pwgen -s -1 50) -ss OK! || exit 1
+/usr/local/bin/zmq_srv.py -i ${VM_GW} --string $(/usr/bin/pwgen -s -1 50) -ss OK! || exit 1
 
 VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '{ print $2 }')
 [[ ${VM_STATE} == 'running' ]] && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
