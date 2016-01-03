@@ -356,6 +356,15 @@ COUNT=0
 echo "$VM_NAME $VM_DOM $VM_REALM $VM_GW"
 
 echo "Checking state of VM"
+sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
+if (( $? > 0 ))
+then
+  echo "Starting network"
+  sudo /usr/bin/virsh net-start ${VM_ACCOUNT}
+fi
+
+(sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}) || exit 1
+
 VM_STATE=$(sudo /usr/bin/virsh dominfo --domain ${VM_NAME} | grep ^State | awk '{ print $2 }')
 [[ ${VM_STATE} == 'running' ]] && echo "Shutting down running VM: ${VM_NAME}" && sudo /usr/bin/virsh shutdown --domain ${VM_NAME}
 
