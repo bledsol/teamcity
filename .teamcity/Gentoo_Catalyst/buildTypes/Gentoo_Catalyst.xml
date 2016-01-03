@@ -44,8 +44,8 @@
 
 CATALYST_ARGS=""
 
-BUILD_BUILDER="%teamcity.build.triggeredBy.username%"
-(( %teamcity.build.triggeredBy.username% == 0 )) && BUILD_BUILDER='bnadmin'
+BUILD_BUILDER=%teamcity.build.triggeredBy.username%
+[[ -z ${BUILD_BUILDER} ]] && BUILD_BUILDER='bnadmin'
 
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
