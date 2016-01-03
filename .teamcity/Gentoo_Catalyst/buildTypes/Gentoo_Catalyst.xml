@@ -44,6 +44,9 @@
 
 CATALYST_ARGS=""
 
+BUILD_BUILDER="%teamcity.build.triggeredBy.username%"
+(( %teamcity.build.triggeredBy.username% == 0 )) && BUILD_BUILDER='bnadmin'
+
 (( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
 (( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
 (( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
@@ -58,7 +61,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
     SUB_ARCH="%param.catalyst.build.subarch%"\
     PROVISION_METHOD="%param.catalyst.provision.method%"\
-    BUILD_BUILDER="%teamcity.build.triggeredBy.username%"\
+    BUILD_BUILDER="${BUILD_BUILDER}"\
     CATALYST_ARGS="'${CATALYST_ARGS}'"\
     KERNEL_VERSION="%param.catalyst.build.kernel.version%"\
     REL_TYPE="%param.catalyst.build.release.type%"\
