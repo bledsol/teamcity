@@ -350,14 +350,9 @@ echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BU
 
 VM_NAME="%param.catalyst.build.release.name%"
 VM_ACCOUNT="%param.aws.account.name%"
-VM_DOM="%param.catalyst.build.target.domain%"
-VM_REALM="%param.catalyst.build.target.realm%"
-VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 IMG_PATH='/var/data/catalyst/iso'
 IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
 COUNT=0
-
-echo "$VM_NAME $VM_DOM $VM_REALM $VM_GW"
 
 echo "Checking state of VM"
 sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
