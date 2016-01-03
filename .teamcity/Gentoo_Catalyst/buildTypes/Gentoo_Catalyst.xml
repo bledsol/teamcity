@@ -154,6 +154,7 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
 set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
+TAKE_SNAPSHOTE=0
 SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
 PKG_MERGE=( %param.catalyst.post.emerge% )
@@ -216,15 +217,28 @@ fi
 
 (( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
 
+PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
+TIME_NOW=$(date +%s)
+
+PORTAGE_SNAPSHOT_AGE=$(( TIME_NOW - PORTAGE_SNAPSHOT_DATE ))
+
+(( PORTAGE_SNAPSHOT_AGE > 14400 )) && TAKE_SNAPSHOT=1
+
 echo "Taking portage snapshot"
 if [[ -z ${CATALYST_ARGS} ]]
 then
-   sudo /usr/bin/catalyst -s ${SNAPSHOT} || exit 1
+   if (( TAKE_SNAPSHOT == 1 ))
+   then 
+     sudo /usr/bin/catalyst -s ${SNAPSHOT} || exit 1
+   fi
    echo "Running stage 1 build"
    sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 else
    echo "Using args: ${CATALYST_ARGS}"
-   sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT} || exit 1
+   if (( TAKE_SNAPSHOT == 1 ))
+   then 
+     sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT} || exit 1
+   fi
    echo "Running stage 1 build"
    sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${WORK_DIR}/${SPEC_FILE} || exit 1
 fi
