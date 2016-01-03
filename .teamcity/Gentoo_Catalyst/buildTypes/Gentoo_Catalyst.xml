@@ -105,15 +105,23 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
       <runner id="RUNNER_44" name="Build Dependencies" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u
+
 source $(pwd)/build-vars-common.sh || exit 1
+
+VM_ACCOUNT="%param.aws.account.name%"
+VM_REALM="%param.catalyst.build.target.realm%"
+VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
 rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/ || exit 1
 
-VM_ACCOUNT="%param.aws.account.name%"
-VM_REALM="%param.catalyst.build.target.realm%"
-VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
+sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
+if (( $? > 0 ))
+then
+    echo "Starting network"
+    sudo /usr/bin/virsh net-start --network ${VM_ACCOUNT}
+fi
 
 echo "Starting ZMQ"
 /usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
