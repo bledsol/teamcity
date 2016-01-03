@@ -401,7 +401,8 @@ AWS_ACCOUNT_ID=$(grep ^%param.aws.account.name% /etc/ec2/accounts.db|cut -d: -f2
 
 [[ -d /var/srv/images/ami/${REL_NAME}/ ]] || mkdir /var/srv/images/ami/${REL_NAME}/
 START_TIME=$(date +%s)
-echo 'pemkey' | ec2-bundle-image -k /etc/catalyst/keys/key.pem -c /etc/ec2/amitools/cert-ec2.pem  -u ${AWS_ACCOUNT_ID} -i  /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso -d /var/srv/images/ami/${REL_NAME}/ -r x86_64 || exit 1
+mkdir -p /var/srv/images/ami/${REL_NAME}/${BUILD_VER}/ 
+echo 'pemkey' | ec2-bundle-image -k /etc/catalyst/keys/key.pem -c /etc/ec2/amitools/cert-ec2.pem  -u ${AWS_ACCOUNT_ID} -i  /var/data/catalyst/iso/${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso -d /var/srv/images/ami/${REL_NAME}/${BUILD_VER}/ -r x86_64 || exit 1
 END_TIME=$(date +%s)
 
 BUILD_TIME=$(( END_TIME - START_TIME ))
