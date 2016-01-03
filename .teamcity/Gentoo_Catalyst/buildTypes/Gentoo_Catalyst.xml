@@ -111,14 +111,14 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/ || exit 1
 
+echo "Starting ZMQ"
+/usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
+echo "$!"
+
 (( %param.catalyst.args.ccache.clear% == 0 )) && exit 0
 echo "Clearing Compile Cache"
 sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
-sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
-
-echo "Starting ZMQ"
-/usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
-echo "$!"]]></param>
+sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
