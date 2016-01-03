@@ -224,11 +224,11 @@ PORTAGE_SNAPSHOT_AGE=$(( TIME_NOW - PORTAGE_SNAPSHOT_DATE ))
 
 (( PORTAGE_SNAPSHOT_AGE > 14400 )) && TAKE_SNAPSHOT=1
 
-echo "Taking portage snapshot"
 if [[ -z ${CATALYST_ARGS} ]]
 then
    if (( TAKE_SNAPSHOT == 1 ))
    then 
+    echo "Taking portage snapshot"
      sudo /usr/bin/catalyst -s ${SNAPSHOT} || exit 1
    fi
    echo "Running stage 1 build"
@@ -237,6 +237,7 @@ else
    echo "Using args: ${CATALYST_ARGS}"
    if (( TAKE_SNAPSHOT == 1 ))
    then 
+     echo "Taking portage snapshot"
      sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT} || exit 1
    fi
    echo "Running stage 1 build"
