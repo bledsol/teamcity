@@ -360,7 +360,7 @@ sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
 if (( $? > 0 ))
 then
   echo "Starting network"
-  sudo /usr/bin/virsh net-start ${VM_ACCOUNT}
+  sudo /usr/bin/virsh net-start --network ${VM_ACCOUNT}
 fi
 
 (sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}) || exit 1
