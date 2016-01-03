@@ -111,6 +111,10 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 rsync -racv --delete /etc/catalyst/overlays/common/root/ /var/data/catalyst/tmp/${REL_NAME}-root/ || exit 1
 
+VM_ACCOUNT="%param.aws.account.name%"
+VM_REALM="%param.catalyst.build.target.realm%"
+VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
+
 echo "Starting ZMQ"
 /usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
 echo "$!"
