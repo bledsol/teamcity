@@ -367,6 +367,7 @@ VM_ACCOUNT="%param.aws.account.name%"
 IMG_PATH='/var/data/catalyst/iso'
 IMG_NAME="${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUILD_VER}.iso"
 COUNT=0
+ZMQ_STAT=0
 
 (sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}) || exit 1
 
@@ -388,7 +389,12 @@ sudo /usr/bin/virsh change-media --domain ${VM_NAME} --source ${IMG_PATH}/${IMG_
 echo "Starting VM"
 sudo /usr/bin/virsh start --domain ${VM_NAME} || exit 1
 
-exit 0]]></param>
+while (( ZMQ_STAT == 0 ))
+do
+    ps ${ZMQ_PID} &> /dev/null
+    ZMQ_STAT=$?
+    sleep 1
+done]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
