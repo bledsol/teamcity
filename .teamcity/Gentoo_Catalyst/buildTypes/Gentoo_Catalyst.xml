@@ -124,7 +124,7 @@ then
 fi
 
 echo "Starting ZMQ"
-/usr/bin/nohup /usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
+/usr/bin/nohup /usr/local/bin/zmq_srv.py -i ${VM_GW} -f /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/zmq-vars.tmp -s $(/usr/bin/pwgen -s -1 50) -ss OK! &
 ZMQ_PID=$!
 
 echo "ZMQ_PID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
