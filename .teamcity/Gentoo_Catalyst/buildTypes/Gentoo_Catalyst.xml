@@ -442,7 +442,7 @@ echo "[$(date)]: Built AMI: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUIL
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_46" name="" type="simpleRunner">
+      <runner id="RUNNER_46" name="CleanUp" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
 
