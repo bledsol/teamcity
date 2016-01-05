@@ -147,7 +147,10 @@ sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${
 
 set -u -o pipefail
 
+
 source $(pwd)/build-vars-common.sh || exit 1
+
+ROOT_OVERLAY="/var/data/catalyst/tmp/${REL_NAME}/root-overlay"
 
 SLACK_KEY=$(egrep ^%param.aws.account.name% /etc/catalyst/keys/slack.api|cut -d: -f2)
 SLACK_USER=%param.catalyst.post.slack.user%
@@ -157,14 +160,14 @@ echo "Checking for key"
 [[ -z ${SLACK_KEY} ]] && exit 1
 
 echo "Checking for hacky overlay"
-[[ -d /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/ ]] || mkdir -p /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/
+[[ -d ${ROOT_OVERLAY}/etc/local.d/ ]] || mkdir -p ${ROOT_OVERLAY}/etc/local.d/
 (( $? == 0 )) || exit 1
 
 sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
     -e "s/###SLACK_CHANNEL###/${SLACK_CHANNEL}/"\
     -e "s/###SLACK_KEY###/${SLACK_KEY}/"\
     -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/"\
-    /etc/catalyst/templates/common/slack-notify.start.template > /var/data/catalyst/tmp/${REL_NAME}-root/etc/local.d/slack-notify.start || exit 1]]></param>
+    /etc/catalyst/templates/common/slack-notify.start.template > ${ROOT_OVERLAY}/etc/local.d/slack-notify.start || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
