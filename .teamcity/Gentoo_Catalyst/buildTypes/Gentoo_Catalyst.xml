@@ -456,6 +456,8 @@ kill -0 ${ZMQ_PID} &> /dev/null || exit 0
 echo "Killing stale processes"
 kill ${ZMQ_PID} 
 sleep 1 
+kill -0 ${ZMQ_PID} &> /dev/null || exit 0 
+echo "Kill like you mean it"
 kill -9 ${ZMQ_PID}]]></param>
           <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
