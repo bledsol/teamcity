@@ -129,12 +129,12 @@ then
 fi
 
 echo "Starting ZMQ"
-/usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep ${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2)
+/usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep ${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2) || exit 1
 
-ZMQ_SS="$(cat zmq.args):$(finger ${BUILD_BUILDER}|grep ^ssh)"
+ZMQ_SS="$(cat zmq.args):$(finger ${BUILD_BUILDER}|grep ^ssh|awk '{print $1 ":" $2}')"
 ZMQ_PID=$(cut -d: -f 4 zmq.args)
 
-/usr/local/bin/zmq_srv.py -i 127.0.0.1 -s $(/usr/bin/pwgen -s -1 50) -ss ${ZMQ_SS}
+/usr/local/bin/zmq_srv.py -i 127.0.0.1 -s $(/usr/bin/pwgen -s -1 50) -ss ${ZMQ_SS} || exit 1
 
 echo "ZMQ_PID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
 [[ -z ${ZMQ_PID} ]] && exit 1
