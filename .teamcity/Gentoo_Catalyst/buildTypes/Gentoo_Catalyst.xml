@@ -199,6 +199,7 @@ echo "Mangling templates"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###BUILD_VER###/${BUILD_VER}/" \
     -e "s/###REL_TYPE###/${REL_NAME}/" \
+    -e "s/###REL_NAME###/${REL_NAME}/" \
     -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
     -e "s/###SRC_PATH###/${REL_NAME}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
