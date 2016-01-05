@@ -124,7 +124,7 @@ then
 fi
 
 echo "Starting ZMQ"
-/usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2)
+/usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep ${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2)
 ZMQ_RPID=$!
 
 ZMQ_SS=$(awk '{ print $3 ":" $5 ":" $8 }' zmq.args)
