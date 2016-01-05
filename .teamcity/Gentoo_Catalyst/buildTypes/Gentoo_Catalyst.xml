@@ -325,6 +325,9 @@ cat ${TEMPLATE_DIR}/stage2.spec.${TARGET}-post.template >> ${WORK_DIR}/${SPEC_FI
 
 echo "Mangling common scripts"
 
+ZMQ_PORT=$( awk '{ print $5 }' ./zmq.args )
+ZMQ_STRING=$( awk '{ print $8 }' ./zmq.args )
+
 echo "#!/bin/bash" >  /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh 
 echo "BUILD_BUILDER_KEY=\"${BUILD_BUILDER_KEY}\"" >> /var/data/catalyst/tmp/${REL_NAME}-wrangle.sh 
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
