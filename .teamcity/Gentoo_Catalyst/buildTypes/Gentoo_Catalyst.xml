@@ -78,8 +78,9 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     TARGET_HOST="%param.catalyst.build.target.host%"\
     TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
     CPU_COUNT="$(nproc)"\
+    ROOT_OVERLAY="/var/data/catalyst/tmp/${REL_NAME}/root-overlay"\
     STAGE_RESUME="%param.catalyst.args.resume%"
-do
+    do
     echo ${var}
 done > build-vars-common.sh
 
