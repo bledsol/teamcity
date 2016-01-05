@@ -408,6 +408,7 @@ do
 done
 
 sudo /usr/bin/virsh change-media --domain ${VM_NAME} --source ${IMG_PATH}/${IMG_NAME} --update hda || exit 1
+sleep 1
 
 echo "Starting VM"
 sudo /usr/bin/virsh start --domain ${VM_NAME} || exit 1
