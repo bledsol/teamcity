@@ -115,6 +115,7 @@ VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
+[[ -d ${ROOT_OVERLAY} ]] || mkdir -p ${ROOT_OVERLAY}
 rsync -racv --delete /etc/catalyst/overlays/common/root/ ${ROOT_OVERLAY}/ || exit 1
 
 sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
