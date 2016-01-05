@@ -442,6 +442,17 @@ echo "[$(date)]: Built AMI: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUIL
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_46" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
+
+kill ${ZMQ_PID} 
+sleep 1 
+kill -9 ${ZMQ_PID}]]></param>
+          <param name="teamcity.step.mode" value="execute_always" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_Catalyst_GentooCatalyst">
