@@ -274,107 +274,10 @@ echo "Fin."]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_47" name="Stage 1 Build (1)" type="simpleRunner">
+      <runner id="RUNNER_47" name="Catalyst Wrapper" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage1.skip% == 1 )) && exit 0 
-
-set -u
-source $(pwd)/build-vars-common.sh || exit 1
-
-TAKE_SNAPSHOT=0
-SPEC_FILE="stage1.spec"
-TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
-PKG_MERGE=( %param.catalyst.post.emerge% )
-
-[[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
-
-echo "Checking for templates"
-for template in ${TEMPLATES[@]}
-do 
-    if [[ ! -f ${TEMPLATE_DIR}/${template} ]]
-    then
-        echo "Missing template: ${template}" 
-        exit 1
-    fi
-done
-
-touch ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-echo "Mangling templates"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###BUILD_VER###/${BUILD_VER}/" \
-    -e "s/###REL_TYPE###/${REL_NAME}/" \
-    -e "s/###REL_NAME###/${REL_NAME}/" \
-    -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
-    -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
-    -e "s/###SRC_PATH###/${REL_NAME}\/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}/" \
-    ${TEMPLATE_DIR}/stage1.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-cat ${TEMPLATE_DIR}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.use.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.use.template >> ${WORK_DIR}/${SPEC_FILE}
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-cat ${TEMPLATE_BASE}/common/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/stage1.spec.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-if (( ${#PKG_MERGE[@]} > 0 ))
-then
-    for pkg in ${PKG_MERGE[@]}
-    do
-        echo " $pkg"
-    done >> ${WORK_DIR}/${SPEC_FILE}
-fi
-
-if [[ ! -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS ]] 
-then
-    echo "Fetching build hashes"
-    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null
-    (( $? > 0 )) && echo "Could not fetch stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS to ${WORK_DIR}" && exit 1
-fi
-
-echo "Checking build hashes"
-if [[ -f ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 ]]
-then
-    cd ${WORK_DIR}
-    ( sha512sum -c stage3-amd64-hardened-${BUILD_VER}.tar.bz2.DIGESTS | egrep -e ": OK$" | grep "stage3-amd64-hardened-${BUILD_VER}.tar.bz2" ) &>/dev/null || exit 1
-    echo "Not fetching, file exists and checksums match"
-    FETCH_STAGE=0
-else
-    FETCH_STAGE=1
-fi
-
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-hardened/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-amd64-hardened-${BUILD_VER}.tar.bz2 &> /dev/null )
-
-PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
-TIME_NOW=$(date +%s)
-
-PORTAGE_SNAPSHOT_AGE=$(( TIME_NOW - PORTAGE_SNAPSHOT_DATE ))
-
-(( PORTAGE_SNAPSHOT_AGE > 14400 )) && TAKE_SNAPSHOT=1
-
-if [[ -z ${CATALYST_ARGS} ]]
-then
-   if (( TAKE_SNAPSHOT == 1 ))
-   then 
-    echo "Taking portage snapshot"
-     sudo /usr/bin/catalyst -s ${SNAPSHOT} || exit 1
-   fi
-   echo "Running stage 1 build"
-   sudo /usr/bin/catalyst -f ${WORK_DIR}/${SPEC_FILE} || exit 1
-else
-   echo "Using args: ${CATALYST_ARGS}"
-   if (( TAKE_SNAPSHOT == 1 ))
-   then 
-     echo "Taking portage snapshot"
-     sudo /usr/bin/catalyst ${CATALYST_ARGS} -s ${SNAPSHOT} || exit 1
-   fi
-   echo "Running stage 1 build"
-   sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${WORK_DIR}/${SPEC_FILE} || exit 1
-fi
-
-echo "Fin."]]></param>
+          <param name="command.executable" value="/usr/local/bin/catalyst-wraps.sh" />
           <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
       <runner id="RUNNER_43" name="Stage 2 Build" type="simpleRunner">
