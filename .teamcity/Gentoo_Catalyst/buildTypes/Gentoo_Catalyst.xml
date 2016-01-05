@@ -131,8 +131,8 @@ fi
 echo "Starting ZMQ"
 /usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep ${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2)
 
-ZMQ_SS=$(awk '{ print $3 ":" $5 ":" $8 }' zmq.args)
-ZMQ_PID=$(awk '{ print $10 }' zmq.args)
+ZMQ_SS=$(cat zmq.args)
+ZMQ_PID=$(cut -d: -f 4 zmq.args)
 
 /usr/local/bin/zmq_srv.py -i 127.0.0.1 -s $(/usr/bin/pwgen -s -1 50) -ss ${ZMQ_SS}
 
