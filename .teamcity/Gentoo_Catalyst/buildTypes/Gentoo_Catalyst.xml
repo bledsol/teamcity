@@ -452,7 +452,7 @@ echo "[$(date)]: Built AMI: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUIL
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
 
 echo "Checking for stale processes"
-kill -0 ${ZMQ_PID} || exit 0 
+kill -0 ${ZMQ_PID} &> /dev/null || exit 0 
 echo "Killing stale processes"
 kill ${ZMQ_PID} 
 sleep 1 
