@@ -148,10 +148,7 @@ sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${
 
 set -u -o pipefail
 
-
 source $(pwd)/build-vars-common.sh || exit 1
-
-ROOT_OVERLAY="/var/data/catalyst/tmp/${REL_NAME}/root-overlay"
 
 SLACK_KEY=$(egrep ^%param.aws.account.name% /etc/catalyst/keys/slack.api|cut -d: -f2)
 SLACK_USER=%param.catalyst.post.slack.user%
