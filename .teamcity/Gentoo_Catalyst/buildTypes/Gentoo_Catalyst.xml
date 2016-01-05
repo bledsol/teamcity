@@ -164,8 +164,7 @@ echo "Checking for hacky overlay"
 
 sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
     -e "s/###SLACK_CHANNEL###/${SLACK_CHANNEL}/"\
-    -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/"\
-    /etc/catalyst/templates/common/slack-notify.start.template > ${ROOT_OVERLAY}/etc/local.d/slack-notify.start || exit 1]]></param>
+    -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/" /etc/catalyst/templates/common/slack-notify.start.template > ${ROOT_OVERLAY}/etc/local.d/slack-notify.start || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
