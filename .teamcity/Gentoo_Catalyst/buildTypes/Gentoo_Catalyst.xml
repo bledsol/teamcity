@@ -474,7 +474,7 @@ done]]></param>
       <runner id="RUNNER_45" name="Bake AMI" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.catalyst.build.post.ami.bake% == 1 )) || exit 0
-
+(( %param.catalyst.args.debug% == 1 )) && set -x
 source $(pwd)/build-vars-common.sh || exit 1
 
 AWS_ACCOUNT_ID=$(grep ^%param.aws.account.name% /etc/ec2/accounts.db|cut -d: -f2)
