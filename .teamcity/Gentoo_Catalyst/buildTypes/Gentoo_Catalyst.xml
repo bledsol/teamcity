@@ -87,7 +87,8 @@ do
     echo ${var}
 done > build-vars-common.sh
 
-source $(pwd)/build-vars-common.sh || exit 1
+STAGE_LATEST="$(curl -s ${CATALYST_DIST_BASE}/${SUB_ARCH}/autobuilds/${CATALYST_DIST_STAGE3_MANIFEST}|grep ${CATALYST_DIST_STAGE3_BZ2}|cut -d/ -f1)"
+STAGE_FETCH_LATEST="%param.catalyst.args.fetch.latest%"
 
 if (( ${STAGE_FETCH_LATEST} == 1 ))
 then
@@ -95,6 +96,9 @@ then
 else
     BUILD_VER="%param.catalyst.build.version%"
 fi
+
+[[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
+echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
 
@@ -119,14 +123,6 @@ for var in CATALYST_DIST_BASE="${CATALYST_DIST_BASE}"\
 do
            echo ${var}
 done >> build-vars-common.sh
-
-source $(pwd)/build-vars-common.sh || exit 1
-
-STAGE_LATEST="$(curl -s ${CATALYST_DIST_BASE}/${SUB_ARCH}/autobuilds/${CATALYST_DIST_STAGE3_MANIFEST}|grep ${CATALYST_DIST_STAGE3_BZ2}|cut -d/ -f1)"
-STAGE_FETCH_LATEST="%param.catalyst.args.fetch.latest%"
-
-[[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
-echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
 
 [[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
 echo "There is a new build: ${STAGE_LATEST}"]]></param>
