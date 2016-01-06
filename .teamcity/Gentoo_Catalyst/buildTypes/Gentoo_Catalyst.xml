@@ -212,16 +212,6 @@ SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
 PKG_MERGE=( %param.catalyst.post.emerge% )
 
-CATALYST_DIST_BASE='http://distfiles.gentoo.org/releases'
-CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}"
-CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
-
-if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
-then
-    CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
-    CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}+nomultilib.tar.bz2"
-fi
-
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
 echo "Checking for templates"
