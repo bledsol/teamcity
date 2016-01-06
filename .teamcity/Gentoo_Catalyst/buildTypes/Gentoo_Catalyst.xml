@@ -425,6 +425,8 @@ echo "[$(date)]: Built Image: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BU
         <parameters>
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
 
+(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
+
 VM_NAME="%param.catalyst.build.release.name%"
 VM_ACCOUNT="%param.aws.account.name%"
 IMG_PATH='/var/data/catalyst/iso'
