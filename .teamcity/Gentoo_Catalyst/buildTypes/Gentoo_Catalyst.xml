@@ -197,7 +197,7 @@ echo "ZMQ_STRING=${ZMQ_STRING}" >> $(pwd)/build-vars-common.sh]]></param>
       <runner id="RUNNER_42" name="Slack Notification" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.catalyst.args.slack.enabled% == 1 )) || exit 0
-
+(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
 set -u -o pipefail
 
 source $(pwd)/build-vars-common.sh || exit 1
