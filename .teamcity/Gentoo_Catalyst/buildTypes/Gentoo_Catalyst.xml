@@ -188,6 +188,16 @@ SPEC_FILE="stage1.spec"
 TEMPLATES="stage1.spec.header.template stage1.spec.use.template stage1.spec.pkg.template"
 PKG_MERGE=( %param.catalyst.post.emerge% )
 
+CATALYST_DIST_BASE='http://distfiles.gentoo.org/releases'
+CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}"
+CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
+
+if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
+then
+    CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
+    CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}+nomultilib.tar.bz2"
+fi
+
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
 
 echo "Checking for templates"
@@ -226,26 +236,25 @@ then
         echo " $pkg"
     done >> ${WORK_DIR}/${SPEC_FILE}
 fi
-
 if [[ ! -f ${WORK_DIR}/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS ]] 
 then
     echo "Fetching build hashes"
-    wget --directory-prefix=${WORK_DIR} http://distfiles.gentoo.org/releases/${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS &> /dev/null
-    (( $? > 0 )) && echo "Could not fetch stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS to ${WORK_DIR}" && exit 1
+    wget --directory-prefix=${WORK_DIR} ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2}.DIGESTS &> /dev/null
+    (( $? > 0 )) && echo "Could not fetch ${CATALYST_DIST_STAGE3_BZ2}.DIGESTS to ${WORK_DIR}" && exit 1
 fi
 
 echo "Checking build hashes"
-if [[ -f ${WORK_DIR}/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2 ]]
+if [[ -f ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} ]]
 then
     cd ${WORK_DIR}
-    ( sha512sum -c stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS | egrep -e ": OK$" | grep "stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2" ) &>/dev/null || exit 1
+    ( sha512sum -c ${CATALYST_DIST_STAGE3_BZ2}.DIGESTS | egrep -e ": OK$" | grep "${CATALYST_DIST_STAGE3_BZ2}" ) &>/dev/null || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
     FETCH_STAGE=1
 fi
 
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget http://distfiles.gentoo.org/releases/${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2 -o ${WORK_DIR}/stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2 &> /dev/null )
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null )
 
 PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
 TIME_NOW=$(date +%s)
