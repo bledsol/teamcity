@@ -322,6 +322,8 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###USERS###/${USERS}/" \
     ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
+(( %param.catalyst.args.verbose% == 1 )) &&  sed 's/--loglevel=.*/--loglevel=5/' ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
+
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
