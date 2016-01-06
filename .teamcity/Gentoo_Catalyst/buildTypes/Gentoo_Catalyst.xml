@@ -283,6 +283,7 @@ then
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
+    echo "${CATALYST_DIST_STAGE3_BZ2}"
     FETCH_STAGE=1
 fi
 
