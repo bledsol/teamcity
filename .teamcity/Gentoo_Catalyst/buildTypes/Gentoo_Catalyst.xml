@@ -15,7 +15,7 @@
       <param name="param.catalyst.args.debug" value="0" spec="checkbox description='Enable Debugging' label='Debug' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.fetch.latest" value="1" spec="checkbox description='Fetch Latest Stage' label='Fetch Latest' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.purge" value="0" spec="checkbox description='Purge previous builds' label='Purge' uncheckedValue='0' display='prompt' checkedValue='1'" />
-      <param name="param.catalyst.args.release.multilib" value="" spec="checkbox description='Enable Multilib' label='Multilib' uncheckedValue='/no-multilib' display='prompt' checkedValue=''" />
+      <param name="param.catalyst.args.release.multilib" value="/no-multilib" spec="checkbox description='Enable Multilib' label='Multilib' uncheckedValue='/no-multilib' display='prompt' checkedValue=''" />
       <param name="param.catalyst.args.release.selinux" value="" spec="checkbox description='Enable Selinux' label='Selinux' display='prompt' checkedValue='/selinux'" />
       <param name="param.catalyst.args.resume" value="1" spec="checkbox description='Auto Resume Catalyst Build' label='Autoresume' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.slack.enabled" value="1" spec="checkbox description='Enable Slack Notifications' label='Slack Notify' uncheckedValue='0' display='prompt' checkedValue='1'" />
