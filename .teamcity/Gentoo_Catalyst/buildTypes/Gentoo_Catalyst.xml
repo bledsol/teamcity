@@ -149,10 +149,17 @@ VM_ACCOUNT="%param.aws.account.name%"
 VM_REALM="%param.catalyst.build.target.realm%"
 VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 
+(( %param.catalyst.args.ccache.clear% == 0 )) && exit 0
+echo "Clearing Compile Cache"
+sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
+sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
+
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
 [[ -d ${ROOT_OVERLAY} ]] || mkdir -p ${ROOT_OVERLAY}
 rsync -racv --delete /etc/catalyst/overlays/common/root/ ${ROOT_OVERLAY}/ || exit 1
+
+(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
 
 sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
 if (( $? > 0 ))
@@ -179,12 +186,7 @@ ZMQ_LPID=$(cut -d: -f 4 zmq.args)
 echo "ZMQ_PID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
 echo "ZMQ_LPID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
 echo "ZMQ_PORT=${ZMQ_PORT}" >> $(pwd)/build-vars-common.sh 
-echo "ZMQ_STRING=${ZMQ_STRING}" >> $(pwd)/build-vars-common.sh 
-
-(( %param.catalyst.args.ccache.clear% == 0 )) && exit 0
-echo "Clearing Compile Cache"
-sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
-sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1]]></param>
+echo "ZMQ_STRING=${ZMQ_STRING}" >> $(pwd)/build-vars-common.sh]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
