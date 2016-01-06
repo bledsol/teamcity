@@ -341,7 +341,7 @@ sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
     -e "s/###TARGET_DOMAIN###/${TARGET_DOMAIN}/g" \
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" \
     -e "s/###ZMQ_PORT###/${ZMQ_PORT}/g" \
-    -e "s/###ZMQ_STRING###/${ZMQ_STRING}/g" /etc/catalyst/templates/common/wrangle.sh.template >> /var/data/catalyst/tmp/${REL_NAME}/wrangle.sh || exit 1
+    -e "s/###ZMQ_STRING###/${ZMQ_STRING}/g" /etc/catalyst/templates/common/wrangle.sh.template > /var/data/catalyst/tmp/${REL_NAME}/wrangle.sh || exit 1
 
 cd ${WORK_DIR}
 if [[ -z ${CATALYST_ARGS} ]]
