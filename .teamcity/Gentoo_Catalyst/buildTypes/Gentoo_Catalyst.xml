@@ -147,7 +147,7 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
       <runner id="RUNNER_44" name="Build Dependencies" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u
-
+(( %param.catalyst.args.debug% == 1 )) && set -x
 source $(pwd)/build-vars-common.sh || exit 1
 
 VM_ACCOUNT="%param.aws.account.name%"
