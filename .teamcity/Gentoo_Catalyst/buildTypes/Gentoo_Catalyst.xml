@@ -117,11 +117,13 @@ echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
 source $(pwd)/build-vars-common.sh || exit 1
 
 CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
-CATALYST_DIST_STAGE3_DIGEST="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS"
+CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS"
 
 if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
 then
     echo "No Multilib"
+    CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2"
+    CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2.DIGESTS"
     CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
     CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}+nomultilib.tar.bz2"
     CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib.txt"
