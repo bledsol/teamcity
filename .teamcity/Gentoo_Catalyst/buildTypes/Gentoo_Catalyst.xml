@@ -46,7 +46,7 @@
       <runner id="RUNNER_41" name="Set Vars" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u -o pipefail
-
+(( %param.catalyst.args.debug% == 1 )) && set -x
 CATALYST_ARGS=""
 
 BUILD_BUILDER=%teamcity.build.triggeredBy.username%
