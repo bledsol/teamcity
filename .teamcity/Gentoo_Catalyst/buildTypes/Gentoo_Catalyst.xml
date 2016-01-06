@@ -83,12 +83,36 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     CPU_COUNT="$(nproc)"\
     ROOT_OVERLAY="/var/data/catalyst/tmp/%param.catalyst.build.release.name%/root-overlay"\
     STAGE_RESUME="%param.catalyst.args.resume%"
-    do
+do
     echo ${var}
 done > build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
-STAGE_LATEST="$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened.txt|grep stage3-${SUB_ARCH}-${REL_TYPE}|cut -d/ -f1)"
+
+CATALYST_DIST_BASE='http://distfiles.gentoo.org/releases'
+CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}"
+CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
+CATALYST_DIST_STAGE3_DIGEST="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS"
+CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}.txt"
+
+if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
+then
+    CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
+    CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}+nomultilib.tar.bz2"
+    CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib.txt"
+fi
+
+for var in CATALYST_DIST_BASE="${CATALYST_DIST_BASE}"\
+           CATALYST_DIST_STAGE3_PATH="${CATALYST_DIST_STAGE3_PATH}"\
+           CATALYST_DIST_STAGE3_BZ2="${CATALYST_DIST_STAGE3_BZ2}"\
+           CATALYST_DIST_STAGE3_DIGEST="${CATALYST_DIST_STAGE3_DIGEST}"\
+           CATALYST_DIST_STAGE3_MANIFEST="${CATALYST_DIST_STAGE3_MANIFEST}"
+do
+           echo ${var}
+done >> build-vars-common.sh
+
+
+STAGE_LATEST="$(curl -s ${CATALYST_DIST_BASE}/${SUB_ARCH}/autobuilds/${CATALYST_DIST_STAGE3_MANIFEST}|grep ${CATALYST_DIST_STAGE3_BZ2}|cut -d/ -f1)"
 STAGE_FETCH_LATEST="%param.catalyst.args.fetch.latest%"
 
 if (( ${STAGE_FETCH_LATEST} == 1 ))
