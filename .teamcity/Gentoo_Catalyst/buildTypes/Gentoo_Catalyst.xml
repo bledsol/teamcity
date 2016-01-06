@@ -290,6 +290,9 @@ echo "Fin."]]></param>
           <param name="script.content"><![CDATA[(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
 
 set -u 
+
+(( %param.catalyst.args.debug% == 1 )) && set -x
+
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
