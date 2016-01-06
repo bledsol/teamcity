@@ -170,12 +170,14 @@ ZMQ_PID=$(cut -d: -f 4 zmq.args)
 /usr/local/bin/zmq_srv.py -i 127.0.0.1 -s $(/usr/bin/pwgen -s -1 50) -ss ${ZMQ_SS} || exit 1
 ZMQ_PORT=$(cut -d: -f2 zmq.args)
 ZMQ_STRING=$(cut -d: -f3 zmq.args)
+ZMQ_LPID=$(cut -d: -f 4 zmq.args)
 
 [[ -z ${ZMQ_PID} ]] && exit 1
 [[ -z ${ZMQ_PORT} ]] && exit 1
 [[ -z ${ZMQ_STRING} ]] && exit 1
 
 echo "ZMQ_PID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
+echo "ZMQ_LPID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
 echo "ZMQ_PORT=${ZMQ_PORT}" >> $(pwd)/build-vars-common.sh 
 echo "ZMQ_STRING=${ZMQ_STRING}" >> $(pwd)/build-vars-common.sh 
 
