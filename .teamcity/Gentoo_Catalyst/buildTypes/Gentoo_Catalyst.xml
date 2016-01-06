@@ -87,6 +87,8 @@ do
     echo ${var}
 done > build-vars-common.sh
 
+source $(pwd)/build-vars-common.sh || exit 1
+
 if (( ${STAGE_FETCH_LATEST} == 1 ))
 then
     BUILD_VER="${STAGE_LATEST}"
