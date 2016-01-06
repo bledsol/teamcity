@@ -95,9 +95,11 @@ CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${R
 CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}.txt"
 if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
 then
+    echo "No Multilib"
     CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
     CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib.txt"
 fi
+
 
 STAGE_LATEST="$(curl -s ${CATALYST_DIST_BASE}/${SUB_ARCH}/autobuilds/${CATALYST_DIST_STAGE3_MANIFEST}|grep bz2|cut -d/ -f1)"
 STAGE_FETCH_LATEST="%param.catalyst.args.fetch.latest%"
@@ -119,6 +121,7 @@ CATALYST_DIST_STAGE3_DIGEST="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2
 
 if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
 then
+    echo "No Multilib"
     CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
     CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}+nomultilib.tar.bz2"
     CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib.txt"
