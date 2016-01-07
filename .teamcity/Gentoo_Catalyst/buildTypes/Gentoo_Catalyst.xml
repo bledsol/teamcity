@@ -535,9 +535,6 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
 
 echo >> ${WORK_DIR}/${SPEC_FILE} 
 
-[[ -f ${TEMPLATE_DIR}/stage3.spec.use.template ]] || exit 1
-cat ${TEMPLATE_DIR}/stage3.spec.use.template >> ${WORK_DIR}/${SPEC_FILE} 
-
 cd ${WORK_DIR}
 if [[ -z ${CATALYST_ARGS} ]]
 then
