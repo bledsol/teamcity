@@ -161,8 +161,8 @@ VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
 if (( %param.catalyst.args.ccache.clear% == 0 )) 
 then
     echo "Clearing Compile Cache"
-    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
-    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/ || exit 1
+    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/* || exit 1
+    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/livecd-stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/* || exit 1
 fi
 
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
