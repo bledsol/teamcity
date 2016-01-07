@@ -554,6 +554,53 @@ echo "Fin."]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_49" name="Stage 3 Build (1)" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage3.skip% == 1 )) && exit 0
+
+set -u 
+
+(( %param.catalyst.args.debug% == 1 )) && set -x
+
+source $(pwd)/build-vars-common.sh || exit 1
+
+SPEC_FILE="stage3.spec"
+
+touch ${WORK_DIR}/${SPEC_FILE} || exit 1
+
+[[ -f ${TEMPLATE_DIR}/stage3.spec.header.template ]] || exit 1
+
+echo "Mangling templates"
+sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
+    -e "s/###BUILD_VER###/${BUILD_VER}/" \
+    -e "s/###REL_TYPE###/${REL_NAME}/" \
+    -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
+    -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
+    -e "s/###REL_NAME###/${REL_NAME}/" \
+    -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
+    ${TEMPLATE_DIR}/stage3.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
+
+echo >> ${WORK_DIR}/${SPEC_FILE} 
+
+cd ${WORK_DIR}
+if [[ -z ${CATALYST_ARGS} ]]
+then
+    echo "Running Stage 3 build"
+    sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
+else
+    echo "Running Stage 3 build with args: ${CATALYST_ARGS}"
+    sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE} || exit 1
+fi
+
+cd /var/data/catalyst/tmp/${REL_NAME}/stage3-${SUB_ARCH}-${BUILD_VER} || exit 1
+
+sudo /bin/tar -cjv --checkpoint=.200 --exclude dev/* -f /var/srv/images/bz2/${CATALYST_DIST_STAGE3_BZ2} *
+
+echo "Fin."]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_46" name="CleanUp" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
