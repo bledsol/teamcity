@@ -22,7 +22,7 @@
       <param name="param.catalyst.args.stage1.skip" value="0" spec="checkbox description='Skip Building Stage 1' label='Skip Stage 1' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.stage2.skip" value="0" spec="checkbox description='Skip Building Stage 2' label='Skip Stage 2' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.stage3.skip" value="1" spec="checkbox description='Skip Stage 3 (default)' label='Skip Stage 3' uncheckedValue='0' display='prompt' checkedValue='1'" />
-      <param name="param.catalyst.args.stage4.skip" value="1" />
+      <param name="param.catalyst.args.stage4.skip" value="1" spec="checkbox description='Skip Stage 4' label='Skip Stage 4' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.args.verbose" value="0" spec="checkbox description='Enable Verbosity' label='Verbose' uncheckedValue='0' display='prompt' checkedValue='1'" />
       <param name="param.catalyst.build.kernel.version" value="4.1.7" spec="text description='Version of Kernel to Install inside Stages' label='Kernel Version' validationMode='not_empty' display='prompt'" />
       <param name="param.catalyst.build.post.ami.bake" value="1" spec="checkbox description='Build Amazon AMI?' label='Bake AMI?' uncheckedValue='0' display='prompt' checkedValue='1'" />
