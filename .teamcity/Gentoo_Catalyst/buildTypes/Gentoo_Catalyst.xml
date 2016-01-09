@@ -256,7 +256,7 @@ touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Mangling templates"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###BUILD_VER###/${BUILD_VER}/" \
+    -e "s/###VERSION_STAMP###/${VERSION_STAMP}/" \
     -e "s/###REL_TYPE###/${REL_NAME}/" \
     -e "s/###REL_NAME###/${REL_NAME}/" \
     -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
@@ -297,7 +297,12 @@ else
     FETCH_STAGE=1
 fi
 
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_SRCPATH}.bz2 &> /dev/null )
+if (( FETCH_STAGE == 1 ))
+then
+    echo "Fetching stage3: ${CATALYST_DIST_STAGE3_BZ2}"
+    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null )
+    (( $? == 0 )) || exit 1
+fi
 
 PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
 TIME_NOW=$(date +%s)
