@@ -297,7 +297,7 @@ else
     FETCH_STAGE=1
 fi
 
-(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null )
+(( FETCH_STAGE == 1 )) && echo "Fetching stage" && ( lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_SRCPATH}.bz2 &> /dev/null )
 
 PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
 TIME_NOW=$(date +%s)
