@@ -366,7 +366,7 @@ touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Mangling templates"
 sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###BUILD_VER###/${BUILD_VER}/" \
+    -e "s/###VERSION_STAMP###/${VERSION_STAMP}/" \
     -e "s/###REL_TYPE###/${REL_NAME}/" \
     -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
