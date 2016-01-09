@@ -303,7 +303,7 @@ fi
 if (( FETCH_STAGE == 1 ))
 then
     echo "Fetching stage3: ${CATALYST_DIST_STAGE3_BZ2}"
-    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null )
+    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null
     (( $? == 0 )) || exit 1
 fi
 
