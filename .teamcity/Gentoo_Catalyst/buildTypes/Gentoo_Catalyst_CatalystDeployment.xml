@@ -82,6 +82,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     USERS="'%param.catalyst.post.users%'"\
     TARGET_HOST="%param.catalyst.build.target.host%"\
     TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
+    BUILD_TARGET="%teamcity.build.target.platform%"\
     CPU_COUNT="$(nproc)"\
     ROOT_OVERLAY="/var/data/catalyst/tmp/%param.catalyst.build.release.name%/root-overlay"\
     STAGE_RESUME="%param.catalyst.args.resume%"
