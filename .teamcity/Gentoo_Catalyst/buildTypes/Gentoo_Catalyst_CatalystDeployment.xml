@@ -80,7 +80,6 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     SRC_PATH="%param.catalyst.build.source.path%"\
     SNAPSHOT="%param.catalyst.build.snapshot%"\
     USERS="'%param.catalyst.post.users%'"\
-    TARGET="%param.catalyst.build.target%"\
     TARGET_HOST="%param.catalyst.build.target.host%"\
     TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
     CPU_COUNT="$(nproc)"\
@@ -120,8 +119,8 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
 CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS"
-CATALYST_DIST_STAGE1_SRCPATH="${TARGET}-stage1-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
-CATALYST_DIST_STAGE2_SRCPATH="${TARGET}-stage2-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
+CATALYST_DIST_STAGE1_SRCPATH="stage1-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
+CATALYST_DIST_STAGE2_SRCPATH="stage2-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
 CATALYST_DIST_STAGE3_SRCPATH="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
 VERSION_STAMP="${REL_TYPE}-${BUILD_VER}"
 
@@ -131,8 +130,8 @@ then
     CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2"
     CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2.DIGESTS"
     CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
-    CATALYST_DIST_STAGE1_SRCPATH="${TARGET}-stage1-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
-    CATALYST_DIST_STAGE2_SRCPATH="${TARGET}-stage2-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
+    CATALYST_DIST_STAGE1_SRCPATH="stage1-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
+    CATALYST_DIST_STAGE2_SRCPATH="stage2-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
     CATALYST_DIST_STAGE3_SRCPATH="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
     VERSION_STAMP="${REL_TYPE}+nomultilib-${BUILD_VER}"
 fi
