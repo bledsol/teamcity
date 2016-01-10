@@ -209,7 +209,7 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 TAKE_SNAPSHOT=0
 SPEC_FILE="stage1.spec"
-TEMPLATES="${SPEC_FILE}.header.template ${SPEC_FILE}.use.template ${SPEC_FILE}.pkg.template"
+TEMPLATES="${SPEC_FILE}.header.template"
 PKG_MERGE=( %param.catalyst.post.emerge% )
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
@@ -238,19 +238,6 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     ${TEMPLATE_DIR}/${SPEC_FILE}.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-cat ${TEMPLATE_DIR}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-cat ${TEMPLATE_BASE}/common/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-if (( ${#PKG_MERGE[@]} > 0 ))
-then
-    for pkg in ${PKG_MERGE[@]}
-    do
-        echo " $pkg"
-    done >> ${WORK_DIR}/${SPEC_FILE}
-fi
 if [[ ! -f ${WORK_DIR}/${CATALYST_DIST_STAGE3_DIGESTS} ]] 
 then
     echo "Fetching build hashes"
