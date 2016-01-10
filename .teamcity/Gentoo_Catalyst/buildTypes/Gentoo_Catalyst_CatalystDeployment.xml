@@ -32,7 +32,6 @@
       <param name="param.catalyst.build.snapshot" value="latest" />
       <param name="param.catalyst.build.source.path" value="%param.catalyst.build.release.type%/%param.catalyst.build.subarch%/stage3-%param.catalyst.build.subarch%-%param.catalyst.build.target%" />
       <param name="param.catalyst.build.subarch" value="amd64" spec="text description='Architecture' label='Arch' validationMode='not_empty' display='normal'" />
-      <param name="param.catalyst.build.target" value="livecd" spec="text description='Target Medium' label='Target' validationMode='not_empty' display='normal'" />
       <param name="param.catalyst.build.target.domain" value="%param.catalyst.build.target.realm%.ccon.io" />
       <param name="param.catalyst.build.target.host" value="deus" spec="text description='Target Hostname' label='Hostname' validationMode='not_empty' display='prompt'" />
       <param name="param.catalyst.build.target.realm" value="midgard" />
