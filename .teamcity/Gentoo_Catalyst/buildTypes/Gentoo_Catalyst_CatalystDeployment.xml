@@ -161,10 +161,6 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
 (( %param.catalyst.args.debug% == 1 )) && set -x
 source $(pwd)/build-vars-common.sh || exit 1
 
-VM_ACCOUNT="%param.aws.account.name%"
-VM_REALM="%param.catalyst.build.target.realm%"
-VM_GW=$( grep "#${VM_ACCOUNT} ${VM_REALM}.gw" /etc/hosts | awk '{ print $1 }' )
-
 if (( %param.catalyst.args.ccache.clear% == 1 )) 
 then
     echo "Clearing Compile Cache"
