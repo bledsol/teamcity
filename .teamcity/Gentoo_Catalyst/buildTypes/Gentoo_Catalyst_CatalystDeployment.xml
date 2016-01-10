@@ -346,9 +346,6 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###KERNEL_VERSION###/${KERNEL_VERSION}/" \
     ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-echo >>  ${WORK_DIR}/${SPEC_FILE}
-cat ${TEMPLATE_DIR}/stage2.spec.${TARGET}-post.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
 echo "Mangling common scripts"
 
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
