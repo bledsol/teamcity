@@ -339,19 +339,10 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
     -e "s/###REL_NAME###/${REL_NAME}/" \
     -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
+    -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
     ${TEMPLATE_DIR}/stage2.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo >> ${WORK_DIR}/${SPEC_FILE}
-
-echo -e "\t${TARGET} Settings"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###REL_TYPE###/${REL_TYPE}/" \
-    -e "s/###REL_TARGET###/${TARGET}/g" \
-    -e "s/###REL_NAME###/${REL_NAME}/g" \
-    -e "s/###BUILD_VER###/${BUILD_VER}/" \
-    -e "s/###CPU_COUNT###/${CPU_COUNT}/" \
-    -e "s/###USERS###/${USERS}/" \
-    ${TEMPLATE_DIR}/stage2.spec.${TARGET}.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
 echo "Check for verb param"
 (( %param.catalyst.args.verbose% == 1 )) && echo "Setting genkernel verbosity" &&  sed -i 's/--loglevel=.*/--loglevel=5/' ${WORK_DIR}/${SPEC_FILE}
@@ -373,8 +364,8 @@ echo "Mangling common scripts"
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
     -e "s/###TARGET_DOMAIN###/${TARGET_DOMAIN}/g" \
     -e "s/###TARGET_HOST###/${TARGET_HOST}/g" \
-    -e "s/###ZMQ_PORT###/${ZMQ_PORT}/g" \
-    -e "s/###ZMQ_STRING###/${ZMQ_STRING}/g" /etc/catalyst/templates/common/wrangle.sh.template > /var/data/catalyst/tmp/${REL_NAME}/wrangle.sh || exit 1
+    -e "/###ZMQ_PORT###/d" \
+    -e "/###ZMQ_STRING###/d" /etc/catalyst/templates/common/wrangle.sh.template > /var/data/catalyst/tmp/${REL_NAME}/wrangle.sh || exit 1
 
 cd ${WORK_DIR}
 if [[ -z ${CATALYST_ARGS} ]]
