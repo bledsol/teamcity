@@ -176,36 +176,7 @@ fi
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
 [[ -d ${ROOT_OVERLAY} ]] || mkdir -p ${ROOT_OVERLAY}
-rsync -racv --delete /etc/catalyst/overlays/common/root/ ${ROOT_OVERLAY}/ || exit 1
-
-(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
-
-sudo /usr/bin/virsh net-list|grep ${VM_ACCOUNT}
-if (( $? > 0 ))
-then
-    echo "Starting network"
-    sudo /usr/bin/virsh net-start --network ${VM_ACCOUNT}
-fi
-
-echo "Starting ZMQ"
-/usr/local/bin/zmq_srv.py -i ${VM_GW} -s $(/usr/bin/pwgen -s -1 50) -ss $(grep ${VM_ACCOUNT} /etc/catalyst/keys/slack.api|cut -d: -f2) || exit 1
-
-ZMQ_SS="$(cat zmq.args):$(finger ${BUILD_BUILDER}|grep ^ssh|awk '{print $1 ":" $2}')"
-ZMQ_PID=$(cut -d: -f 4 zmq.args)
-
-/usr/local/bin/zmq_srv.py -i 127.0.0.1 -s $(/usr/bin/pwgen -s -1 50) -ss ${ZMQ_SS} || exit 1
-ZMQ_PORT=$(cut -d: -f2 zmq.args)
-ZMQ_STRING=$(cut -d: -f3 zmq.args)
-ZMQ_LPID=$(cut -d: -f 4 zmq.args)
-
-[[ -z ${ZMQ_PID} ]] && exit 1
-[[ -z ${ZMQ_PORT} ]] && exit 1
-[[ -z ${ZMQ_STRING} ]] && exit 1
-
-echo "ZMQ_PID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
-echo "ZMQ_LPID=${ZMQ_PID}" >> $(pwd)/build-vars-common.sh 
-echo "ZMQ_PORT=${ZMQ_PORT}" >> $(pwd)/build-vars-common.sh 
-echo "ZMQ_STRING=${ZMQ_STRING}" >> $(pwd)/build-vars-common.sh]]></param>
+rsync -racv --delete /etc/catalyst/overlays/common/root/ ${ROOT_OVERLAY}/ || exit 1]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
