@@ -7,6 +7,7 @@
       <option name="executionTimeoutMin" value="180" />
     </options>
     <disabled-settings>
+      <setting-ref ref="RUNNER_52" />
       <setting-ref ref="RUNNER_54" />
       <setting-ref ref="RUNNER_57" />
     </disabled-settings>
