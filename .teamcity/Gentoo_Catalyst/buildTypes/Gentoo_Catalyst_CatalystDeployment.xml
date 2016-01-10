@@ -339,13 +339,6 @@ echo "Check for verb param"
 
 echo >>  ${WORK_DIR}/${SPEC_FILE}
 
-echo -e "\tBoot Settings"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###REL_TYPE###/${REL_TYPE}/g" \
-    -e "s/###REL_TARGET###/${BUILD_TARGET}/" \
-    -e "s/###KERNEL_VERSION###/${KERNEL_VERSION}/" \
-    ${TEMPLATE_DIR}/stage2.spec.boot.template >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
 echo "Mangling common scripts"
 
 sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
