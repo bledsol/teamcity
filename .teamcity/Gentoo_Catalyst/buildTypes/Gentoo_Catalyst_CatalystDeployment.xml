@@ -80,6 +80,7 @@ for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.nam
     REL_SNAPSHOT="%param.catalyst.build.snapshot%"\
     SRC_PATH="%param.catalyst.build.source.path%"\
     SNAPSHOT="%param.catalyst.build.snapshot%"\
+    SNAPSHOT_PATH="/var/data/catalyst/snapshots"\
     USERS="'%param.catalyst.post.users%'"\
     TARGET_HOST="%param.catalyst.build.target.host%"\
     TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
