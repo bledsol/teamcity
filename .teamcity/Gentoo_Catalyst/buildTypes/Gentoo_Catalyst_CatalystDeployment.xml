@@ -43,6 +43,7 @@
       <param name="param.catalyst.post.slack.user" value="marvyn" />
       <param name="param.catalyst.post.users" value="" spec="text description='Additional Users (space delimeted)' label='Users' validationMode='any' display='prompt'" />
       <param name="param.catalyst.provision.method" value="thin" spec="text regexp='thin||slim||thick' display='prompt' validationMessage='Please specify one of thin, slim or thick' description='Provisioning Method (thin,slim,thick)' label='Provisioning Method' validationMode='regex'" />
+      <param name="teamcity.build.target.platform" value="aws" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_50" name="Set Vars" type="simpleRunner">
