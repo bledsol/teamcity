@@ -290,25 +290,24 @@ then
 fi
 
 echo "Checking build hashes"
-if [[ -f ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} ]]
+if [[ -f ${SNAPSHOT_DIR}/${CATALYST_DIST_STAGE3_BZ2} ]]
 then
-    cd ${WORK_DIR}
+    cd ${SNAPSHOT_DIR}
     ( sha512sum -c ${CATALYST_DIST_STAGE3_DIGESTS} | egrep -e ": OK$" | grep "${CATALYST_DIST_STAGE3_BZ2}" ) &>/dev/null || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
 else
-    echo "${CATALYST_DIST_STAGE3_BZ2}"
     FETCH_STAGE=1
 fi
 
 if (( FETCH_STAGE == 1 ))
 then
     echo "Fetching stage3: ${CATALYST_DIST_STAGE3_BZ2}"
-    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${WORK_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null
+    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${SNAPSHOT_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null
     (( $? == 0 )) || exit 1
 fi
 
-PORTAGE_SNAPSHOT_DATE=$(date +%s -r /var/data/catalyst/snapshots/portage-latest.tar.bz2)
+PORTAGE_SNAPSHOT_DATE=$(date +%s -r ${SNAPSHOT_DIR}/portage-latest.tar.bz2)
 TIME_NOW=$(date +%s)
 
 PORTAGE_SNAPSHOT_AGE=$(( TIME_NOW - PORTAGE_SNAPSHOT_DATE ))
