@@ -450,6 +450,7 @@ set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage4.spec"
+PKG_MERGE=( %param.catalyst.post.emerge% )
 
 touch ${WORK_DIR}/${SPEC_FILE} || exit 1
 
