@@ -340,7 +340,7 @@ echo "Fin."]]></param>
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_47" name="Catalyst Wrapper" type="simpleRunner">
+      <runner id="RUNNER_47" name="Catalyst Stage1" type="simpleRunner">
         <parameters>
           <param name="command.executable" value="/usr/local/bin/catwrap.sh" />
           <param name="command.parameters" value="iso 1 amd64 hardened deusOS" />
