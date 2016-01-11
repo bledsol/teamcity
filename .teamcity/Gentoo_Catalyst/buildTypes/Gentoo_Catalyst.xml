@@ -9,7 +9,6 @@
     <disabled-settings>
       <setting-ref ref="RUNNER_39" />
       <setting-ref ref="RUNNER_43" />
-      <setting-ref ref="RUNNER_47" />
     </disabled-settings>
     <parameters>
       <param name="param.aws.account.name" value="ccon" spec="text description='Account Name' label='Account ID' validationMode='not_empty' display='prompt'" />
