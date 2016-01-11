@@ -344,7 +344,7 @@ echo "Fin."]]></param>
       <runner id="RUNNER_47" name="Catalyst Stage1" type="simpleRunner">
         <parameters>
           <param name="command.executable" value="/usr/local/bin/catwrap.sh" />
-          <param name="command.parameters" value="iso 1 amd64 hardened deusOS" />
+          <param name="command.parameters" value="-T iso -S 1 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% %param.catalyst.args.verbose% %param.catalyst.args.debug% %param.catalyst.args.purge%" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
