@@ -357,6 +357,7 @@ set -u
 source $(pwd)/build-vars-common.sh || exit 1
 
 SPEC_FILE="stage2.spec"
+[[ ${TARGET} == livecd ]] && SPEC_FILE="livecd-stage2.spec"
 BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER}|grep ^ssh)"
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
