@@ -269,11 +269,11 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     ${TEMPLATE_DIR}/${SPEC_FILE}.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-cat ${TEMPLATE_DIR}/${TARGET}-${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
+cat ${TEMPLATE_DIR}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
 [[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-cat ${TEMPLATE_DIR}/${TARGET}-${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
+cat ${TEMPLATE_DIR}/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 [[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
 if (( ${#PKG_MERGE[@]} > 0 ))
 then
