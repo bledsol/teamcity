@@ -341,7 +341,8 @@ echo "Fin."]]></param>
       </runner>
       <runner id="RUNNER_47" name="Catalyst Wrapper" type="simpleRunner">
         <parameters>
-          <param name="command.executable" value="/usr/local/bin/catalyst-wraps.sh" />
+          <param name="command.executable" value="/usr/local/bin/catwrap.sh" />
+          <param name="command.parameters" value="iso 1 amd64 hardened deusOS" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
