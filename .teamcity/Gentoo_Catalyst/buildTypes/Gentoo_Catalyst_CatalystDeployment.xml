@@ -239,17 +239,17 @@ sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
     ${TEMPLATE_DIR}/${SPEC_FILE}.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
 echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
 
-if [[ ! -f ${WORK_DIR}/${CATALYST_DIST_STAGE3_DIGESTS} ]] 
+if [[ ! -f ${SNAPSHOT_DIR}/${CATALYST_DIST_STAGE3_DIGESTS} ]] 
 then
     echo "Fetching build hashes"
-    wget --directory-prefix=${WORK_DIR} ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_DIGESTS} &> /dev/null
-    (( $? > 0 )) && echo "Could not fetch ${CATALYST_DIST_STAGE3_DIGESTS} to ${WORK_DIR}" && exit 1
+    wget --directory-prefix=${SNAPSHOT_DIR} ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_DIGESTS} &> /dev/null
+    (( $? > 0 )) && echo "Could not fetch ${CATALYST_DIST_STAGE3_DIGESTS} to ${SNAPSHOT_DIR}" && exit 1
 fi
 
 echo "Checking build hashes"
-if [[ -f ${SNAPSHOT_PATH}/${CATALYST_DIST_STAGE3_BZ2} ]]
+if [[ -f ${SNAPSHOT_DIR}/${CATALYST_DIST_STAGE3_BZ2} ]]
 then
-    cd ${SNAPSHOT_PATH}
+    cd ${SNAPSHOT_DIR}
     ( sha512sum -c ${CATALYST_DIST_STAGE3_DIGESTS} | egrep -e ": OK$" | grep "${CATALYST_DIST_STAGE3_BZ2}" ) &>/dev/null || exit 1
     echo "Not fetching, file exists and checksums match"
     FETCH_STAGE=0
@@ -261,11 +261,11 @@ fi
 if (( FETCH_STAGE == 1 ))
 then
     echo "Fetching stage3: ${CATALYST_DIST_STAGE3_BZ2}"
-    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${SNAPSHOT_PATH}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null
+    lftp -c pget ${CATALYST_DIST_BASE}/${CATALYST_DIST_STAGE3_PATH}/${CATALYST_DIST_STAGE3_BZ2} -o ${SNAPSHOT_DIR}/${CATALYST_DIST_STAGE3_BZ2} &> /dev/null
     (( $? == 0 )) || exit 1
 fi
 
-PORTAGE_SNAPSHOT_DATE=$(date +%s -r ${SNAPSHOT_PATH}/portage-latest.tar.bz2)
+PORTAGE_SNAPSHOT_DATE=$(date +%s -r ${SNAPSHOT_DIR}/portage-latest.tar.bz2)
 TIME_NOW=$(date +%s)
 
 PORTAGE_SNAPSHOT_AGE=$(( TIME_NOW - PORTAGE_SNAPSHOT_DATE ))
