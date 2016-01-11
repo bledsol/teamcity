@@ -240,7 +240,8 @@ source $(pwd)/build-vars-common.sh || exit 1
 
 TAKE_SNAPSHOT=0
 SPEC_FILE="stage1.spec"
-TEMPLATES="${SPEC_FILE}.header.template ${TARGET}-${SPEC_FILE}.use.template ${TARGET}-${SPEC_FILE}.pkg.template"
+[[ TARGET == livecd ]] && SPEC_FILE="livecd-stage1.spec"
+TEMPLATES="${SPEC_FILE}.header.template ${SPEC_FILE}.use.template ${SPEC_FILE}.pkg.template"
 PKG_MERGE=( %param.catalyst.post.emerge% )
 
 [[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
