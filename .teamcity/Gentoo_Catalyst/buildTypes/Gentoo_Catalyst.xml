@@ -348,6 +348,13 @@ echo "Fin."]]></param>
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_56" name="Catalyst Stage1 (1)" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="/usr/local/bin/catwrap.sh" />
+          <param name="command.parameters" value="iso 1 amd64 hardened deusOS" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_43" name="Stage 2 Build" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
