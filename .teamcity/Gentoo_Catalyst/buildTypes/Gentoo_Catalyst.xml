@@ -91,6 +91,7 @@ do
 done > build-vars-common.sh
 
 source $(pwd)/build-vars-common.sh || exit 1
+echo $SRC_PATH
 
 CATALYST_DIST_BASE='http://distfiles.gentoo.org/releases'
 CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}"
