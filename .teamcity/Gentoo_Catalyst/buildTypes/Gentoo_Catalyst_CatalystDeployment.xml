@@ -250,66 +250,6 @@ echo "[$(date)]: Built AMI: ${REL_NAME}-${SUB_ARCH}-${REL_TYPE}-installer-${BUIL
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_59" name="Stage 4 Build" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage4.skip% == 1 )) && exit 0
-
-set -u 
-
-(( %param.catalyst.args.debug% == 1 )) && set -x
-
-source $(pwd)/build-vars-common.sh || exit 1
-
-SPEC_FILE="stage4.spec"
-PKG_MERGE=( %param.catalyst.post.emerge% )
-
-touch ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-[[ -f ${TEMPLATE_DIR}/${SPEC_FILE}.header.template ]] || exit 1
-
-echo "Mangling templates"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###VERSION_STAMP###/${VERSION_STAMP}/" \
-    -e "s/###REL_TYPE###/${REL_NAME}/" \
-    -e "s/###REL_NAME###/${REL_NAME}/" \
-    -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
-    -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
-    -e "s/###REL_NAME###/${REL_NAME}/" \
-    -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
-    ${TEMPLATE_DIR}/${SPEC_FILE}.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-cat ${TEMPLATE_DIR}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.use.template >> ${WORK_DIR}/${SPEC_FILE}
-
-echo >> ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-cat ${TEMPLATE_DIR}/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-[[ -f ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template ]] && cat ${TEMPLATE_BASE}/${PROVISION_METHOD}/${SPEC_FILE}.pkg.template >> ${WORK_DIR}/${SPEC_FILE}
-if (( ${#PKG_MERGE[@]} > 0 ))
-then
-    for pkg in ${PKG_MERGE[@]}
-    do
-        echo " $pkg"
-    done >> ${WORK_DIR}/${SPEC_FILE}
-fi
-
-cd ${WORK_DIR}
-if [[ -z ${CATALYST_ARGS} ]]
-then
-    echo "Running Stage 4 build"
-    sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
-else
-    echo "Running Stage 4 build with args: ${CATALYST_ARGS}"
-    sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE} || exit 1
-fi
-
-echo "Fin."]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_60" name="CleanUp" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[source $(pwd)/build-vars-common.sh || exit 1
