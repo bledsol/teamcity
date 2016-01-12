@@ -208,7 +208,7 @@ sudo /usr/local/bin/genisys -T stage -S 2 -A %param.catalyst.build.subarch% -N %
       </runner>
       <runner id="RUNNER_49" name="Stage 3 Build" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage1.skip% == 3 )) && exit 0
+          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage3.skip% == 1 )) && exit 0
 
 sudo /usr/local/bin/genisys -T stage -S 3 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% -K %param.catalyst.build.kernel.version% %param.catalyst.args.release.multilib% %param.catalyst.args.release.selinux% %param.catalyst.args.debug% %param.catalyst.args.verbose%]]></param>
           <param name="teamcity.step.mode" value="default" />
