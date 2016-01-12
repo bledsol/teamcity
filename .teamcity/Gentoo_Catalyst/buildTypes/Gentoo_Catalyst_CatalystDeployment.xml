@@ -164,13 +164,6 @@ echo "There is a new build: ${STAGE_LATEST}"]]></param>
 (( %param.catalyst.args.debug% == 1 )) && set -x
 source $(pwd)/build-vars-common.sh || exit 1
 
-if (( %param.catalyst.args.ccache.clear% == 1 )) 
-then
-    echo "Clearing Compile Cache"
-    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/stage1-${SUB_ARCH}-${BUILD_VER}/var/ccache/* || exit 1
-    sudo /bin/rm -rf /var/data/catalyst/tmp/${REL_NAME}/stage2-${SUB_ARCH}-${BUILD_VER}/var/ccache/* || exit 1
-fi
-
 [[ -f /etc/catalyst/kernels/${SUB_ARCH}-${REL_TYPE}-${BUILD_TARGET}-${KERNEL_VERSION}.config ]] || exit 1
 
 [[ -d ${ROOT_OVERLAY} ]] || mkdir -p ${ROOT_OVERLAY}
