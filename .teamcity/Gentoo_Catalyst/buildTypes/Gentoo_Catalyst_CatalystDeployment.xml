@@ -214,66 +214,6 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="RUNNER_55" name="Stage 2 Build" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage2.skip% == 1 )) && exit 0
-
-set -u 
-
-(( %param.catalyst.args.debug% == 1 )) && set -x
-
-source $(pwd)/build-vars-common.sh || exit 1
-
-SPEC_FILE="stage2.spec"
-BUILD_BUILDER_KEY="$(finger ${BUILD_BUILDER}|grep ^ssh)"
-
-[[ -d ${WORK_DIR} ]] || mkdir -p ${WORK_DIR}
-
-touch ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-[[ -f ${TEMPLATE_DIR}/stage2.spec.header.template ]] || exit 1
-
-echo "Mangling templates"
-sed -e "s/###SUB_ARCH###/${SUB_ARCH}/" \
-    -e "s/###VERSION_STAMP###/${VERSION_STAMP}/" \
-    -e "s/###REL_TYPE###/${REL_NAME}/" \
-    -e "s/###REL_PROFILE###/${REL_PROFILE}/" \
-    -e "s/###REL_SNAPSHOT###/${SNAPSHOT}/" \
-    -e "s/###REL_NAME###/${REL_NAME}/" \
-    -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
-    -e "s/###SRC_PATH###/${REL_NAME}\/${CATALYST_DIST_STAGE1_SRCPATH}/" \
-    ${TEMPLATE_DIR}/stage2.spec.header.template > ${WORK_DIR}/${SPEC_FILE} || exit 1
-
-echo >> ${WORK_DIR}/${SPEC_FILE}
-
-echo "Check for verb param"
-(( %param.catalyst.args.verbose% == 1 )) && echo "Setting genkernel verbosity" &&  sed -i 's/--loglevel=.*/--loglevel=5/' ${WORK_DIR}/${SPEC_FILE}
-
-echo >>  ${WORK_DIR}/${SPEC_FILE}
-
-echo "Mangling common scripts"
-
-sed -e "s/###BUILD_BUILDER###/${BUILD_BUILDER}/g" \
-    -e "s/###TARGET_DOMAIN###/${TARGET_DOMAIN}/g" \
-    -e "s/###TARGET_HOST###/${TARGET_HOST}/g" \
-    -e "/###ZMQ_PORT###/d" \
-    -e "/###ZMQ_STRING###/d" /etc/catalyst/templates/common/wrangle.sh.template > /var/data/catalyst/tmp/${REL_NAME}/wrangle.sh || exit 1
-
-cd ${WORK_DIR}
-if [[ -z ${CATALYST_ARGS} ]]
-then
-    echo "Running Stage 2 build"
-    sudo /usr/bin/catalyst -f ${SPEC_FILE} || exit 1
-else
-    echo "Running Stage 2 build with args: ${CATALYST_ARGS}"
-    sudo /usr/bin/catalyst ${CATALYST_ARGS} -f ${SPEC_FILE} || exit 1
-fi
-
-echo "Fin."]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_57" name="Bake AMI" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.catalyst.build.post.ami.bake% == 1 )) || exit 0
