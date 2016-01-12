@@ -8,7 +8,6 @@
     </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_52" />
-      <setting-ref ref="RUNNER_53" />
       <setting-ref ref="RUNNER_57" />
     </disabled-settings>
     <parameters>
