@@ -211,8 +211,8 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
       </runner>
       <runner id="RUNNER_61" name="Stage 4 Build" type="simpleRunner">
         <parameters>
-          <param name="command.executable" value="sudo /usr/local/bin/genisys" />
-          <param name="command.parameters" value="-T stage -S 4 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% -K %param.catalyst.build.kernel.version% %param.catalyst.args.release.multilib% %param.catalyst.args.release.selinux% %param.catalyst.args.debug% %param.catalyst.args.verbose%" />
+          <param name="command.executable" value="sudo" />
+          <param name="command.parameters" value="/usr/local/bin/genisys -T stage -S 4 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% -K %param.catalyst.build.kernel.version% %param.catalyst.args.release.multilib% %param.catalyst.args.release.selinux% %param.catalyst.args.debug% %param.catalyst.args.verbose%" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
