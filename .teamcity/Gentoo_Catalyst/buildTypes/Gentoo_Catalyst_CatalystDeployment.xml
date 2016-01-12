@@ -214,6 +214,13 @@ sed -e "s/###SLACK_USER###/${SLACK_USER}/"\
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_49" name="Stage 2 Build (1)" type="simpleRunner">
+        <parameters>
+          <param name="command.executable" value="/usr/local/bin/genisys" />
+          <param name="command.parameters" value="-T stage -S 2 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% -K %param.catalyst.build.kernel.version% %param.catalyst.args.release.multilib% %param.catalyst.args.release.selinux% %param.catalyst.args.debug% %param.catalyst.args.verbose%" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_57" name="Bake AMI" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[(( %param.catalyst.build.post.ami.bake% == 1 )) || exit 0
