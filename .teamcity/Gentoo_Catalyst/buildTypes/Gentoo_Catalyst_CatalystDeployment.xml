@@ -48,7 +48,6 @@
       <runner id="RUNNER_50" name="Set Vars" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u -o pipefail
-(( %param.catalyst.args.debug% == 1 )) && set -x
 CATALYST_ARGS=""
 
 BUILD_BUILDER=%teamcity.build.triggeredBy.username%
@@ -56,10 +55,6 @@ BUILD_BUILDER=%teamcity.build.triggeredBy.username%
 
 echo "Built by: $BUILD_BUILDER"
 
-(( %param.catalyst.args.purge% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -p"
-(( %param.catalyst.args.debug% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -d"
-(( %param.catalyst.args.verbose% == 1 )) && CATALYST_ARGS="${CATALYST_ARGS} -v"
-(( %param.catalyst.args.resume% == 0 )) && CATALYST_ARGS="${CATALYST_ARGS} -a"
 REL_PROFILE="%param.catalyst.build.profile%"
 REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\//g')
 echo ${REL_PROFILE}
