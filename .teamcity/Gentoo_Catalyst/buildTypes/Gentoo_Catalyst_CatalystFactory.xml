@@ -6,6 +6,7 @@
     <parameters>
       <param name="target.disable.multilib" value="-n" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-d'" />
+      <param name="target.enable.selinux" value="" spec="checkbox description='Enable Security Enhanced Linux' label='Enable Selinux' display='prompt' checkedValue='-s'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_55" name="Genisys" type="simpleRunner">
