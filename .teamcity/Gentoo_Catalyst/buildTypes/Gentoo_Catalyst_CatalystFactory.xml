@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fd894493-740c-4a18-ac21-06f6d29e91d9" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Catalyst Build Stage 1-4</name>
-  <description>Gentoo Catalyst Stage Burner</description>
+  <name>Catalyst Factory</name>
+  <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <options>
       <option name="executionTimeoutMin" value="180" />
