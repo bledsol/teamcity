@@ -204,11 +204,9 @@ sudo /usr/local/bin/genisys -T stage -S 1 -A %param.catalyst.build.subarch% -N %
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_54" name="Stage 1 Build (1)" type="simpleRunner">
+      <runner id="RUNNER_54" name="Genisys" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[(( %param.catalyst.args.stage1.skip% == 1 )) && exit 0
-
-sudo /usr/local/bin/genisys -T stage -S 1 -A %param.catalyst.build.subarch% -N %param.catalyst.build.release.name% -P %param.catalyst.build.release.type% -K %param.catalyst.build.kernel.version% %param.catalyst.args.release.multilib% %param.catalyst.args.release.selinux% %param.catalyst.args.debug% %param.catalyst.args.verbose%]]></param>
+          <param name="script.content" value="sudo /usr/local/bin/genisys -T stage -S all -A" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
