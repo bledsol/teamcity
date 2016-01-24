@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4f366008-7bbf-4f98-8aaa-3b05f9b42045" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Catalyst Factory</name>
+  <description>Gentoo Catalyst Build Factory</description>
+  <settings>
+    <parameters />
+    <build-runners />
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <cleanup />
+  </settings>
+</build-type>
+
