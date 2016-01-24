@@ -3,7 +3,9 @@
   <name>Catalyst Factory</name>
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
-    <parameters />
+    <parameters>
+      <param name="target.disable.multilib" value="-n" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
+    </parameters>
     <build-runners>
       <runner id="RUNNER_55" name="Genisys" type="simpleRunner">
         <parameters>
