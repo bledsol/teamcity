@@ -9,7 +9,6 @@
     <disabled-settings>
       <setting-ref ref="RUNNER_48" />
       <setting-ref ref="RUNNER_49" />
-      <setting-ref ref="RUNNER_50" />
       <setting-ref ref="RUNNER_51" />
       <setting-ref ref="RUNNER_52" />
       <setting-ref ref="RUNNER_53" />
@@ -52,113 +51,6 @@
       <param name="teamcity.build.target.platform" value="aws" />
     </parameters>
     <build-runners>
-      <runner id="RUNNER_50" name="Set Vars" type="simpleRunner">
-        <parameters>
-          <param name="script.content"><![CDATA[set -u -o pipefail
-CATALYST_ARGS=""
-
-BUILD_BUILDER=%teamcity.build.triggeredBy.username%
-[[ $BUILD_BUILDER =~ "teamcity.build.triggeredBy.username" ]] && BUILD_BUILDER='bnadmin'
-
-echo "Built by: $BUILD_BUILDER"
-
-REL_PROFILE="%param.catalyst.build.profile%"
-REL_PROFILE=$(echo ${REL_PROFILE}|sed 's/\//\\\//g')
-echo ${REL_PROFILE}
-for var in WORK_DIR="/var/data/catalyst/builds/%param.catalyst.build.release.name%"\
-    BUILD_START="$(date +%s)"\
-    TEMPLATE_DIR="/etc/catalyst/templates/common"\
-    TEMPLATE_BASE="/etc/catalyst/templates"\
-    SNAPSHOT_DIR="/var/data/catalyst/snapshots"\
-    SUB_ARCH="%param.catalyst.build.subarch%"\
-    PROVISION_METHOD="%param.catalyst.provision.method%"\
-    BUILD_BUILDER="${BUILD_BUILDER}"\
-    CATALYST_ARGS="'${CATALYST_ARGS}'"\
-    KERNEL_VERSION="%param.catalyst.build.kernel.version%"\
-    REL_TYPE="%param.catalyst.build.release.type%"\
-    REL_NAME="%param.catalyst.build.release.name%"\
-    REL_PROFILE="'${REL_PROFILE}'"\
-    REL_SNAPSHOT="%param.catalyst.build.snapshot%"\
-    SRC_PATH="%param.catalyst.build.source.path%"\
-    SNAPSHOT="%param.catalyst.build.snapshot%"\
-    SNAPSHOT_PATH="/var/data/catalyst/snapshots"\
-    USERS="'%param.catalyst.post.users%'"\
-    TARGET_HOST="%param.catalyst.build.target.host%"\
-    TARGET_DOMAIN="%param.catalyst.build.target.domain%"\
-    BUILD_TARGET="%teamcity.build.target.platform%"\
-    CPU_COUNT="$(nproc)"\
-    ROOT_OVERLAY="/var/data/catalyst/tmp/%param.catalyst.build.release.name%/root-overlay"\
-    STAGE_RESUME="%param.catalyst.args.resume%"
-do
-    echo ${var}
-done > build-vars-common.sh
-
-source $(pwd)/build-vars-common.sh || exit 1
-
-CATALYST_DIST_BASE='http://distfiles.gentoo.org/releases'
-CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}"
-CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}.txt"
-if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
-then
-    echo "No Multilib"
-    CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
-    CATALYST_DIST_STAGE3_MANIFEST="latest-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib.txt"
-fi
-
-
-STAGE_LATEST="$(curl -s ${CATALYST_DIST_BASE}/${SUB_ARCH}/autobuilds/${CATALYST_DIST_STAGE3_MANIFEST}|grep bz2|cut -d/ -f1)"
-STAGE_FETCH_LATEST="%param.catalyst.args.fetch.latest%"
-
-if (( ${STAGE_FETCH_LATEST} == 1 ))
-then
-    BUILD_VER="${STAGE_LATEST}"
-else
-    BUILD_VER="%param.catalyst.build.version%"
-fi
-
-[[ -z ${BUILD_VER} ]] && echo "Build Version is empty" && exit 1
-echo "BUILD_VER=${BUILD_VER}" >> build-vars-common.sh
-
-source $(pwd)/build-vars-common.sh || exit 1
-
-CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2"
-CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}.tar.bz2.DIGESTS"
-CATALYST_DIST_STAGE1_SRCPATH="stage1-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
-CATALYST_DIST_STAGE2_SRCPATH="stage2-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
-CATALYST_DIST_STAGE3_SRCPATH="stage3-${SUB_ARCH}-${REL_TYPE}-${BUILD_VER}"
-VERSION_STAMP="${REL_TYPE}-${BUILD_VER}"
-
-if [[ "${REL_PROFILE}" =~ "no-multilib" ]] 
-then
-    echo "No Multilib"
-    CATALYST_DIST_STAGE3_BZ2="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2"
-    CATALYST_DIST_STAGE3_DIGESTS="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}.tar.bz2.DIGESTS"
-    CATALYST_DIST_STAGE3_PATH="${SUB_ARCH}/autobuilds/current-stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib"
-    CATALYST_DIST_STAGE1_SRCPATH="stage1-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
-    CATALYST_DIST_STAGE2_SRCPATH="stage2-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
-    CATALYST_DIST_STAGE3_SRCPATH="stage3-${SUB_ARCH}-${REL_TYPE}+nomultilib-${BUILD_VER}"
-    VERSION_STAMP="${REL_TYPE}+nomultilib-${BUILD_VER}"
-fi
-
-for var in CATALYST_DIST_BASE="${CATALYST_DIST_BASE}"\
-           CATALYST_DIST_STAGE3_PATH="${CATALYST_DIST_STAGE3_PATH}"\
-           CATALYST_DIST_STAGE3_BZ2="${CATALYST_DIST_STAGE3_BZ2}"\
-           CATALYST_DIST_STAGE3_DIGESTS="${CATALYST_DIST_STAGE3_DIGESTS}"\
-           CATALYST_DIST_STAGE3_MANIFEST="${CATALYST_DIST_STAGE3_MANIFEST}"\
-           CATALYST_DIST_STAGE1_SRCPATH="${CATALYST_DIST_STAGE1_SRCPATH}"\
-           CATALYST_DIST_STAGE2_SRCPATH="${CATALYST_DIST_STAGE2_SRCPATH}"\
-           CATALYST_DIST_STAGE3_SRCPATH="${CATALYST_DIST_STAGE3_SRCPATH}"\
-           VERSION_STAMP="${VERSION_STAMP}"
-do
-           echo ${var}
-done >> build-vars-common.sh
-
-[[ ${BUILD_VER} == ${STAGE_LATEST} ]] && echo "Congrats this is a current build" && exit 0
-echo "There is a new build: ${STAGE_LATEST}"]]></param>
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_51" name="Build Dependencies" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[set -u
