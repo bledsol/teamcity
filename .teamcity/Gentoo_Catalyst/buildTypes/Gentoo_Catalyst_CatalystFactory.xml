@@ -4,7 +4,15 @@
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_55" name="Genisys" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K %target.kernel% -N %target.name% -P %target.profile% -q -vvv %target.disable.multilib% %target.enable.selinux% %target.enable.debug%" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_Catalyst_GentooCatalyst" />
     </vcs-settings>
