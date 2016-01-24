@@ -22,6 +22,7 @@
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_Catalyst_GentooCatalyst" />
+      <vcs-entry-ref root-id="Gentoo_Catalyst_HttpsGithubComCconIoGenisysGitRefsHeadsMaster" />
     </vcs-settings>
     <requirements />
     <build-triggers />
