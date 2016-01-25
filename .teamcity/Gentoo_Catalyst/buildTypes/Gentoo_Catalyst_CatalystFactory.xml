@@ -16,7 +16,7 @@
     <build-runners>
       <runner id="RUNNER_55" name="Genisys" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K %target.kernel% -N %target.name% -P %target.profile% -q -vvv %target.disable.multilib% %target.enable.selinux% %target.enable.debug% %target.enable.aws% %target.enable.openstack%" />
+          <param name="script.content" value="sudo /usr/local/bin/geni -T %target.delivery% -S all -A amd64 -K %target.kernel% -N %target.name% -P %target.profile% -q -vvv %target.disable.multilib% %target.enable.selinux% %target.enable.debug% %target.enable.aws% %target.enable.openstack%" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
