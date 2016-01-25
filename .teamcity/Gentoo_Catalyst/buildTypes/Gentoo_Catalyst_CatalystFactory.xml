@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="target.disable.multilib" value="-n" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
+      <param name="target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
       <param name="target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-d'" />
       <param name="target.enable.selinux" value="" spec="checkbox description='Enable Security Enhanced Linux' label='Enable Selinux' display='prompt' checkedValue='-s'" />
       <param name="target.kernel" value="4.3.3" spec="text description='Target Kernel Config' label='Target Kernel Config' validationMode='not_empty' display='prompt'" />
