@@ -4,6 +4,7 @@
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <parameters>
+      <param name="target.clear.autoresume" value="" spec="checkbox description='Clear Autoresume' label='Clear Autoresume' display='prompt' checkedValue='-r'" />
       <param name="target.delivery" value="stage" spec="text description='stage, livecd, ami, iso' label='Delivery Target' validationMode='not_empty' display='prompt'" />
       <param name="target.disable.multilib" value="-n" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
