@@ -7,7 +7,7 @@
       <param name="target.delivery" value="stage" spec="text description='stage, livecd, ami, iso' label='Delivery Target' validationMode='not_empty' display='prompt'" />
       <param name="target.disable.multilib" value="-n" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
-      <param name="target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-d'" />
+      <param name="target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-x'" />
       <param name="target.enable.docker" value="" spec="checkbox description='Make Docker Container' label='Dockerize' display='prompt' checkedValue='-d'" />
       <param name="target.enable.openstack" value="" spec="checkbox description='Enable Openstack Stage4 Support' label='Openstack Support' display='prompt' checkedValue='-o'" />
       <param name="target.enable.selinux" value="" spec="checkbox description='Enable Security Enhanced Linux' label='Enable Selinux' display='prompt' checkedValue='-s'" />
