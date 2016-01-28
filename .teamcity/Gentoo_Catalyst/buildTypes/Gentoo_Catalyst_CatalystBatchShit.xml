@@ -37,11 +37,11 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_52" name="" type="simpleRunner">
+      <runner id="RUNNER_52" name="Vanilla nomultilib aws docker" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -d --
 (( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -d --]]></param>
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
