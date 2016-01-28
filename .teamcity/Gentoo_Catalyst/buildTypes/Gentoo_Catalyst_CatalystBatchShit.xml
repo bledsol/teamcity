@@ -36,7 +36,13 @@ fi]]></param>
       <runner id="RUNNER_50" name="Vanilla nomultilib w/aws" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -b
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -c -p -b]]></param>
+if (( $? > 0 )) 
+then
+  sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -c -p -b
+  return $?
+else
+  return
+fi]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -44,7 +50,13 @@ fi]]></param>
       <runner id="RUNNER_51" name="Vanilla nomultilib openstack" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -o -b
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -o -p -b]]></param>
+if (( $? > 0 )) 
+then
+  sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -o -p -b
+  return $?
+else
+  return
+fi]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -52,7 +64,13 @@ fi]]></param>
       <runner id="RUNNER_52" name="Vanilla nomultilib aws docker" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -d -b
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -c -d -b]]></param>
+if (( $? > 0 )) 
+then
+  sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -c -d -b
+  return $?
+else
+  return
+fi]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
