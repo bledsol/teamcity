@@ -61,11 +61,11 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_57" name="" type="simpleRunner">
+      <runner id="RUNNER_57" name="Hardened selinux" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -s --
 (( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -s --]]></param>
-          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
