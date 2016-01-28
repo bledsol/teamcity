@@ -101,10 +101,10 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_62" name="" type="simpleRunner">
+      <runner id="RUNNER_62" name="livecd hardened nomultilib aws docker" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T livecd -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -a -d --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T livecd -S all -A amd64 -K 4.3.3 -N ccon -P hardened -vvv -x -n -a -d --]]></param>
+          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T livecd -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -a -d -b
+(( $? > 0 )) && sudo /usr/local/bin/geni -T livecd -S all -A amd64 -K 4.3.3 -N ccon -P hardened -vvv -x -n -a -d -b]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
