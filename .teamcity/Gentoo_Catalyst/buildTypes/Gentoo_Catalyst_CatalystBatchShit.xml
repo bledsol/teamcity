@@ -24,7 +24,7 @@
       <runner id="RUNNER_50" name="Vanilla nomultilib w/aws" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -b
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -p -b]]></param>
+(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -c -p -b]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
