@@ -55,8 +55,8 @@
       </runner>
       <runner id="RUNNER_54" name="Hardened" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -vvv -x --]]></param>
+          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -b
+(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -vvv -x -b]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
