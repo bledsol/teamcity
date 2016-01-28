@@ -8,40 +8,7 @@
       <runner id="RUNNER_48" name="" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -p --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -p --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -p --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -o --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -o -p --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -d --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -a -d --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -o -d --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -o -d --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -s --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -s --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -s --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s -a -d --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -s -a -d --
-
-sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s -o -d --
-(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -n -s -o -d --]]></param>
+(( $? > 0 )) && sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -vvv -x -p --]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
