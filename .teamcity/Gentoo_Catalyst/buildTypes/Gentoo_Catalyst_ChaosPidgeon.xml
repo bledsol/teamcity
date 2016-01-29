@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d4e14ed6-1590-489c-9748-61021e66c6a7" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Catalyst BatchShit</name>
+  <name>Chaos Pidgeon</name>
   <description>Genisys Test Cases</description>
   <settings>
     <parameters />
