@@ -7,7 +7,7 @@
     <build-runners>
       <runner id="RUNNER_51" name="Do the things" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/chapi" />
+          <param name="script.content" value="sudo /usr/local/bin/chapi 5" />
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
