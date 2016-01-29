@@ -5,9 +5,9 @@
   <settings>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_51" name="Vanilla nomultilib openstack" type="simpleRunner">
+      <runner id="RUNNER_51" name="Do the things" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -o -b" />
+          <param name="script.content" value="sudo /usr/local/bin/chapi" />
           <param name="teamcity.step.mode" value="execute_if_failed" />
           <param name="use.custom.script" value="true" />
         </parameters>
