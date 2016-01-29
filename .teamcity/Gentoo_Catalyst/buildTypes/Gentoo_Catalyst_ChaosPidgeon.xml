@@ -12,69 +12,6 @@
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_52" name="Vanilla nomultilib aws docker" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -a -d -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_53" name="Vanilla nomultilib openstack docker" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P vanilla -n -o -d -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_54" name="Hardened" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_57" name="Hardened selinux" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -s -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_58" name="Hardened nomultilib" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_59" name="Hardened nomultilib selinux" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_60" name="Hardened nomultilib selinux amazon docker" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s -a -d -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_61" name="Hardened openstack selinux docker" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T stage -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -s -o -d -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_62" name="livecd hardened nomultilib aws docker" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="sudo /usr/local/bin/geni -T livecd -S all -A amd64 -K 4.3.3 -N ccon -P hardened -n -a -d -b" />
-          <param name="teamcity.step.mode" value="execute_if_failed" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_Catalyst_HttpsGithubComCconIoGenisysGitRefsHeadsMaster" />
