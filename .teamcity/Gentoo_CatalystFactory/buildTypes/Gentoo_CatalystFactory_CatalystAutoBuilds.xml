@@ -40,6 +40,12 @@
           <param name="triggerRules" value="+:root=Gentoo_Catalyst_HttpsGithubComCconIoGenisysGitRefsHeadsMaster:**" />
         </parameters>
       </build-trigger>
+      <build-trigger id="TRIGGER_9" type="buildDependencyTrigger">
+        <parameters>
+          <param name="afterSuccessfulBuildOnly" value="true" />
+          <param name="dependsOn" value="Gentoo_CatalystFactory_StageCheck" />
+        </parameters>
+      </build-trigger>
     </build-triggers>
     <build-extensions>
       <extension id="perfmon" type="perfmon">
