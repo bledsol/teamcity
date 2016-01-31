@@ -4,7 +4,17 @@
   <description>Check for latest stage</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_8" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[LATEST=$(curl -s http://distfiles.gentoo.org/releases/amd64/autobuilds/latest-stage3-amd64-hardened+nomultilib.txt|tail -n1|cut -d/ -f 1)
+grep ${LATEST} /var/data/catalyst/builds/stage-snapshots-seen.log && exit 1
+echo "New Seed: ${LATEST}" && exit 0]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings />
     <requirements />
     <build-triggers />
