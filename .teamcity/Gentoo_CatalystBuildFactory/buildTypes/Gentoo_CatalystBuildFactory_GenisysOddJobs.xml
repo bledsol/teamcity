@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f8daf5b7-fd4f-41a9-96ff-91df9ab440f4" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Catalyst Odd Jobs</name>
+  <name>Genisys Odd Jobs</name>
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <parameters>
