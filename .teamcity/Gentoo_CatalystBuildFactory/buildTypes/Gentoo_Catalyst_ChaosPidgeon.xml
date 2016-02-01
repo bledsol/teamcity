@@ -21,7 +21,7 @@
       <build-trigger id="TRIGGER_8" type="buildDependencyTrigger">
         <parameters>
           <param name="afterSuccessfulBuildOnly" value="true" />
-          <param name="dependsOn" value="Gentoo_CatalystFactory_CatalystAutoBuilds" />
+          <param name="dependsOn" value="Gentoo_CatalystBuildFactory_GenisysAutoBuilds" />
         </parameters>
       </build-trigger>
     </build-triggers>

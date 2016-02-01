@@ -2,9 +2,9 @@
 <settings>
   <project-graphs>
     <graph title="New chart title" defaultFilters="" hideFilters="" id="customGraph1" seriesTitle="Series">
-      <valueType key="SuccessRate" title="Success Rate" sourceBuildTypeId="Gentoo_CatalystFactory_CatalystAutoBuilds" />
-      <valueType key="BuildDuration" title="Build Duration (all stages)" sourceBuildTypeId="Gentoo_CatalystFactory_CatalystAutoBuilds" />
-      <valueType key="TimeSpentInQueue" title="Time Spent in Queue" sourceBuildTypeId="Gentoo_CatalystFactory_CatalystAutoBuilds" />
+      <valueType key="SuccessRate" title="Success Rate" sourceBuildTypeId="Gentoo_CatalystBuildFactory_GenisysAutoBuilds" />
+      <valueType key="BuildDuration" title="Build Duration (all stages)" sourceBuildTypeId="Gentoo_CatalystBuildFactory_GenisysAutoBuilds" />
+      <valueType key="TimeSpentInQueue" title="Time Spent in Queue" sourceBuildTypeId="Gentoo_CatalystBuildFactory_GenisysAutoBuilds" />
     </graph>
   </project-graphs>
   <issueTrackers>
