@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" parent-id="Gentoo" uuid="a8b618ee-6e8b-4a60-abbc-4eb11bbac886" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
-  <name>Catalyst Factory</name>
+  <name>Catalyst Build Factory</name>
   <parameters />
   <cleanup />
 </project>
