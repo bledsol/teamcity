@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings />
+<settings>
+  <issueTrackers>
+    <trackerConnection key="youtrack1" type="youtrack">
+      <param name="secure:password" value="zxx775d03cbe80d301b" />
+      <param name="name" value="YouTrack" />
+      <param name="host" value="http://localhost:8112" />
+      <param name="idPrefix" value="GENISYS" />
+      <param name="autoSync" value="true" />
+      <param name="username" value="" />
+    </trackerConnection>
+  </issueTrackers>
+</settings>
 
