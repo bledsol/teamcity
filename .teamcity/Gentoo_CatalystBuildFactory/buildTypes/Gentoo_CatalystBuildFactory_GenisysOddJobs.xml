@@ -6,7 +6,7 @@
     <parameters>
       <param name="a.target.enable.kerncache" value="" spec="checkbox description='Enable KernCache?' label='Enable KernCache?' display='prompt' checkedValue='-k'" />
       <param name="b.target.build.purge" value="" spec="checkbox description='Purge previous build' label='Purge' display='prompt' checkedValue='-p'" />
-      <param name="target.clear.autoresume" value="" spec="checkbox description='Clear Autoresume' label='Clear Autoresume' display='prompt' checkedValue='-r'" />
+      <param name="b.target.clear.autoresume" value="" spec="checkbox description='Clear Autoresume' label='Clear Autoresume' display='prompt' checkedValue='-r'" />
       <param name="target.delivery" value="stage" spec="text description='stage, livecd, ami, iso' label='Delivery Target' validationMode='not_empty' display='prompt'" />
       <param name="target.disable.multilib" value="" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
