@@ -4,6 +4,7 @@
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <parameters>
+      <param name="a.target.enable.docker" value="" spec="checkbox description='Make Docker Container' label='Dockerize' display='prompt' checkedValue='-d'" />
       <param name="a.target.enable.kerncache" value="" spec="checkbox description='Enable KernCache?' label='Enable KernCache?' display='prompt' checkedValue='-k'" />
       <param name="a.target.enable.openstack" value="" spec="checkbox description='Enable Openstack Stage4 Support' label='Openstack Support' display='prompt' checkedValue='-o'" />
       <param name="a.target.enable.selinux" value="" spec="checkbox description='Enable Security Enhanced Linux' label='Enable Selinux' display='prompt' checkedValue='-s'" />
@@ -13,7 +14,6 @@
       <param name="target.disable.multilib" value="" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
       <param name="target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-x'" />
-      <param name="target.enable.docker" value="" spec="checkbox description='Make Docker Container' label='Dockerize' display='prompt' checkedValue='-d'" />
       <param name="target.kernel" value="4.3.3" spec="text description='Target Kernel Config' label='Target Kernel Config' validationMode='not_empty' display='prompt'" />
       <param name="target.name" value="ccon" spec="text description='Build Name' label='Build Name' validationMode='not_empty' display='prompt'" />
       <param name="target.profile" value="hardened" spec="text description='Target Profile |[ vanilla || hardened |]' label='Target Profile' validationMode='not_empty' display='prompt'" />
