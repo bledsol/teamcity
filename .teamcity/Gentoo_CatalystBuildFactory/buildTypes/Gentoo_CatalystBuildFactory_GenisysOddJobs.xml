@@ -4,7 +4,7 @@
   <description>Gentoo Catalyst Build Factory</description>
   <settings>
     <parameters>
-      <param name="target.build.purge" value="" spec="checkbox description='Purge previous build' label='Purge' display='prompt' checkedValue='-p'" />
+      <param name="b.target.build.purge" value="" spec="checkbox description='Purge previous build' label='Purge' display='prompt' checkedValue='-p'" />
       <param name="target.clear.autoresume" value="" spec="checkbox description='Clear Autoresume' label='Clear Autoresume' display='prompt' checkedValue='-r'" />
       <param name="target.delivery" value="stage" spec="text description='stage, livecd, ami, iso' label='Delivery Target' validationMode='not_empty' display='prompt'" />
       <param name="target.disable.multilib" value="" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
