@@ -24,7 +24,7 @@
     <build-runners>
       <runner id="RUNNER_7" name="Genisys" type="simpleRunner">
         <parameters>
-          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T %target.delivery% -S all -A amd64 -K %target.kernel% -N %target.name% -P %target.profile% -q -v %a.target.disable.multilib% %a.target.enable.selinux% %a.target.enable.debug% %a.target.enable.aws% %a.target.enable.openstack% %a.target.enable.docker% %b.target.clear.autoresume% %b.target.build.purge% %a.target.enable.kerncache% 
+          <param name="script.content"><![CDATA[sudo /usr/local/bin/geni -T %target.delivery% -S all -A amd64 -K %target.kernel% -N %target.name% -P %target.profile% -b -v %a.target.disable.multilib% %a.target.enable.selinux% %a.target.enable.debug% %a.target.enable.aws% %a.target.enable.openstack% %a.target.enable.docker% %b.target.clear.autoresume% %b.target.build.purge% %a.target.enable.kerncache% 
 (( $? > 0 )) && exit 1
 exit 0]]></param>
           <param name="teamcity.step.mode" value="execute_if_failed" />
