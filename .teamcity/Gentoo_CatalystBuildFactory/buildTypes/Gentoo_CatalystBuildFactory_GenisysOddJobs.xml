@@ -9,7 +9,7 @@
     <parameters>
       <param name="a.target.disable.multilib" value="" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
       <param name="a.target.enable.aws" value="" spec="checkbox description='Enable AWS Support for Stage 4 build' label='AWS Support' display='prompt' checkedValue='-a'" />
-      <param name="a.target.enable.debug" value="" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-x'" />
+      <param name="a.target.enable.debug" value="-x" spec="checkbox description='Enable Debugging' label='Enable Debugging' display='prompt' checkedValue='-x'" />
       <param name="a.target.enable.docker" value="" spec="checkbox description='Make Docker Container' label='Dockerize' display='prompt' checkedValue='-d'" />
       <param name="a.target.enable.kerncache" value="" spec="checkbox description='Enable KernCache?' label='Enable KernCache?' display='prompt' checkedValue='-k'" />
       <param name="a.target.enable.openstack" value="" spec="checkbox description='Enable Openstack Stage4 Support' label='Openstack Support' display='prompt' checkedValue='-o'" />
