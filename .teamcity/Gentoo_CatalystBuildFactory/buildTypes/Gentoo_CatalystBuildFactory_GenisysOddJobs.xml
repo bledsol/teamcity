@@ -5,6 +5,7 @@
   <settings>
     <options>
       <option name="checkoutMode" value="MANUAL" />
+      <option name="executionTimeoutMin" value="240" />
     </options>
     <parameters>
       <param name="a.target.disable.multilib" value="" spec="checkbox description='Disable Multilib Support' label='Disable Multilib' display='prompt' checkedValue='-n'" />
