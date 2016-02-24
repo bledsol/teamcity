@@ -5,6 +5,7 @@
   <settings>
     <parameters>
       <param name="args.docker.account" value="ccon" spec="text description='Docker Account Name' label='Docker Account' validationMode='not_empty' display='prompt'" />
+      <param name="args.docker.build-name" value="amibuilder" spec="text description='Docker Build Name' label='Build Name' validationMode='not_empty' display='prompt'" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_9" name="" type="simpleRunner">
