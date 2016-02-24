@@ -4,7 +4,16 @@
   <description>Build Docker Container</description>
   <settings>
     <parameters />
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_9" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[cd docker/%args.docker.build-name%
+docker build %args.docker.account%/%args.docker.build-name% .]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Gentoo_CatalystBuildFactory_DockerBuilds" />
     </vcs-settings>
