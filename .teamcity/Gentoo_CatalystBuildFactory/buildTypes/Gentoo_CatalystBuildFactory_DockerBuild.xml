@@ -11,6 +11,7 @@
       <runner id="RUNNER_9" name="" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[cd docker/%args.docker.build-name%
+cp $(ls -1tr /var/data/catalyst/snapshots/portage*.tar.bz2|tail -n1) .
 docker build %args.docker.account%/%args.docker.build-name% .]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
